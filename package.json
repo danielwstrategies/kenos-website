@@ -1,0 +1,32 @@
+{
+  "name": "adoring-bose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx watch src/server.ts",
+    "build": "tsc && cp -r public dist/",
+    "build:payload": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js payload build",
+    "start": "cross-env NODE_ENV=production PAYLOAD_CONFIG_PATH=dist/payload.config.js node dist/server.js",
+    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
+    "deploy:build": "npm run build && npm run build:payload"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@payloadcms/db-mongodb": "^3.65.0",
+    "@payloadcms/richtext-slate": "^3.65.0",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "payload": "^3.0.0-beta.135",
+    "pm2": "^6.0.14"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.10.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
