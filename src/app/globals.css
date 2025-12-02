@@ -1,19 +1,34 @@
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+:root {
+  /* Keno's Color Palette */
+  --primary-brown: #3D1A1A;
+  --primary-red: #C8102E;
+  --accent-gold: #D4AF37;
+  --cream-bg: #F5E6D3;
+  --light-cream: #FAF6F0;
+  --dark-brown: #2B1515;
+  --text-dark: #2D2D2D;
+  --text-gray: #666666;
+  --white: #FFFFFF;
+  
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* Spacing */
+  --container-max: 1200px;
+  --section-padding: 4rem 2rem;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html, body {
@@ -24,16 +39,149 @@ html, body {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-dark);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background: var(--primary-red);
+  color: var(--white);
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background: #A00D25;
+  opacity: 1;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid var(--white);
+  border-radius: 4px;
+}
+
+.btn-secondary:hover {
+  background: var(--white);
+  color: var(--primary-brown);
+  opacity: 1;
+}
+
+/* Container */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Spacing */
+section {
+  padding: var(--section-padding);
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-cream {
+  color: var(--cream-bg);
+}
+
+.bg-cream {
+  background: var(--cream-bg);
+}
+
+.bg-light-cream {
+  background: var(--light-cream);
+}
+
+.bg-dark-brown {
+  background: var(--dark-brown);
+}
+
+.bg-primary-brown {
+  background: var(--primary-brown);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  :root {
+    --section-padding: 3rem 1.5rem;
+  }
+  
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-padding: 2rem 1rem;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
 }
