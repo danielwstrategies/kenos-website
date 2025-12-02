@@ -1,27 +1,30 @@
-import { buildConfig } from 'payload/config'
+import { buildConfig } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { slateEditor } from '@payloadcms/richtext-slate'
 import path from 'path'
-import Users from './collections/Users'
-import Pages from './collections/Pages'
+import { fileURLToPath } from 'url'
+import Users from './collections/Users.ts'
+import TestCollection from './collections/TestCollection.ts'
+
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
-  admin: {
-    user: 'users',
-  },
-  collections: [
-    Users,
-    Pages,
-  ],
-  globals: [
-    // Globals will be imported here
-  ],
-  typescript: {
-    outputFile: path.resolve(__dirname, 'payload-types.ts'),
-  },
+  secret: process.env.PAYLOAD_SECRET || 'your-secret-key-change-this',
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || 'mongodb://localhost:27017/kenos-website',
   }),
-  editor: slateEditor({}),
+  admin: {
+    user: 'users',
+    theme: 'light',
+    importMap: {
+      baseDir: path.resolve(dirname),
+    },
+  },
+  collections: [
+    Users,
+    TestCollection,
+  ],
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
 })

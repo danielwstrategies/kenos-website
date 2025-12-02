@@ -4,24 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts tsx watch src/server.ts",
-    "build": "tsc && cp -r public dist/",
-    "build:payload": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js payload build",
-    "start": "cross-env NODE_ENV=production PAYLOAD_CONFIG_PATH=dist/payload.config.js node dist/server.js",
-    "generate:types": "cross-env PAYLOAD_CONFIG_PATH=src/payload.config.ts payload generate:types",
-    "deploy:build": "npm run build && npm run build:payload"
+    "dev": "next dev -p 3011",
+    "build": "next build",
+    "start": "next start -p 3011",
+    "lint": "next lint",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@payloadcms/db-mongodb": "^3.65.0",
+    "@payloadcms/next": "^3.65.0",
     "@payloadcms/richtext-slate": "^3.65.0",
+    "@payloadcms/ui": "^3.65.0",
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "payload": "^3.0.0-beta.135",
-    "pm2": "^6.0.14"
+    "mongodb": "^7.0.0",
+    "next": "^15.4.7",
+    "payload": "^3.65.0",
+    "pm2": "^6.0.14",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

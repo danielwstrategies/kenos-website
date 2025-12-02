@@ -1,16 +1,16 @@
 import express from 'express'
 import payload from 'payload'
 import dotenv from 'dotenv'
+import config from './payload.config'
 
 dotenv.config()
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = parseInt(process.env.PORT || '3000', 10)
 
 const start = async () => {
   await payload.init({
-    secret: process.env.PAYLOAD_SECRET || 'your-secret-key',
-    express: app,
+    config,
     onInit: () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
