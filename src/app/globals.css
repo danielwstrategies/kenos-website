@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&family=Montserrat:wght@400;500;600;700&display=swap');
 
 :root {
   /* Kenos Restaurant Brand Colors */
@@ -17,7 +18,7 @@
   --white: #FFFFFF;
   
   /* Typography */
-  --font-heading: 'Playfair Display', serif;
+  --font-heading: 'Yeseva One', serif;
   --font-body: 'Inter', sans-serif;
   
   /* Spacing */
@@ -46,6 +47,7 @@ body {
   font-family: var(--font-body);
   color: var(--text-dark);
   background: var(--white);
+  font-size: 0.875rem; /* 14px */
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -53,14 +55,14 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.2;
-  color: var(--text-dark);
+  color: var(--white);
 }
 
 h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 900;
+  font-weight: 400;
 }
 
 h2 {
@@ -74,7 +76,12 @@ h3 {
 
 p {
   margin-bottom: 1rem;
+  font-size: 0.875rem; /* 14px */
   line-height: 1.8;
+}
+
+a {
+  font-size: inherit;
 }
 
 a {
@@ -140,6 +147,32 @@ img {
     -webkit-backdrop-filter: blur(16px) saturate(180%);
   }
 
+  /* Kenos Button Styles */
+  .kenos-btn-primary {
+    @apply inline-block px-6 py-3 rounded font-yeseva text-white transition-all duration-300;
+    background-color: #980914;
+    box-shadow: inset 0px 1px 1px 0px rgba(255,255,255,0.25), inset 0px -1px 1px 0px rgba(47,0,0,0.59);
+  }
+
+  .kenos-btn-primary:hover {
+    background-color: #711B1C;
+    transform: translateY(-2px);
+    box-shadow: inset 0px 1px 1px 0px rgba(255,255,255,0.25), inset 0px -1px 1px 0px rgba(47,0,0,0.59), 0px 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .kenos-btn-secondary {
+    @apply inline-block px-6 py-3 rounded font-yeseva transition-all duration-300;
+    background-color: #F5EBEB;
+    color: #2F0C0C;
+    box-shadow: inset 0px 1px 1px 0px rgba(255,255,255,0.25), inset 0px -1px 1px 0px rgba(47,0,0,0.59);
+  }
+
+  .kenos-btn-secondary:hover {
+    background-color: #E5D5D5;
+    transform: translateY(-2px);
+    box-shadow: inset 0px 1px 1px 0px rgba(255,255,255,0.25), inset 0px -1px 1px 0px rgba(47,0,0,0.59), 0px 4px 8px rgba(0,0,0,0.2);
+  }
+
   /* GSAP Animation Initial States */
   .gsap-fade-in {
     opacity: 0;
@@ -168,6 +201,16 @@ img {
   .gsap-scale {
     opacity: 0;
     transform: scale(0.9);
+  }
+}
+
+/* Image Ticker Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 

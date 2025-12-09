@@ -140,38 +140,7 @@ async function seedHomepage() {
               },
             ],
           },
-          {
-            blockType: 'gallery',
-            title: 'Experience Keno\'s',
-            subtitle: 'A glimpse into our world',
-            layout: 'grid',
-            images: [
-              {
-                caption: 'Our elegant dining room',
-              },
-              {
-                caption: 'Fresh ingredients from local farms',
-              },
-              {
-                caption: 'Our talented culinary team',
-              },
-              {
-                caption: 'Handcrafted cocktails',
-              },
-              {
-                caption: 'Perfect for intimate gatherings',
-              },
-              {
-                caption: 'Art meets cuisine',
-              },
-              {
-                caption: 'Seasonal specials',
-              },
-              {
-                caption: 'Desserts to remember',
-              },
-            ],
-          },
+          // Gallery block removed - add images in admin panel
           {
             blockType: 'testimonials',
             title: 'What Our Guests Say',

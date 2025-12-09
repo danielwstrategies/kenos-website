@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     pages: Page;
     media: Media;
+    services: Service;
+    'contact-submissions': ContactSubmission;
     test: Test;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -81,6 +83,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     test: TestSelect<false> | TestSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -91,8 +95,12 @@ export interface Config {
     defaultIDType: string;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    navigation: Navigation;
+  };
+  globalsSelect: {
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -160,6 +168,135 @@ export interface Page {
    */
   slug: string;
   layout: (
+    | {
+        /**
+         * Main headline (e.g., "You're Only A Stranger Once")
+         */
+        heading: string;
+        /**
+         * Restaurant address to display on hero
+         */
+        address?: string | null;
+        /**
+         * Large food photography background
+         */
+        backgroundImage?: (string | null) | Media;
+        primaryButton?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        secondaryButton?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'kenosHero';
+      }
+    | {
+        awards?:
+          | {
+              /**
+               * Award title (e.g., "Best Breakfast in Orange County")
+               */
+              title: string;
+              /**
+               * Award source (e.g., "Yelp", "OC Register")
+               */
+              source?: string | null;
+              /**
+               * Circular badge design with stars
+               */
+              badgeImage?: (string | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Logo displayed between badges
+         */
+        centerLogo?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'awardsSection';
+      }
+    | {
+        /**
+         * Promotion heading with gradient effect
+         */
+        heading: string;
+        /**
+         * Promotional details in bordered box
+         */
+        content: {
+          [k: string]: unknown;
+        }[];
+        button?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        /**
+         * Dark food photography background
+         */
+        backgroundImage?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'promotionSection';
+      }
+    | {
+        heading: string;
+        description?: string | null;
+        button?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        gallery?:
+          | {
+              image: string | Media;
+              caption?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'orderOnlineSection';
+      }
+    | {
+        heading: string;
+        content: string;
+        button?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        /**
+         * Food photography with dark overlay
+         */
+        backgroundImage?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'destinationSection';
+      }
+    | {
+        /**
+         * Circular profile photo
+         */
+        photo?: (string | null) | Media;
+        /**
+         * Label above name (e.g., "OWNER", "CHEF")
+         */
+        label?: string | null;
+        name: string;
+        /**
+         * Personal quote about favorite meal
+         */
+        quote: string;
+        button?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'ownerProfileSection';
+      }
     | {
         /**
          * Main headline text
@@ -395,6 +532,62 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: string;
+  title: string;
+  /**
+   * Icon name from iconoir-react (e.g., "headset-help", "chart-line")
+   */
+  icon?: string | null;
+  description?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
+  /**
+   * Short tagline or subtitle for the service
+   */
+  tagline?: string | null;
+  /**
+   * Longer description paragraph for the service
+   */
+  detailedDescription?: string | null;
+  serviceItems?:
+    | {
+        /**
+         * Icon name from iconoir-react
+         */
+        icon?: string | null;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Order in which the service appears (lower numbers first)
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions".
+ */
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string | null;
+  subject?: string | null;
+  message: string;
+  status?: ('new' | 'contacted' | 'resolved') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "test".
  */
 export interface Test {
@@ -439,6 +632,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'services';
+        value: string | Service;
+      } | null)
+    | ({
+        relationTo: 'contact-submissions';
+        value: string | ContactSubmission;
       } | null)
     | ({
         relationTo: 'test';
@@ -519,6 +720,109 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        kenosHero?:
+          | T
+          | {
+              heading?: T;
+              address?: T;
+              backgroundImage?: T;
+              primaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        awardsSection?:
+          | T
+          | {
+              awards?:
+                | T
+                | {
+                    title?: T;
+                    source?: T;
+                    badgeImage?: T;
+                    id?: T;
+                  };
+              centerLogo?: T;
+              id?: T;
+              blockName?: T;
+            };
+        promotionSection?:
+          | T
+          | {
+              heading?: T;
+              content?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              backgroundImage?: T;
+              id?: T;
+              blockName?: T;
+            };
+        orderOnlineSection?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        destinationSection?:
+          | T
+          | {
+              heading?: T;
+              content?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              backgroundImage?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ownerProfileSection?:
+          | T
+          | {
+              photo?: T;
+              label?: T;
+              name?: T;
+              quote?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         hero?:
           | T
           | {
@@ -736,6 +1040,41 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  icon?: T;
+  description?: T;
+  tagline?: T;
+  detailedDescription?: T;
+  serviceItems?:
+    | T
+    | {
+        icon?: T;
+        text?: T;
+        id?: T;
+      };
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions_select".
+ */
+export interface ContactSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
+  message?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "test_select".
  */
 export interface TestSelect<T extends boolean = true> {
@@ -783,6 +1122,66 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: string;
+  mainNav: {
+    label: string;
+    href: string;
+    openInNewTab?: boolean | null;
+    id?: string | null;
+  }[];
+  footerNav: {
+    label: string;
+    href: string;
+    openInNewTab?: boolean | null;
+    id?: string | null;
+  }[];
+  socialLinks?: {
+    facebook?: string | null;
+    instagram?: string | null;
+    twitter?: string | null;
+    yelp?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  mainNav?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        openInNewTab?: T;
+        id?: T;
+      };
+  footerNav?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        openInNewTab?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        facebook?: T;
+        instagram?: T;
+        twitter?: T;
+        yelp?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

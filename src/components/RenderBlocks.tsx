@@ -9,6 +9,12 @@ import TestimonialsBlock from './blocks/TestimonialsBlock'
 import ContactBlock from './blocks/ContactBlock'
 import ContentBlock from './blocks/ContentBlock'
 import CTABlock from './blocks/CTABlock'
+import KenosHeroBlock from './blocks/KenosHeroBlock'
+import AwardsSectionBlock from './blocks/AwardsSectionBlock'
+import PromotionSectionBlock from './blocks/PromotionSectionBlock'
+import OrderOnlineSectionBlock from './blocks/OrderOnlineSectionBlock'
+import DestinationSectionBlock from './blocks/DestinationSectionBlock'
+import OwnerProfileSectionBlock from './blocks/OwnerProfileSectionBlock'
 
 interface RenderBlocksProps {
   layout: any[]
@@ -23,6 +29,18 @@ export default function RenderBlocks({ layout }: RenderBlocksProps) {
     <>
       {layout.map((block: any, index: number) => {
         switch (block.blockType) {
+          case 'kenosHero':
+            return <KenosHeroBlock key={block.id || index} block={block} />
+          case 'awardsSection':
+            return <AwardsSectionBlock key={block.id || index} block={block} />
+          case 'promotionSection':
+            return <PromotionSectionBlock key={block.id || index} block={block} />
+          case 'orderOnlineSection':
+            return <OrderOnlineSectionBlock key={block.id || index} block={block} />
+          case 'destinationSection':
+            return <DestinationSectionBlock key={block.id || index} block={block} />
+          case 'ownerProfileSection':
+            return <OwnerProfileSectionBlock key={block.id || index} block={block} />
           case 'hero':
             return <HeroBlock key={block.id || index} block={block} />
           case 'about':

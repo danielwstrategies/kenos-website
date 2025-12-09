@@ -25,197 +25,191 @@ export async function GET() {
       })
     }
 
-    // Create the homepage with proper Slate editor format
+    // Create the Keno's Restaurant homepage with design-specific blocks
     const homepage = await payload.create({
       collection: 'pages',
       data: {
         title: 'Home',
         slug: 'home',
         layout: [
+          // 1. Hero Section - "You're Only A Stranger Once"
           {
-            blockType: 'hero',
-            heading: "Welcome to Keno's Restaurant",
-            subheading:
-              'Experience authentic flavors and warm hospitality in the heart of the city. Every dish tells a story.',
+            blockType: 'kenosHero',
+            heading: "You're Only A Stranger Once",
+            address: '8685 E Chapman Ave\nOrange, CA 92869',
             primaryButton: {
-              text: 'View Our Menu',
+              text: 'See Menu',
               link: '/menu',
             },
             secondaryButton: {
-              text: 'Reserve a Table',
-              link: '/reservations',
+              text: 'Our History',
+              link: '/history',
             },
           },
+          // 2. Awards Section - Best Breakfast & Family Friendly
           {
-            blockType: 'about',
-            title: 'Our Story',
-            subtitle: 'A Passion for Excellence Since 2010',
+            blockType: 'awardsSection',
+            awards: [
+              {
+                title: 'Best Breakfast in Orange County',
+                source: 'Yelp',
+              },
+              {
+                title: '#2 Best Family Friendly Restaurant in Orange County',
+                source: 'OC Register',
+              },
+            ],
+          },
+          // 3. Thanksgiving Promotion Section
+          {
+            blockType: 'promotionSection',
+            heading: 'Thanksgiving Pre-Order Menu',
             content: [
               {
                 children: [
                   {
-                    text: "At Keno's Restaurant, we believe that great food brings people together. Our journey began over a decade ago with a simple vision: to create a dining experience that celebrates authentic flavors, fresh ingredients, and the joy of sharing a meal with loved ones.",
+                    text: 'Order your complete Thanksgiving dinner from Keno\'s! Traditional turkey dinner with all the fixings, including stuffing, mashed potatoes, gravy, cranberry sauce, and fresh-baked pies.',
                   },
                 ],
               },
               {
                 children: [
                   {
-                    text: 'Our talented chefs craft each dish with care, combining traditional recipes with modern culinary techniques to deliver unforgettable flavors.',
+                    text: 'Pre-orders must be placed by November 20th. Pick up available November 22-23.',
                   },
                 ],
               },
             ],
-            imagePosition: 'right',
-            features: [
-              {
-                icon: '🍳',
-                title: 'Fresh Ingredients',
-                description: 'Locally sourced produce and ingredients delivered fresh daily',
-              },
-              {
-                icon: '👨‍🍳',
-                title: 'Expert Chefs',
-                description: 'Over 20 years of combined culinary experience',
-              },
-              {
-                icon: '🏆',
-                title: 'Award Winning',
-                description: 'Recognized for excellence in dining and service',
-              },
-              {
-                icon: '❤️',
-                title: 'Made with Love',
-                description: 'Every dish is prepared with passion and attention to detail',
-              },
-            ],
+            button: {
+              text: 'Reserve',
+              link: '/reservations',
+            },
           },
+          // 4. Order Online Section with Photo Gallery
+          {
+            blockType: 'orderOnlineSection',
+            heading: 'Order Online',
+            description: 'Enjoy Keno\'s delicious food from the comfort of your home. Browse our full menu and place your order for pickup or delivery.',
+            button: {
+              text: 'Order Now',
+              link: '/order',
+            },
+            gallery: [],
+          },
+          // 5. "A Destination" Section
+          {
+            blockType: 'destinationSection',
+            heading: 'A Destination',
+            content: 'For over 31 years, Keno\'s has been a beloved gathering place where families and friends come together to share great food and create lasting memories. Our commitment to quality ingredients, scratch-made recipes, and warm hospitality makes every visit special.',
+            button: {
+              text: 'Our Menu',
+              link: '/menu',
+            },
+          },
+          // 6. Owner Profile Section
+          {
+            blockType: 'ownerProfileSection',
+            label: 'OWNER',
+            name: 'Keno',
+            quote: 'My favorite meal at the restaurant is our classic breakfast platter with fluffy pancakes, crispy bacon, and farm-fresh eggs. It reminds me why I started this place - to bring people together over honest, delicious food.',
+            button: {
+              text: 'See The Team',
+              link: '/team',
+            },
+          },
+          // 7. Menu Highlights Section
           {
             blockType: 'menuHighlights',
             title: 'Signature Dishes',
-            subtitle: 'Taste our most loved creations',
+            subtitle: 'Fan favorites that keep our guests coming back',
             items: [
               {
-                name: 'Grilled Atlantic Salmon',
-                description:
-                  'Fresh salmon fillet with herb butter, seasonal vegetables, and roasted potatoes',
-                price: '$28.99',
+                name: 'Famous Fried Chicken',
+                description: 'Crispy, golden-fried chicken with our secret blend of herbs and spices',
+                price: '$16.99',
                 category: 'Main Course',
                 featured: true,
               },
               {
-                name: 'Truffle Mushroom Risotto',
-                description: 'Creamy arborio rice with wild mushrooms, parmesan, and black truffle oil',
-                price: '$24.99',
-                category: 'Main Course',
-                featured: true,
-              },
-              {
-                name: 'Caprese Salad',
-                description: 'Fresh mozzarella, heirloom tomatoes, basil, and balsamic reduction',
+                name: 'Classic Breakfast Platter',
+                description: 'Two eggs any style, bacon or sausage, hash browns, and pancakes or toast',
                 price: '$12.99',
-                category: 'Appetizer',
-                featured: false,
+                category: 'Breakfast',
+                featured: true,
               },
               {
-                name: 'Beef Tenderloin',
-                description: '8oz prime beef with red wine reduction, mashed potatoes, and asparagus',
-                price: '$36.99',
+                name: 'Keno\'s Burger',
+                description: 'Half-pound Angus beef patty with lettuce, tomato, onion, and special sauce',
+                price: '$14.99',
                 category: 'Main Course',
                 featured: true,
               },
               {
-                name: 'Chocolate Lava Cake',
-                description: 'Warm chocolate cake with molten center, vanilla ice cream, and berry coulis',
-                price: '$9.99',
+                name: 'Homemade Pie',
+                description: 'Fresh-baked daily - ask your server for today\'s flavors',
+                price: '$6.99',
                 category: 'Dessert',
-                featured: false,
-              },
-              {
-                name: 'Mediterranean Pasta',
-                description: 'Fresh pasta with sun-dried tomatoes, olives, feta, and herbs',
-                price: '$19.99',
-                category: 'Main Course',
                 featured: false,
               },
             ],
           },
-
+          // 8. Testimonials
           {
             blockType: 'testimonials',
             title: 'What Our Guests Say',
-            subtitle: "Hear from those who've experienced Keno's",
+            subtitle: 'Over 31 years of happy customers',
             testimonials: [
               {
-                quote:
-                  'Absolutely incredible! The food was exceptional and the service was impeccable. This is now our go-to restaurant for special occasions.',
-                author: 'Sarah Mitchell',
-                role: 'Food Critic',
-                rating: 5,
-              },
-              {
-                quote:
-                  "The best Italian cuisine I've had outside of Italy. The truffle risotto is to die for! Highly recommend.",
-                author: 'James Chen',
+                quote: 'Best breakfast in Orange County, hands down! The pancakes are fluffy, the bacon is crispy, and the service is always friendly. This is our family\'s Sunday tradition.',
+                author: 'Jennifer Martinez',
                 role: 'Regular Customer',
                 rating: 5,
               },
               {
-                quote:
-                  "A hidden gem! The atmosphere is cozy, the staff is friendly, and every dish we tried was delicious. Can't wait to come back!",
-                author: 'Emily Rodriguez',
-                role: 'Travel Blogger',
+                quote: 'Keno\'s is the real deal. Great food, generous portions, and prices that won\'t break the bank. The fried chicken is absolutely incredible!',
+                author: 'Mike Thompson',
+                role: 'Food Enthusiast',
                 rating: 5,
               },
               {
-                quote:
-                  "Outstanding experience from start to finish. The chef's attention to detail is evident in every bite. Five stars!",
-                author: 'Michael Thompson',
-                role: 'Business Executive',
+                quote: 'A true Orange County gem! We\'ve been coming here for over 15 years and it never disappoints. The staff treats you like family.',
+                author: 'Sarah Chen',
+                role: 'Local Resident',
                 rating: 5,
               },
             ],
           },
-          {
-            blockType: 'cta',
-            heading: 'Ready for an Unforgettable Dining Experience?',
-            description: "Reserve your table today and discover why Keno's is the talk of the town.",
-            button: {
-              text: 'Make a Reservation',
-              link: '/reservations',
-            },
-            style: 'centered',
-          },
+          // 9. Contact Information
           {
             blockType: 'contact',
             title: 'Visit Us',
-            subtitle: "We'd love to serve you",
-            address: '123 Gourmet Street\nDowntown District\nCity, State 12345',
-            phone: '(555) 123-4567',
+            subtitle: 'We\'re here to serve you',
+            address: '8685 E Chapman Ave\nOrange, CA 92869',
+            phone: '(714) 555-KENO',
             email: 'info@kenosrestaurant.com',
             hours: [
               {
-                day: 'Monday - Thursday',
-                hours: '11:00 AM - 10:00 PM',
+                day: 'Monday - Friday',
+                hours: '7:00 AM - 9:00 PM',
               },
               {
-                day: 'Friday - Saturday',
-                hours: '11:00 AM - 11:00 PM',
+                day: 'Saturday',
+                hours: '7:00 AM - 10:00 PM',
               },
               {
                 day: 'Sunday',
-                hours: '10:00 AM - 9:00 PM (Brunch 10AM-2PM)',
+                hours: '7:00 AM - 9:00 PM',
               },
             ],
             showContactForm: true,
           },
         ],
         meta: {
-          title: "Keno's Restaurant | Authentic Cuisine & Fine Dining Experience",
+          title: "Keno's Restaurant | Orange County's Best Breakfast & Family Dining Since 1994",
           description:
-            "Experience exceptional dining at Keno's Restaurant. Fresh ingredients, expert chefs, and unforgettable flavors in the heart of the city. Reserve your table today!",
+            "Experience 31+ years of delicious American comfort food at Keno's Restaurant in Orange, CA. Award-winning breakfast, lunch, and dinner in a family-friendly atmosphere.",
           keywords:
-            'restaurant, fine dining, Italian cuisine, local restaurant, gourmet food, farm to table, reservations',
+            'Kenos restaurant, Orange CA restaurant, best breakfast Orange County, family restaurant, American food, fried chicken, comfort food, Orange dining',
         },
         status: 'published',
       },
@@ -223,7 +217,7 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
-      message: 'Homepage created successfully!',
+      message: 'Keno\'s Restaurant homepage created successfully!',
       page: {
         id: homepage.id,
         title: homepage.title,
@@ -232,6 +226,7 @@ export async function GET() {
       },
       urls: {
         view: `/admin/collections/pages/${homepage.id}`,
+        frontend: '/',
         api: `/api/pages/${homepage.id}`,
       },
     })
@@ -241,6 +236,7 @@ export async function GET() {
       {
         success: false,
         error: error.message || 'Failed to create homepage',
+        details: error.toString(),
       },
       { status: 500 },
     )

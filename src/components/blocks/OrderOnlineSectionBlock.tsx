@@ -1,0 +1,111 @@
+'use client'
+
+import React from 'react'
+import Image from 'next/image'
+
+// Static ticker images
+const tickerImages = [
+  '/images/efebf1140cd08e0bdcdd6ee6c6828f0e3b6233e5.png',
+  '/images/8983217433c1c88a2980785d9c4f68375d28a9b3.png',
+  '/images/6e9447896fd9a8e5e9461a7fe84d150f1f12238a.png',
+  '/images/01dc96d19ff8ebb8cec9a78843df40db73137229.png',
+]
+
+interface OrderOnlineSectionBlockProps {
+  block: {
+    heading: string
+    description?: string
+    button?: {
+      text: string
+      link: string
+    }
+    gallery?: Array<{
+      image: any
+      caption?: string
+    }>
+  }
+}
+
+export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlockProps) {
+  const { heading, description, button } = block
+
+  // Double the images for seamless infinite scroll
+  const doubledImages = [...tickerImages, ...tickerImages]
+
+  return (
+    <section className="relative pt-16 md:pt-24 pb-0 z-10">
+      <div className="container mx-auto px-4 max-w-6xl">
+        {/* Heading and Description */}
+        <div className="text-center mb-12">
+          <h2 className="font-yeseva text-3xl md:text-4xl lg:text-5xl mb-4 text-[#2F0C0C]">
+            {heading}
+          </h2>
+          {description && (
+            <p className="font-montserrat text-base md:text-lg text-neutral-700 max-w-2xl mx-auto mb-8">
+              {description}
+            </p>
+          )}
+          {button?.text && (
+            <a
+              href={button.link}
+              className="kenos-btn-primary"
+            >
+              {button.text}
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Infinite Scrolling Ticker */}
+      <div className="ticker-wrapper mt-12 mb-[-2rem]">
+        <div className="ticker-track">
+          {doubledImages.map((src, index) => (
+            <div
+              key={index}
+              className="ticker-item"
+            >
+              <Image
+                src={src}
+                alt={`Food image ${(index % tickerImages.length) + 1}`}
+                width={300}
+                height={300}
+                className="w-auto h-48 md:h-64 object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style jsx>{`
+        .ticker-wrapper {
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .ticker-track {
+          display: flex;
+          gap: 1.5rem;
+          animation: ticker 25s linear infinite;
+          width: max-content;
+        }
+
+        .ticker-item {
+          flex-shrink: 0;
+        }
+
+        @keyframes ticker {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .ticker-wrapper:hover .ticker-track {
+          animation-play-state: paused;
+        }
+      `}</style>
+    </section>
+  )
+}

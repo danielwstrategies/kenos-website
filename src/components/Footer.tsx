@@ -1,7 +1,14 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
 
 interface FooterNav {
   label: string
@@ -9,54 +16,158 @@ interface FooterNav {
   openInNewTab?: boolean
 }
 
-interface SocialLinks {
-  facebook?: string
-  instagram?: string
-  twitter?: string
-  yelp?: string
-}
-
 interface FooterProps {
-  footerNav?: FooterNav[]
-  socialLinks?: SocialLinks
+  leftColumn?: FooterNav[]
+  rightColumn?: FooterNav[]
+  hoursTitle?: string
+  hoursLine1?: string
+  hoursLine2?: string
 }
 
-const defaultFooterNav: FooterNav[] = [
+const defaultLeftColumn: FooterNav[] = [
   { label: 'Home', href: '/' },
-  { label: 'Menu', href: '#menu' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Current Menus and Ordering', href: '/menu' },
+  { label: 'Entertainment', href: '/entertainment' },
+  { label: 'Our History', href: '/history' },
+  { label: 'Our Staff', href: '/staff' },
+  { label: 'Gallery', href: '/gallery' },
 ]
 
-export default function Footer({ footerNav, socialLinks }: FooterProps) {
-  const navItems = footerNav && footerNav.length > 0 ? footerNav : defaultFooterNav
+const defaultRightColumn: FooterNav[] = [
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Jobs', href: '/jobs' },
+  { label: "Keno's News", href: '/news' },
+  { label: 'Become a VIP', href: '/vip' },
+  { label: 'Site Map', href: '/sitemap' },
+  { label: 'Privacy Policy', href: '/privacy' },
+]
+
+export default function Footer({ 
+  leftColumn, 
+  rightColumn,
+  hoursTitle = 'Restaurant Hours',
+  hoursLine1 = 'Sunday-Thursday 7 AM-9 PM',
+  hoursLine2 = 'Friday-Saturday: 7 AM-10 PM'
+}: FooterProps) {
+  const leftNav = leftColumn && leftColumn.length > 0 ? leftColumn : defaultLeftColumn
+  const rightNav = rightColumn && rightColumn.length > 0 ? rightColumn : defaultRightColumn
+
+  const footerRef = useRef<HTMLElement>(null)
+  const logoRef = useRef<HTMLDivElement>(null)
+  const hoursRef = useRef<HTMLDivElement>(null)
+  const leftColRef = useRef<HTMLDivElement>(null)
+  const rightColRef = useRef<HTMLDivElement>(null)
+  const copyrightRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: 'top 90%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
+      // Logo fade in
+      if (logoRef.current) {
+        tl.fromTo(
+          logoRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+          0
+        )
+      }
+
+      // Hours box
+      if (hoursRef.current) {
+        tl.fromTo(
+          hoursRef.current,
+          { opacity: 0, y: 15 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+          0.15
+        )
+      }
+
+      // Left column links stagger
+      if (leftColRef.current) {
+        tl.fromTo(
+          leftColRef.current.querySelectorAll('li'),
+          { opacity: 0, x: -15 },
+          { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+          0.2
+        )
+      }
+
+      // Right column links stagger
+      if (rightColRef.current) {
+        tl.fromTo(
+          rightColRef.current.querySelectorAll('li'),
+          { opacity: 0, x: -15 },
+          { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+          0.3
+        )
+      }
+
+      // Copyright
+      if (copyrightRef.current) {
+        tl.fromTo(
+          copyrightRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: 'power3.out' },
+          0.5
+        )
+      }
+    }, footerRef)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
-    <footer className="bg-secondary text-white py-16 px-8">
+    <footer 
+      ref={footerRef}
+      className="text-white py-16 px-8"
+      style={{
+        background: 'linear-gradient(135deg, #1a0a0a 0%, #2d1515 50%, #0d0d0d 100%)'
+      }}
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          <div>
-            <div className="text-2xl font-bold font-heading mb-4">
-              Keno&apos;s
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+          {/* Left - Logo and Hours */}
+          <div className="md:col-span-4">
+            {/* Logo */}
+            <div ref={logoRef} className="mb-8 opacity-0">
+              <Image
+                src="/media/Keno's Logo 1.png"
+                alt="Keno's Restaurant"
+                width={200}
+                height={180}
+                className="w-48 h-auto"
+              />
             </div>
-            <p className="text-white/70 leading-relaxed text-sm">
-              Restaurant Hours
-              <br />
-              Sunday-Thursday 7 AM to 9 PM
-              <br />
-              Friday-Saturday 7 AM to 10 PM
-            </p>
+
+            {/* Hours Box */}
+            <div ref={hoursRef} className="border border-white/30 p-6 inline-block opacity-0">
+              <h4 className="font-montserrat font-semibold text-lg mb-3 text-white">
+                {hoursTitle}
+              </h4>
+              <p className="font-montserrat text-white/80 text-sm leading-relaxed">
+                {hoursLine1}
+                <br />
+                {hoursLine2}
+              </p>
+            </div>
           </div>
 
-          <div>
-            <h4 className="mb-4 text-lg font-semibold">Quick Links</h4>
-            <ul className="space-y-2">
-              {navItems.map((item, i) => (
-                <li key={i}>
+          {/* Middle - Navigation Column 1 */}
+          <div ref={leftColRef} className="md:col-span-4">
+            <ul className="space-y-4">
+              {leftNav.map((item, i) => (
+                <li key={i} className="opacity-0">
                   <Link
                     href={item.href}
                     target={item.openInNewTab ? '_blank' : undefined}
-                    className="text-white/70 hover:text-white transition-colors"
+                    className="font-montserrat text-white/90 hover:text-white transition-colors text-base"
                   >
                     {item.label}
                   </Link>
@@ -65,62 +176,28 @@ export default function Footer({ footerNav, socialLinks }: FooterProps) {
             </ul>
           </div>
 
-          <div>
-            <h4 className="mb-4 text-lg font-semibold">Connect</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="#contact" className="text-white/70 hover:text-white transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#jobs" className="text-white/70 hover:text-white transition-colors">
-                  Jobs
-                </Link>
-              </li>
-              <li>
-                <Link href="#vip" className="text-white/70 hover:text-white transition-colors">
-                  Become a VIP
-                </Link>
-              </li>
-              <li>
-                <Link href="#privacy" className="text-white/70 hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
+          {/* Right - Navigation Column 2 */}
+          <div ref={rightColRef} className="md:col-span-4">
+            <ul className="space-y-4">
+              {rightNav.map((item, i) => (
+                <li key={i} className="opacity-0">
+                  <Link
+                    href={item.href}
+                    target={item.openInNewTab ? '_blank' : undefined}
+                    className="font-montserrat text-white/90 hover:text-white transition-colors text-base"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
-            
-            {/* Social Links */}
-            {socialLinks && (
-              <div className="flex gap-4 mt-6">
-                {socialLinks.facebook && (
-                  <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white">
-                    Facebook
-                  </a>
-                )}
-                {socialLinks.instagram && (
-                  <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white">
-                    Instagram
-                  </a>
-                )}
-                {socialLinks.yelp && (
-                  <a href={socialLinks.yelp} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white">
-                    Yelp
-                  </a>
-                )}
-              </div>
-            )}
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 text-center">
-          <p className="text-sm text-white/60">
-            © {new Date().getFullYear()} Keno&apos;s Restaurant. All rights reserved.
-          </p>
-          <p className="mt-4 text-sm">
-            <Link href="/admin" className="text-primary hover:underline">
-              Edit in Admin Panel
-            </Link>
+        {/* Copyright */}
+        <div ref={copyrightRef} className="pt-8 opacity-0">
+          <p className="font-montserrat text-sm text-white/60">
+            © {new Date().getFullYear()} Keno&apos;s Restaurant. All Rights Reserved.
           </p>
         </div>
       </div>

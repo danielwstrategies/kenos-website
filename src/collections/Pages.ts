@@ -72,6 +72,398 @@ const Pages: CollectionConfig = {
       type: 'blocks',
       required: true,
       blocks: [
+        // Kenos Hero Section (with address overlay)
+        {
+          slug: 'kenosHero',
+          labels: {
+            singular: 'Kenos Hero',
+            plural: 'Kenos Heroes',
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'Main headline (e.g., "You\'re Only A Stranger Once")',
+              },
+            },
+            {
+              name: 'address',
+              type: 'textarea',
+              admin: {
+                description: 'Restaurant address to display on hero',
+              },
+            },
+            {
+              name: 'addressLink',
+              type: 'text',
+              admin: {
+                description: 'Google Maps link for the address',
+              },
+            },
+            {
+              name: 'backgroundImage',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Large food photography background',
+              },
+            },
+            {
+              name: 'primaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'See Menu',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/menu',
+                },
+              ],
+            },
+            {
+              name: 'secondaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Our History',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/history',
+                },
+              ],
+            },
+          ],
+        },
+        // Awards/Badges Section
+        {
+          slug: 'awardsSection',
+          labels: {
+            singular: 'Awards Section',
+            plural: 'Awards Sections',
+          },
+          fields: [
+            {
+              name: 'awards',
+              type: 'array',
+              minRows: 1,
+              maxRows: 3,
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    description: 'Award title (e.g., "Best Breakfast in Orange County")',
+                  },
+                },
+                {
+                  name: 'source',
+                  type: 'select',
+                  options: [
+                    { label: 'Orange County Hotlist', value: 'hotlist' },
+                    { label: 'The Orange County Register', value: 'register' },
+                  ],
+                  admin: {
+                    description: 'Select the award source logo to display',
+                  },
+                },
+                {
+                  name: 'badgeImage',
+                  type: 'upload',
+                  relationTo: 'media',
+                  admin: {
+                    description: 'Circular badge design with stars',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'centerLogo',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Logo displayed between badges',
+              },
+            },
+          ],
+        },
+        // Promotion Section (Thanksgiving, seasonal)
+        {
+          slug: 'promotionSection',
+          labels: {
+            singular: 'Promotion Section',
+            plural: 'Promotion Sections',
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'Main heading (e.g., "Thanksgiving Day Menus")',
+              },
+            },
+            {
+              name: 'subheading',
+              type: 'text',
+              admin: {
+                description: 'Subheading below main heading (e.g., "Pre-Order Family Meals or Dine-In")',
+              },
+            },
+            {
+              name: 'promotionImages',
+              type: 'array',
+              maxRows: 3,
+              admin: {
+                description: 'Promotion images (menu flyers, product photos) - displayed on right side with overflow and rounded corners',
+              },
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
+            },
+            {
+              name: 'showDateBox',
+              type: 'checkbox',
+              defaultValue: false,
+              admin: {
+                description: 'Show the date/info box above the CTA button',
+              },
+            },
+            {
+              name: 'dateBoxLine1',
+              type: 'text',
+              admin: {
+                description: 'First line in date box (e.g., "Thursday November 27th, 2025")',
+                condition: (data, siblingData) => siblingData?.showDateBox === true,
+              },
+            },
+            {
+              name: 'dateBoxLine2',
+              type: 'text',
+              admin: {
+                description: 'Second line in date box (e.g., "Open from 7:00 am - 6:00 pm")',
+                condition: (data, siblingData) => siblingData?.showDateBox === true,
+              },
+            },
+            {
+              name: 'dateBoxLine3',
+              type: 'text',
+              admin: {
+                description: 'Third line in date box (e.g., "Holiday Menu 11am - Sold Out")',
+                condition: (data, siblingData) => siblingData?.showDateBox === true,
+              },
+            },
+            {
+              name: 'button',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Reserve',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/reservations',
+                },
+              ],
+            },
+            {
+              name: 'backgroundImage',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Background image for the section',
+              },
+            },
+          ],
+        },
+        // Order Online Section
+        {
+          slug: 'orderOnlineSection',
+          labels: {
+            singular: 'Order Online Section',
+            plural: 'Order Online Sections',
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+            },
+            {
+              name: 'button',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Order Online',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/order',
+                },
+              ],
+            },
+            {
+              name: 'gallery',
+              type: 'array',
+              minRows: 3,
+              maxRows: 6,
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+                {
+                  name: 'caption',
+                  type: 'text',
+                },
+              ],
+            },
+          ],
+        },
+        // Destination Section (dark overlay with quote)
+        {
+          slug: 'destinationSection',
+          labels: {
+            singular: 'Destination Section',
+            plural: 'Destination Sections',
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'content',
+              type: 'textarea',
+              required: true,
+            },
+            {
+              name: 'button',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Our Menu',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/menu',
+                },
+              ],
+            },
+            {
+              name: 'backgroundImage',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Food photography with dark overlay',
+              },
+            },
+          ],
+        },
+        // Owner Profile Section
+        {
+          slug: 'ownerProfileSection',
+          labels: {
+            singular: 'Owner Profile Section',
+            plural: 'Owner Profile Sections',
+          },
+          fields: [
+            {
+              name: 'photo',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Circular profile photo',
+              },
+            },
+            {
+              name: 'label',
+              type: 'text',
+              defaultValue: 'OWNER',
+              admin: {
+                description: 'Label above name (e.g., "OWNER", "CHEF")',
+              },
+            },
+            {
+              name: 'name',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'bio',
+              type: 'textarea',
+              admin: {
+                description: 'Biography text (use double line breaks for paragraphs)',
+              },
+            },
+            {
+              name: 'favoriteMealLabel',
+              type: 'text',
+              defaultValue: "Steve's Favorite Meal",
+              admin: {
+                description: 'Label for favorite meal section',
+              },
+            },
+            {
+              name: 'favoriteMeal',
+              type: 'text',
+              admin: {
+                description: 'Favorite meal quote',
+              },
+            },
+            {
+              name: 'button',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'See The Team',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/team',
+                },
+              ],
+            },
+          ],
+        },
         // Hero Section
         {
           slug: 'hero',

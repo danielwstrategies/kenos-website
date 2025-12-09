@@ -264,6 +264,23 @@ No local MongoDB required. The admin panel and API routes connect automatically.
 6. **Focus on user request** - Only address what was asked
 7. **No token waste** - Avoid verbose explanations and unnecessary details
 
+## Dev Server Management (CRITICAL)
+
+**NEVER kill or interrupt the dev server.** The user runs `npm run dev` in a separate terminal.
+
+When making code changes:
+- **DO NOT** run `npm run dev` - assume it's already running
+- **DO NOT** use `pkill` or kill commands on node/tsx processes
+- **DO NOT** run bash commands with timeouts that could kill the server
+- **DO** let Next.js hot reload handle file changes automatically
+- **DO** use `curl http://localhost:3011/health` to check if server is running (non-destructive)
+
+If the server stops responding:
+1. Ask the user to restart it manually in their terminal
+2. Or use: `cd /Users/danielyager/kenos-website && npm run dev &` to start in background
+
+**Why this matters:** Running `npm run dev` from Claude Code or using timeouts on bash commands can orphan/kill the existing server process, causing "site not loading" issues.
+
 ## Best Practices
 
 1. **Always add alt text** to images (accessibility + SEO)
@@ -309,3 +326,27 @@ http://localhost:3011/api      # API documentation
 - **Next.js Docs**: https://nextjs.org/docs
 - **Project Docs**: `/docs` folder
 - **Example Data**: `/example-homepage.json`
+
+## Known Issues & Bugs
+
+### Curl commands get stuck
+**Problem**: Running `curl` commands to check localhost:3011 causes the bash tool to hang/timeout.
+**Workaround**: Do NOT use `curl` to test the server. Instead:
+- Check the background server output with `BashOutput` tool
+- Ask the user to verify in their browser
+- Use non-blocking checks only
+
+### CSS changes may require hard refresh
+**Problem**: After editing `globals.css`, the page may appear broken or not load.
+**Solution**: 
+- The server logs may still show 200 responses
+- Ask user to hard refresh browser (Cmd+Shift+R)
+- Check server output for compilation errors
+
+
+### Multiple processes on same port
+**Problem**: Page refuses to load when multiple node processes are running on port 3011.
+**Symptoms**: Server logs show 200 but browser shows nothing or hangs.
+**Diagnosis**: Run `lsof -ti:3011` - if it shows more than one PID, thats the issue.
+**Solution**: Kill all processes with `kill -9 $(lsof -ti:3011)` then restart server.
+

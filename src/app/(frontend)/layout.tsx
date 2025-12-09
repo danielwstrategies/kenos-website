@@ -1,9 +1,9 @@
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Yeseva_One, Inter } from 'next/font/google'
 import '../globals.css'
 
-const playfair = Playfair_Display({ 
+const yeseva = Yeseva_One({ 
   subsets: ['latin'],
-  weight: ['400', '600', '700', '900'],
+  weight: ['400'],
   variable: '--font-heading',
   display: 'swap',
 })
@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={`${yeseva.variable} ${inter.variable}`}>
       <body className={inter.className}>{children}</body>
     </html>
   )
