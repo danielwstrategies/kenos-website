@@ -1,16 +1,20 @@
 {
-  "name": "adoring-bose",
+  "name": "kenos-website",
   "version": "1.0.0",
-  "description": "",
+  "description": "Kenos Restaurant website built with Next.js 15 and Payload CMS 3.x",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev -p 3011",
+    "dev": "tsx src/server.ts",
     "build": "next build",
-    "start": "next start -p 3011",
+    "start": "NODE_ENV=production tsx src/server.ts",
     "lint": "next lint",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
-    "seed:homepage": "tsx scripts/seed-homepage.ts"
+    "seed:homepage": "tsx scripts/seed-homepage.ts",
+    "test:db": "tsx scripts/test-mongodb-connection.ts",
+    "setup": "tsx scripts/setup-wizard.ts",
+    "check:users": "tsx scripts/check-users.ts",
+    "create:admin": "tsx scripts/create-admin-user.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +27,8 @@
     "cross-env": "^10.1.0",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "gsap": "^3.13.0",
+    "lottie-web": "^5.13.0",
     "mongodb": "^7.0.0",
     "next": "^15.4.7",
     "payload": "^3.65.0",
@@ -32,8 +38,14 @@
     "sharp": "^0.34.5"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.6",
     "@types/node": "^24.10.1",
+    "autoprefixer": "^10.4.20",
+    "bcryptjs": "^3.0.3",
+    "iconoir-react": "^7.11.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }

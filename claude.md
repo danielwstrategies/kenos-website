@@ -1,7 +1,18 @@
-# Claude AI Instructions for Kenos Website
+# Claude AI Instructions for Kenos Restaurant Website
+
+## Communication Guidelines
+
+**IMPORTANT - Read First:**
+- Keep responses SHORT and DIRECT
+- **NEVER create documentation files without explicit user permission**
+- **ASK before creating any new files in /docs folder**
+- Answer questions concisely in chat only
+- Only create guides/documents when user explicitly says "create a document" or "write a guide"
+- Compress and summarize - avoid verbose explanations
+- If user asks a question, answer it directly - don't offer to document it
 
 ## Project Overview
-This is a Next.js 15 + Payload CMS 3.x restaurant website project with a flexible block-based page builder.
+This is a Next.js 15 + Payload CMS 3.x restaurant website project for Kenos Restaurant with Tailwind CSS styling and GSAP animations.
 
 ## How to Create Pages in Payload CMS
 
@@ -162,12 +173,12 @@ npm run generate:types
 
 All documentation is in the `/docs` folder:
 
-- `pages-guide.md` - Comprehensive guide for using Pages collection
+- `blocks-reference.md` - Comprehensive guide for using Pages collection
 - `blocks-reference.md` - Quick reference for all block types
-- `quick-start.md` - 10-minute setup checklist
-- `implementation-summary.md` - Technical overview
+- `setup.md` - 10-minute setup checklist
+- `index.md` - Technical overview
 - `css-troubleshooting.md` - Payload admin styling issues reference
-- `browser-seed-instructions.md` - How to create pages via browser console
+- `setup.md` - How to create pages via browser console
 
 ## Common Tasks
 
@@ -231,7 +242,7 @@ import '@payloadcms/next/css'  // ✅ Correct for Payload 3.x
 4. **Preview frontend**: http://localhost:3011
 5. **Check API data**: http://localhost:3011/api/pages
 6. **Generate types**: `npm run generate:types` (after schema changes)
-7. **Deploy**: Follow `DEPLOYMENT.md` instructions
+7. **Deploy**: Follow `deployment.md` instructions
 
 ## Database Connection
 
@@ -242,6 +253,16 @@ DATABASE_URI=mongodb+srv://...
 ```
 
 No local MongoDB required. The admin panel and API routes connect automatically.
+
+## AI Assistant Guidelines
+
+1. **Be concise** - Short answers in chat only
+2. **NEVER create files without permission** - User must explicitly say "create a file" or "write a document"
+3. **Answer, don't document** - When user asks a question, answer it in chat
+4. **Ask first** - If documentation would be helpful, ASK if user wants it created
+5. **Docs in /docs folder** - Only when explicitly requested
+6. **Focus on user request** - Only address what was asked
+7. **No token waste** - Avoid verbose explanations and unnecessary details
 
 ## Best Practices
 

@@ -15,6 +15,11 @@ const inter = Inter({
   display: 'swap',
 })
 
+export const metadata = {
+  title: "Keno's Restaurant | Family Dining in Anaheim Hills",
+  description: "Keno's Family Restaurant - Award-winning breakfast and family dining in Anaheim Hills, CA. Serving the community since 1992.",
+}
+
 export default function FrontendLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>

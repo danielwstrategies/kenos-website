@@ -1,7 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Keno's Color Palette */
+  /* Kenos Restaurant Brand Colors */
   --primary-brown: #3D1A1A;
   --primary-red: #C8102E;
   --accent-gold: #D4AF37;
@@ -89,80 +93,82 @@ img {
   display: block;
 }
 
-/* Button Styles */
-.btn {
-  display: inline-block;
-  padding: 0.875rem 2rem;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 1rem;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+@layer components {
+  /* Button Styles */
+  .btn {
+    @apply inline-block px-8 py-4 font-semibold text-base text-center border-0 cursor-pointer transition-all duration-300 rounded;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white uppercase tracking-wide text-sm;
+  }
+
+  .btn-primary:hover {
+    @apply bg-primary-dark opacity-100;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent text-white border-2 border-white uppercase tracking-wide text-sm;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-white text-primary-brown opacity-100;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  /* Section Spacing */
+  .section {
+    @apply py-16 md:py-20 lg:py-24;
+  }
 }
 
-.btn-primary {
-  background: var(--primary-red);
-  color: var(--white);
-  border-radius: 4px;
-}
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+  
+  .bg-gradient-primary {
+    @apply bg-gradient-to-br from-primary-brown via-primary to-accent;
+  }
 
-.btn-primary:hover {
-  background: #A00D25;
-  opacity: 1;
-}
+  .backdrop-glass {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+  }
 
-.btn-secondary {
-  background: transparent;
-  color: var(--white);
-  border: 2px solid var(--white);
-  border-radius: 4px;
-}
+  /* GSAP Animation Initial States */
+  .gsap-fade-in {
+    opacity: 0;
+  }
 
-.btn-secondary:hover {
-  background: var(--white);
-  color: var(--primary-brown);
-  opacity: 1;
-}
+  .gsap-fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-/* Container */
-.container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 2rem;
-}
+  .gsap-fade-down {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
 
-/* Section Spacing */
-section {
-  padding: var(--section-padding);
-}
+  .gsap-fade-left {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
 
-/* Utility Classes */
-.text-center {
-  text-align: center;
-}
+  .gsap-fade-right {
+    opacity: 0;
+    transform: translateX(30px);
+  }
 
-.text-cream {
-  color: var(--cream-bg);
-}
-
-.bg-cream {
-  background: var(--cream-bg);
-}
-
-.bg-light-cream {
-  background: var(--light-cream);
-}
-
-.bg-dark-brown {
-  background: var(--dark-brown);
-}
-
-.bg-primary-brown {
-  background: var(--primary-brown);
+  .gsap-scale {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 }
 
 /* Responsive Typography */
@@ -170,18 +176,10 @@ section {
   :root {
     --section-padding: 3rem 1.5rem;
   }
-  
-  .container {
-    padding: 0 1.5rem;
-  }
 }
 
 @media (max-width: 480px) {
   :root {
     --section-padding: 2rem 1rem;
-  }
-  
-  .container {
-    padding: 0 1rem;
   }
 }

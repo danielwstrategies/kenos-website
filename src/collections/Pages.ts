@@ -12,6 +12,33 @@ const Pages: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async ({ doc, req, operation }) => {
+        try {
+          const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3011'
+          
+          // Revalidate the page's path
+          const path = doc.slug === 'home' ? '/' : `/${doc.slug}`
+          
+          await fetch(`${serverUrl}/api/revalidate`, {
+            method: 'POST',
+            headers: {
+              'x-revalidate-secret': process.env.REVALIDATE_SECRET!,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ path }),
+          })
+          
+          console.log(`Triggered revalidation for page: ${path}`)
+        } catch (err) {
+          console.error('Revalidation failed (non-critical):', err)
+        }
+
+        return doc
+      },
+    ],
+  },
   fields: [
     {
       name: 'title',
