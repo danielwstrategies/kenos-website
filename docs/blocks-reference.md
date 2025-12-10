@@ -1,6 +1,10 @@
-# Pages Collection - Block Types Quick Reference
+# Block Types Reference
 
-A quick reference guide for all available content blocks in the Pages collection.
+Quick reference for all available content blocks in the Pages collection.
+
+## Overview
+
+This guide documents the 8 block types available for building pages in Payload CMS.
 
 ---
 
@@ -334,9 +338,14 @@ All blocks are reusable! You can:
 
 ---
 
-## 📚 Resources
+## Related Documentation
+
+- **Quick Start**: [setup.md](./setup.md)
+- **Styling Guide**: [styling-guide.md](./styling-guide.md)
+- **Deployment**: [deployment-quickstart.md](./deployment-quickstart.md)
+- **All Docs**: [index.md](./index.md)
+
+## Resources
 
 - **Collection File**: `src/collections/Pages.ts`
-- **Example Data**: `example-homepage.json`
-- **Full Guide**: `PAGES_GUIDE.md`
 - **Payload Docs**: https://payloadcms.com/docs

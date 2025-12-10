@@ -1,8 +1,26 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // Require API key for seed operations
+  const apiKey = request.headers.get('x-api-key')
+  const expectedKey = process.env.SEED_API_KEY
+  
+  if (!expectedKey) {
+    return NextResponse.json(
+      { success: false, error: 'SEED_API_KEY not configured on server' },
+      { status: 500 }
+    )
+  }
+  
+  if (apiKey !== expectedKey) {
+    return NextResponse.json(
+      { success: false, error: 'Unauthorized - invalid or missing API key' },
+      { status: 401 }
+    )
+  }
+
   try {
     const payload = await getPayload({ config })
 

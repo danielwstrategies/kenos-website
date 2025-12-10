@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 
 interface ContactBlockProps {
   block: {
@@ -18,7 +18,34 @@ interface ContactBlockProps {
   }
 }
 
+// Extract and validate iframe src from embed code - only allow Google Maps
+function extractSafeMapSrc(embedCode: string): string | null {
+  if (!embedCode) return null
+  
+  // Match src attribute from iframe
+  const srcMatch = embedCode.match(/src=["']([^"']+)["']/)
+  if (!srcMatch) return null
+  
+  const src = srcMatch[1]
+  
+  // Only allow Google Maps embed URLs
+  const allowedDomains = [
+    'https://www.google.com/maps/embed',
+    'https://maps.google.com/maps',
+  ]
+  
+  if (allowedDomains.some(domain => src.startsWith(domain))) {
+    return src
+  }
+  
+  return null
+}
+
 export default function ContactBlock({ block }: ContactBlockProps) {
+  const safeSrc = useMemo(() => {
+    return block.mapEmbed ? extractSafeMapSrc(block.mapEmbed) : null
+  }, [block.mapEmbed])
+
   return (
     <section id="contact" className="py-20 px-8 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -75,11 +102,16 @@ export default function ContactBlock({ block }: ContactBlockProps) {
           </div>
         </div>
 
-        {block.mapEmbed && (
+        {safeSrc && (
           <div className="mt-12">
-            <div
-              className="w-full h-96 rounded-lg overflow-hidden"
-              dangerouslySetInnerHTML={{ __html: block.mapEmbed }}
+            <iframe
+              src={safeSrc}
+              className="w-full h-96 rounded-lg"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Location Map"
             />
           </div>
         )}

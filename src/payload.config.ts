@@ -24,8 +24,13 @@ if (!databaseUri) {
   throw new Error('DATABASE_URI environment variable is not set')
 }
 
+const payloadSecret = process.env.PAYLOAD_SECRET
+if (!payloadSecret) {
+  throw new Error('PAYLOAD_SECRET environment variable is not set')
+}
+
 export default buildConfig({
-  secret: process.env.PAYLOAD_SECRET || 'your-secret-key-change-this',
+  secret: payloadSecret,
   db: mongooseAdapter({
     url: databaseUri,
   }),

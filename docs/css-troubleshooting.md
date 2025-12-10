@@ -323,3 +323,8 @@ If none of these solutions work:
 
 ## Last Updated
 December 2, 2024 - Verified working with Payload 3.65.0 + Next.js 15.4.7
+## Related Documentation
+
+- **General Troubleshooting**: [troubleshooting-log.md](./troubleshooting-log.md)
+- **Quick Start**: [setup.md](./setup.md)
+- **All Docs**: [index.md](./index.md)
