@@ -8,7 +8,7 @@ import { gsap } from 'gsap'
 interface NavItem {
   label: string
   href: string
-  openInNewTab?: boolean
+  openInNewTab?: boolean | null
 }
 
 interface NavigationProps {
