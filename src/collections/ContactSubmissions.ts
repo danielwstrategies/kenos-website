@@ -37,7 +37,7 @@ const ContactSubmissions: CollectionConfig = {
       // Skip rate limiting for authenticated users
       if (req.user) return true
 
-      const ip = req.headers?.get('x-forwarded-for') || req.ip || 'unknown'
+      const ip = req.headers?.get('x-forwarded-for') || req.headers?.get('x-real-ip') || 'unknown'
       return checkRateLimit(ip)
     },
     // Only authenticated users can update/delete
