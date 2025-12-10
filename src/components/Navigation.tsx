@@ -90,7 +90,7 @@ export default function Navigation({ mainNav }: NavigationProps) {
         <div className="w-full mx-auto flex justify-between items-center">
           <Link href="/" className="flex items-center">
             <Image
-              src="/media/Keno's Logo 1.png"
+              src="/media/kenos-logo-1.png"
               alt="Keno's Restaurant"
               width={120}
               height={50}

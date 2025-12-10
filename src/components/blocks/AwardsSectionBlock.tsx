@@ -92,7 +92,7 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
         <div className="flex justify-center md:hidden mb-6">
           <div ref={logoRef} className="relative w-40 h-40 opacity-0">
             <Image
-              src="/media/Keno's Logo 1.png"
+              src="/media/kenos-logo-1.png"
               alt="Kenos Restaurant Logo"
               fill
               className="object-contain"
@@ -105,7 +105,7 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
           <div ref={logoRef} className="hidden md:block flex-shrink-0 opacity-0">
             <div className="relative w-64 h-64">
               <Image
-                src="/media/Keno's Logo 1.png"
+                src="/media/kenos-logo-1.png"
                 alt="Kenos Restaurant Logo"
                 fill
                 className="object-contain"

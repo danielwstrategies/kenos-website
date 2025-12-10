@@ -138,7 +138,7 @@ export default function Footer({
             {/* Logo */}
             <div ref={logoRef} className="mb-8 opacity-0">
               <Image
-                src="/media/Keno's Logo 1.png"
+                src="/media/kenos-logo-1.png"
                 alt="Keno's Restaurant"
                 width={200}
                 height={180}
