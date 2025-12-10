@@ -55,7 +55,7 @@ export default async function HomePage() {
             </div>
           </div>
         </main>
-        <Footer footerNav={navigation?.footerNav} socialLinks={navigation?.socialLinks} />
+        <Footer />
       </>
     )
   }
