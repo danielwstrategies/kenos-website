@@ -7,3 +7,6 @@ dist
 logs
 build
 .next
+
+# Documentation (contains example credentials)
+docs/
