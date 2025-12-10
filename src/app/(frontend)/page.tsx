@@ -66,7 +66,7 @@ export default async function HomePage() {
       <main>
         <RenderBlocks layout={page.layout || []} />
       </main>
-      <Footer footerNav={navigation?.footerNav} socialLinks={navigation?.socialLinks} />
+      <Footer />
     </>
   )
 }
