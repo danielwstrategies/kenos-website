@@ -311,6 +311,39 @@ http://localhost:3011/admin    # Payload admin panel
 http://localhost:3011/api      # API documentation
 ```
 
+## Server Logging
+
+The project uses **Winston** for comprehensive logging to help diagnose issues:
+
+### Log Files Location
+- **Error logs**: `/logs/error.log` - Only errors, crashes, exceptions
+- **Combined logs**: `/logs/combined.log` - All logs (info + errors)
+- **Auto-rotation**: Max 5MB per file, keeps last 5 files
+
+### Viewing Logs in Production (Coolify)
+```bash
+# In Coolify terminal:
+cat /app/logs/error.log           # View error logs
+cat /app/logs/combined.log        # View all logs
+tail -50 /app/logs/combined.log   # Last 50 lines
+grep -i "error\|mongodb\|crash" /app/logs/combined.log  # Search errors
+```
+
+### What Gets Logged
+- ✅ Server startup/shutdown
+- ✅ Health check passes/failures
+- ✅ Unhandled promise rejections
+- ✅ Uncaught exceptions
+- ✅ MongoDB connection issues
+- ✅ All errors with full stack traces
+
+### If Site Shows "No Server Available"
+1. Check `/app/logs/error.log` for crash details
+2. Look for MongoDB connection errors
+3. Check for memory/timeout issues
+4. Review last entries before crash in `combined.log`
+
+
 ## When Things Go Wrong
 
 1. **Server won't start**: Check `.env` file exists with DATABASE_URI
@@ -319,6 +352,7 @@ http://localhost:3011/api      # API documentation
 4. **Type errors**: Run `npm run generate:types`
 5. **Build fails**: Delete `.next` folder and rebuild
 6. **Port in use**: Change PORT in `.env` or kill process on 3011
+7. **Site crashed/went down**: Check `/logs/error.log` for crash details
 
 ## Additional Resources
 
