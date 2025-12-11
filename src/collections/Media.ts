@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 const Media: CollectionConfig = {
   slug: 'media',
+  trash: true,
   admin: {
     useAsTitle: 'alt',
     defaultColumns: ['alt', 'updatedAt'],

@@ -384,3 +384,12 @@ grep -i "error\|mongodb\|crash" /app/logs/combined.log  # Search errors
 **Diagnosis**: Run `lsof -ti:3011` - if it shows more than one PID, thats the issue.
 **Solution**: Kill all processes with `kill -9 $(lsof -ti:3011)` then restart server.
 
+### Hydration mismatch with duplicate HTML tags
+**Problem**: React hydration error showing mismatched className attributes between server and client.
+**Cause**: Multiple nested layouts both rendering `<html>` and `<body>` tags. Next.js requires only the root layout to have these tags.
+**Symptoms**: Console error "A tree hydrated but some attributes of the server rendered HTML didn't match the client properties"
+**Solution**: 
+- Root layout (`/src/app/layout.tsx`) must have `<html>` and `<body>` tags with all global styles/fonts
+- Nested layouts (like `(frontend)/layout.tsx`) should only return `<>{children}</>`
+- Move font imports and globals.css to root layout only
+

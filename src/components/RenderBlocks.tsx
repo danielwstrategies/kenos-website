@@ -10,6 +10,7 @@ import ContactBlock from './blocks/ContactBlock'
 import ContentBlock from './blocks/ContentBlock'
 import CTABlock from './blocks/CTABlock'
 import KenosHeroBlock from './blocks/KenosHeroBlock'
+import HistoryHeroBlock from './blocks/HistoryHeroBlock'
 import AwardsSectionBlock from './blocks/AwardsSectionBlock'
 import PromotionSectionBlock from './blocks/PromotionSectionBlock'
 import OrderOnlineSectionBlock from './blocks/OrderOnlineSectionBlock'
@@ -29,6 +30,8 @@ export default function RenderBlocks({ layout }: RenderBlocksProps) {
     <>
       {layout.map((block: any, index: number) => {
         switch (block.blockType) {
+          case 'historyHero':
+            return <HistoryHeroBlock key={block.id || index} block={block} />
           case 'kenosHero':
             return <KenosHeroBlock key={block.id || index} block={block} />
           case 'awardsSection':

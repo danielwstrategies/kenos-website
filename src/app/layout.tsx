@@ -1,14 +1,6 @@
-import type { Metadata } from 'next'
+// Root layout - minimal, lets route groups define their own HTML structure
+// This is required for Payload CMS compatibility (it renders its own <html> tags)
 
-export const metadata: Metadata = {
-  title: 'Kenos Website',
-  description: 'Welcome to Kenos',
-}
-
-/**
- * Root app layout without <html>/<body>.
- * Segment layouts (e.g., Payload admin `(payload)/layout.tsx`) will render their own html/body.
- */
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return children
 }

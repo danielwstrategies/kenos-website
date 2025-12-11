@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 const Pages: CollectionConfig = {
   slug: 'pages',
+  trash: true,
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
@@ -72,6 +73,49 @@ const Pages: CollectionConfig = {
       type: 'blocks',
       required: true,
       blocks: [
+        // History Hero Section (with hanging overlay image)
+        {
+          slug: 'historyHero',
+          labels: {
+            singular: 'History Hero',
+            plural: 'History Heroes',
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              required: true,
+              admin: {
+                description: 'Main headline (e.g., "Our History")',
+              },
+            },
+            {
+              name: 'content',
+              type: 'textarea',
+              admin: {
+                description: 'History description text',
+              },
+            },
+            {
+              name: 'backgroundImage',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Background image (e.g., restaurant exterior)',
+              },
+            },
+            {
+              name: 'overlayImage',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Historical photo that hangs below the hero section',
+              },
+            },
+          ],
+        },
         // Kenos Hero Section (with address overlay)
         {
           slug: 'kenosHero',
