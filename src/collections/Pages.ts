@@ -73,6 +73,109 @@ const Pages: CollectionConfig = {
       type: 'blocks',
       required: true,
       blocks: [
+        // Family Section (team/staff introduction)
+        {
+          slug: 'familySection',
+          labels: {
+            singular: 'Family Section',
+            plural: 'Family Sections',
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              required: true,
+              defaultValue: 'FAMILY',
+              admin: {
+                description: 'Section heading (displayed in Marble Dreams font)',
+              },
+            },
+            {
+              name: 'content',
+              type: 'textarea',
+              required: true,
+              admin: {
+                description: 'Main text content (use double line breaks for paragraphs)',
+              },
+            },
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Image displayed on the right side',
+              },
+            },
+            {
+              name: 'button',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Meet the Team',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/team',
+                },
+              ],
+            },
+          ],
+        },
+        // History Timeline Ticker (EST. year with historical photos)
+        {
+          slug: 'historyTimelineTicker',
+          labels: {
+            singular: 'History Timeline Ticker',
+            plural: 'History Timeline Tickers',
+          },
+          fields: [
+            {
+              name: 'showYear',
+              type: 'checkbox',
+              defaultValue: true,
+              admin: {
+                description: 'Show the EST. year section (uncheck to hide)',
+              },
+            },
+            {
+              name: 'yearLabel',
+              type: 'text',
+              defaultValue: 'EST.',
+              admin: {
+                description: 'Small label above the year (e.g., "EST.", "SINCE") - only shown if "Show Year" is checked',
+              },
+            },
+            {
+              name: 'year',
+              type: 'text',
+              defaultValue: '1983',
+              admin: {
+                description: 'Year to display prominently - only shown if "Show Year" is checked',
+              },
+            },
+            {
+              name: 'images',
+              type: 'array',
+              minRows: 1,
+              maxRows: 5,
+              admin: {
+                description: 'Historical photos to display (3 recommended)',
+              },
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
         // Classics Section (text left, stacked images right)
         {
           slug: 'classicsSection',
@@ -334,24 +437,21 @@ const Pages: CollectionConfig = {
               name: 'dateBoxLine1',
               type: 'text',
               admin: {
-                description: 'First line in date box (e.g., "Thursday November 27th, 2025")',
-                condition: (data, siblingData) => siblingData?.showDateBox === true,
+                description: 'First line in date box (e.g., "Thursday November 27th, 2025") - only shown if "Show Date Box" is checked',
               },
             },
             {
               name: 'dateBoxLine2',
               type: 'text',
               admin: {
-                description: 'Second line in date box (e.g., "Open from 7:00 am - 6:00 pm")',
-                condition: (data, siblingData) => siblingData?.showDateBox === true,
+                description: 'Second line in date box (e.g., "Open from 7:00 am - 6:00 pm") - only shown if "Show Date Box" is checked',
               },
             },
             {
               name: 'dateBoxLine3',
               type: 'text',
               admin: {
-                description: 'Third line in date box (e.g., "Holiday Menu 11am - Sold Out")',
-                condition: (data, siblingData) => siblingData?.showDateBox === true,
+                description: 'Third line in date box (e.g., "Holiday Menu 11am - Sold Out") - only shown if "Show Date Box" is checked',
               },
             },
             {

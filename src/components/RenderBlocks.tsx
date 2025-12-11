@@ -17,6 +17,8 @@ import OrderOnlineSectionBlock from './blocks/OrderOnlineSectionBlock'
 import DestinationSectionBlock from './blocks/DestinationSectionBlock'
 import OwnerProfileSectionBlock from './blocks/OwnerProfileSectionBlock'
 import ClassicsSectionBlock from './blocks/ClassicsSectionBlock'
+import HistoryTimelineTickerBlock from './blocks/HistoryTimelineTickerBlock'
+import FamilySectionBlock from './blocks/FamilySectionBlock'
 
 interface RenderBlocksProps {
   layout: any[]
@@ -31,6 +33,10 @@ export default function RenderBlocks({ layout }: RenderBlocksProps) {
     <>
       {layout.map((block: any, index: number) => {
         switch (block.blockType) {
+          case 'familySection':
+            return <FamilySectionBlock key={block.id || index} block={block} />
+          case 'historyTimelineTicker':
+            return <HistoryTimelineTickerBlock key={block.id || index} block={block} />
           case 'classicsSection':
             return <ClassicsSectionBlock key={block.id || index} block={block} />
           case 'historyHero':

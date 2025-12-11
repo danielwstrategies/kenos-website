@@ -3,6 +3,9 @@
 import React, { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface HistoryHeroBlockProps {
   block: {
@@ -16,10 +19,12 @@ interface HistoryHeroBlockProps {
 export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
   const { heading, content, backgroundImage, overlayImage } = block
   
+  const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const overlayImageRef = useRef<HTMLDivElement>(null)
   const backgroundImageRef = useRef<HTMLDivElement>(null)
+  const parallaxImageRef = useRef<HTMLDivElement>(null)
 
   const bgImageUrl = backgroundImage?.url || '/images/kenos-exterior.jpg'
   const overlayImageUrl = overlayImage?.url
@@ -51,24 +56,40 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
       '-=0.3'
     )
 
+    // Parallax effect for background
+    const parallaxAnimation = gsap.to(parallaxImageRef.current, {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
+
     return () => {
       tl.kill()
+      parallaxAnimation.kill()
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 
   return (
-    <section className="relative">
+    <section ref={sectionRef} className="relative">
       {/* Hero Section */}
       <div className="relative min-h-[500px] md:min-h-[550px] flex items-end overflow-visible pb-32 md:pb-0">
         {/* Background Image with Overlay */}
-        <div ref={backgroundImageRef} className="absolute inset-0 z-0 opacity-0">
-          <Image
-            src={bgImageUrl}
-            alt="History background"
-            fill
-            className="object-cover"
-            priority
-          />
+        <div ref={backgroundImageRef} className="absolute inset-0 z-0 opacity-0 overflow-hidden">
+          <div ref={parallaxImageRef} className="absolute inset-0 scale-110">
+            <Image
+              src={bgImageUrl}
+              alt="History background"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
           {/* Dark gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-gray-900/70 to-black/60" />
         </div>
