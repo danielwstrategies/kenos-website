@@ -59,7 +59,7 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
   return (
     <section className="relative">
       {/* Hero Section */}
-      <div className="relative min-h-[500px] md:min-h-[550px] flex items-center overflow-visible pb-32 md:pb-0">
+      <div className="relative min-h-[500px] md:min-h-[550px] flex items-end overflow-visible pb-32 md:pb-0">
         {/* Background Image with Overlay */}
         <div ref={backgroundImageRef} className="absolute inset-0 z-0 opacity-0">
           <Image
@@ -69,13 +69,13 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
             className="object-cover"
             priority
           />
-          {/* Warm brown/sepia gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#5D3A1A]/80 via-[#8B5A2B]/70 to-[#A0522D]/60" />
+          {/* Dark gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-gray-900/70 to-black/60" />
         </div>
 
         {/* Content Grid */}
         <div className="relative z-10 container mx-auto px-4 md:px-8 lg:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start pt-8 md:pt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
             {/* Left side - Overlay Image (hanging below) */}
             <div 
               ref={overlayImageRef}
@@ -84,7 +84,7 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
               {overlayImageUrl && (
                 <div className="relative w-full max-w-md mx-auto md:mx-0">
                   {/* Single image with frame effect */}
-                  <div className="relative aspect-[4/3] md:translate-y-20 lg:translate-y-28 rounded-md overflow-hidden shadow-2xl border-[6px] border-white/30">
+                  <div className="relative aspect-[4/3] md:translate-y-8 lg:translate-y-12 rounded-xl overflow-hidden shadow-2xl">
                     <Image
                       src={overlayImageUrl}
                       alt="Historical photo"
@@ -121,9 +121,6 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
           </div>
         </div>
       </div>
-
-      {/* Spacer for the hanging image on desktop */}
-      <div className="hidden md:block h-24 lg:h-32" />
     </section>
   )
 }

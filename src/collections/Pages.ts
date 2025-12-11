@@ -73,6 +73,47 @@ const Pages: CollectionConfig = {
       type: 'blocks',
       required: true,
       blocks: [
+        // Classics Section (text left, stacked images right)
+        {
+          slug: 'classicsSection',
+          labels: {
+            singular: 'Classics Section',
+            plural: 'Classics Sections',
+          },
+          fields: [
+            {
+              name: 'subtitle',
+              type: 'text',
+              admin: {
+                description: 'Small uppercase subtitle (e.g., "TASTE THE CLASSICS")',
+              },
+            },
+            {
+              name: 'content',
+              type: 'textarea',
+              admin: {
+                description: 'Body text content',
+              },
+            },
+            {
+              name: 'images',
+              type: 'array',
+              minRows: 1,
+              maxRows: 2,
+              admin: {
+                description: 'Two images that stack/overlap on the right side',
+              },
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
         // History Hero Section (with hanging overlay image)
         {
           slug: 'historyHero',
