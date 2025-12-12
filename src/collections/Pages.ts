@@ -73,6 +73,96 @@ const Pages: CollectionConfig = {
       type: 'blocks',
       required: true,
       blocks: [
+        // Keno's Today Section (with logo heading and image ticker)
+        {
+          slug: 'kenosToday',
+          labels: {
+            singular: "Keno's Today Section",
+            plural: "Keno's Today Sections",
+          },
+          fields: [
+            {
+              name: 'logo',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: "Script logo for 'Keno\\'s' text (uses default if not provided)",
+              },
+            },
+            {
+              name: 'headingSuffix',
+              type: 'text',
+              defaultValue: 'Today',
+              admin: {
+                description: "Text after the logo (e.g., 'Today', 'Legacy', 'Story')",
+              },
+            },
+            {
+              name: 'content',
+              type: 'textarea',
+              admin: {
+                description: 'Description text below the heading',
+              },
+            },
+            {
+              name: 'primaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'See Menu',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/menu',
+                },
+              ],
+            },
+            {
+              name: 'secondaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Order Online',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/order',
+                },
+              ],
+            },
+            {
+              name: 'backgroundImage',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Background image for the hero area',
+              },
+            },
+            {
+              name: 'gallery',
+              type: 'array',
+              minRows: 2,
+              maxRows: 8,
+              admin: {
+                description: 'Images for the horizontal scrolling ticker',
+              },
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
         // Family Section (team/staff introduction)
         {
           slug: 'familySection',
@@ -134,6 +224,18 @@ const Pages: CollectionConfig = {
           },
           fields: [
             {
+              name: 'displayMode',
+              type: 'select',
+              defaultValue: 'notecard',
+              options: [
+                { label: 'Notecard Gallery (layered photos with click to enlarge)', value: 'notecard' },
+                { label: 'Ticker (scrolling horizontal photos)', value: 'ticker' },
+              ],
+              admin: {
+                description: 'Choose how to display the photos',
+              },
+            },
+            {
               name: 'showYear',
               type: 'checkbox',
               defaultValue: true,
@@ -161,9 +263,9 @@ const Pages: CollectionConfig = {
               name: 'images',
               type: 'array',
               minRows: 1,
-              maxRows: 5,
+              maxRows: 10,
               admin: {
-                description: 'Historical photos to display (3 recommended)',
+                description: 'Historical photos to display',
               },
               fields: [
                 {

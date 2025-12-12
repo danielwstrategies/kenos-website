@@ -19,6 +19,7 @@ import OwnerProfileSectionBlock from './blocks/OwnerProfileSectionBlock'
 import ClassicsSectionBlock from './blocks/ClassicsSectionBlock'
 import HistoryTimelineTickerBlock from './blocks/HistoryTimelineTickerBlock'
 import FamilySectionBlock from './blocks/FamilySectionBlock'
+import KenosTodayBlock from './blocks/KenosTodayBlock'
 
 interface RenderBlocksProps {
   layout: any[]
@@ -33,6 +34,8 @@ export default function RenderBlocks({ layout }: RenderBlocksProps) {
     <>
       {layout.map((block: any, index: number) => {
         switch (block.blockType) {
+          case 'kenosToday':
+            return <KenosTodayBlock key={block.id || index} block={block} />
           case 'familySection':
             return <FamilySectionBlock key={block.id || index} block={block} />
           case 'historyTimelineTicker':

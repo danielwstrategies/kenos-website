@@ -96,8 +96,8 @@ export default function FamilySectionBlock({ block }: FamilySectionBlockProps) {
   return (
     <section
       ref={containerRef}
-      className="py-16 md:py-24 lg:py-[60px]"
-      style={{ backgroundColor: '#F5EBE0' }}
+      className="py-[60px]"
+      style={{ backgroundColor: '#E8DFD4' }}
     >
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         {/* Heading with decorative line */}
