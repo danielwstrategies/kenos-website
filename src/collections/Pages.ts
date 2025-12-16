@@ -250,6 +250,19 @@ const Pages: CollectionConfig = {
                 },
               ],
             },
+            {
+              name: 'sectionBackground',
+              type: 'select',
+              defaultValue: 'none',
+              options: [
+                { label: 'None (Transparent)', value: 'none' },
+                { label: 'Beige / Cream', value: 'beige' },
+                { label: 'White', value: 'white' },
+              ],
+              admin: {
+                description: 'Background color behind the entire section (visible around margins)',
+              },
+            },
           ],
         },
         // Staff Grid Section (team member cards)
@@ -298,6 +311,13 @@ const Pages: CollectionConfig = {
                   required: false,
                   admin: {
                     description: 'Staff member photo (portrait orientation works best)',
+                  },
+                },
+                {
+                  name: 'bio',
+                  type: 'textarea',
+                  admin: {
+                    description: 'Staff member biography (displayed in popup when clicking on the card)',
                   },
                 },
               ],
@@ -516,6 +536,19 @@ const Pages: CollectionConfig = {
                   defaultValue: '/our-history',
                 },
               ],
+            },
+            {
+              name: 'sectionBackground',
+              type: 'select',
+              defaultValue: 'none',
+              options: [
+                { label: 'None (Transparent)', value: 'none' },
+                { label: 'Beige / Cream', value: 'beige' },
+                { label: 'White', value: 'white' },
+              ],
+              admin: {
+                description: 'Background color behind the entire section (visible around the rounded card)',
+              },
             },
           ],
         },

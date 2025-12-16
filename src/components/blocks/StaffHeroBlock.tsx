@@ -33,6 +33,7 @@ interface StaffHeroBlockProps {
       text?: string
       link?: string
     }
+    sectionBackground?: 'none' | 'beige' | 'white'
   }
 }
 
@@ -46,11 +47,22 @@ export default function StaffHeroBlock({ block }: StaffHeroBlockProps) {
     overlayImage,
     primaryButton,
     secondaryButton,
+    sectionBackground = 'none',
   } = block
 
   const containerRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const overlayImageRef = useRef<HTMLDivElement>(null)
+
+  // Map background options to colors
+  const backgroundColors: Record<string, string> = {
+    none: 'transparent',
+    beige: '#F0E3D9',
+    white: '#FFFFFF',
+  }
+
+  // Add padding when background is visible
+  const hasSectionBg = sectionBackground !== 'none'
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -87,14 +99,17 @@ export default function StaffHeroBlock({ block }: StaffHeroBlockProps) {
   }, [])
 
   return (
-    <div className="relative">
+    <div 
+      className={`relative ${hasSectionBg ? 'px-2 lg:px-4 pt-2 lg:pt-4 pb-2 lg:pb-4' : ''}`}
+      style={{ backgroundColor: backgroundColors[sectionBackground] }}
+    >
       <section
         ref={containerRef}
         className="relative overflow-visible"
       >
         {/* Background Image */}
         {backgroundImage?.url && (
-          <div className="absolute inset-0 z-0 rounded-2xl overflow-hidden mx-2 lg:mx-4 mt-2 lg:mt-4">
+          <div className={`absolute inset-0 z-0 rounded-2xl overflow-hidden ${hasSectionBg ? '' : 'mx-2 lg:mx-4 mt-2 lg:mt-4'}`}>
             <Image
               src={backgroundImage.url}
               alt={backgroundImage.alt || 'Background'}

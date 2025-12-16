@@ -24,17 +24,25 @@ interface HistoryHeroBlockProps {
       text?: string
       link?: string
     }
+    sectionBackground?: 'none' | 'beige' | 'white'
   }
 }
 
 export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
-  const { heading, content, backgroundImage, logo, button } = block
+  const { heading, content, backgroundImage, logo, button, sectionBackground = 'none' } = block
   
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const backgroundImageRef = useRef<HTMLDivElement>(null)
 
   const bgImageUrl = backgroundImage?.url || '/images/kenos-exterior.jpg'
+
+  // Map background options to colors
+  const backgroundColors: Record<string, string> = {
+    none: 'transparent',
+    beige: '#F0E3D9',
+    white: '#FFFFFF',
+  }
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
@@ -57,9 +65,16 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
     }
   }, [])
 
+  // Add padding when background is visible
+  const hasSectionBg = sectionBackground !== 'none'
+
   return (
-    <section ref={sectionRef} className="relative">
-      <div className="relative mx-2 md:mx-4 rounded-2xl overflow-hidden">
+    <section 
+      ref={sectionRef} 
+      className={`relative ${hasSectionBg ? 'px-2 md:px-4 pt-2 md:pt-4 pb-2 md:pb-4' : ''}`}
+      style={{ backgroundColor: backgroundColors[sectionBackground] }}
+    >
+      <div className={`relative ${hasSectionBg ? '' : 'mx-2 md:mx-4 mt-2 md:mt-4'} rounded-2xl overflow-hidden`}>
         {/* Background Image with Overlay */}
         <div ref={backgroundImageRef} className="absolute inset-0 z-0 opacity-0">
           <Image
