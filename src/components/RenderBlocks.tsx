@@ -18,8 +18,9 @@ import DestinationSectionBlock from './blocks/DestinationSectionBlock'
 import OwnerProfileSectionBlock from './blocks/OwnerProfileSectionBlock'
 import ClassicsSectionBlock from './blocks/ClassicsSectionBlock'
 import HistoryTimelineTickerBlock from './blocks/HistoryTimelineTickerBlock'
-import FamilySectionBlock from './blocks/FamilySectionBlock'
 import KenosTodayBlock from './blocks/KenosTodayBlock'
+import StaffHeroBlock from './blocks/StaffHeroBlock'
+import StaffGridBlock from './blocks/StaffGridBlock'
 
 interface RenderBlocksProps {
   layout: any[]
@@ -34,10 +35,12 @@ export default function RenderBlocks({ layout }: RenderBlocksProps) {
     <>
       {layout.map((block: any, index: number) => {
         switch (block.blockType) {
+          case 'staffHero':
+            return <StaffHeroBlock key={block.id || index} block={block} />
+          case 'staffGrid':
+            return <StaffGridBlock key={block.id || index} block={block} />
           case 'kenosToday':
             return <KenosTodayBlock key={block.id || index} block={block} />
-          case 'familySection':
-            return <FamilySectionBlock key={block.id || index} block={block} />
           case 'historyTimelineTicker':
             return <HistoryTimelineTickerBlock key={block.id || index} block={block} />
           case 'classicsSection':

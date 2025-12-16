@@ -41,6 +41,7 @@ import { UnorderedListElement as UnorderedListElement_0b388c087d9de8c4f011dd323a
 import { UploadElementButton as UploadElementButton_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
 import { UploadElement as UploadElement_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
 import { WithUpload as WithUpload_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
+import { default as default_d496f29b2f2c9d5a472a9dc09cefebff } from '@/components/MediaThumbnailCell'
 
 export const importMap = {
   "@payloadcms/richtext-slate/rsc#RscEntrySlateCell": RscEntrySlateCell_0e78253914a550fdacd75626f1dabe17,
@@ -85,5 +86,6 @@ export const importMap = {
   "@payloadcms/richtext-slate/client#UnorderedListElement": UnorderedListElement_0b388c087d9de8c4f011dd323a130cfb,
   "@payloadcms/richtext-slate/client#UploadElementButton": UploadElementButton_0b388c087d9de8c4f011dd323a130cfb,
   "@payloadcms/richtext-slate/client#UploadElement": UploadElement_0b388c087d9de8c4f011dd323a130cfb,
-  "@payloadcms/richtext-slate/client#WithUpload": WithUpload_0b388c087d9de8c4f011dd323a130cfb
+  "@payloadcms/richtext-slate/client#WithUpload": WithUpload_0b388c087d9de8c4f011dd323a130cfb,
+  "@/components/MediaThumbnailCell#default": default_d496f29b2f2c9d5a472a9dc09cefebff
 }

@@ -29,7 +29,7 @@ const defaultLeftColumn: FooterNav[] = [
   { label: 'Current Menus and Ordering', href: '/menu' },
   { label: 'Entertainment', href: '/entertainment' },
   { label: 'Our History', href: '/history' },
-  { label: 'Our Staff', href: '/staff' },
+  { label: 'Our Staff', href: '/our-staff' },
   { label: 'Gallery', href: '/gallery' },
 ]
 

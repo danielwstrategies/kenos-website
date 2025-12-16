@@ -106,7 +106,7 @@ export default function KenosTodayBlock({ block }: KenosTodayBlockProps) {
             {primaryButton?.text && primaryButton?.link && (
               <Link
                 href={primaryButton.link}
-                className="inline-block px-8 py-3 bg-[#8B2332] text-white font-montserrat font-medium rounded hover:bg-[#6d1b27] transition-colors"
+                className="kenos-btn-primary"
               >
                 {primaryButton.text}
               </Link>
@@ -114,7 +114,7 @@ export default function KenosTodayBlock({ block }: KenosTodayBlockProps) {
             {secondaryButton?.text && secondaryButton?.link && (
               <Link
                 href={secondaryButton.link}
-                className="inline-block px-8 py-3 border-2 border-white text-white font-montserrat font-medium rounded hover:bg-white/10 transition-colors"
+                className="kenos-btn-secondary"
               >
                 {secondaryButton.text}
               </Link>
@@ -178,3 +178,6 @@ export default function KenosTodayBlock({ block }: KenosTodayBlockProps) {
     </section>
   )
 }
+
+
+

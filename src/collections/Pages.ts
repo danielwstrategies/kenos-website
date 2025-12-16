@@ -163,6 +163,147 @@ const Pages: CollectionConfig = {
             },
           ],
         },
+        // Staff Hero Section (Our Keno's Family)
+        {
+          slug: 'staffHero',
+          labels: {
+            singular: 'Staff Hero Section',
+            plural: 'Staff Hero Sections',
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              defaultValue: 'Our',
+              admin: {
+                description: 'First part of heading (before logo)',
+              },
+            },
+            {
+              name: 'headingLogo',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: "Logo to display in heading (Keno's script logo)",
+              },
+            },
+            {
+              name: 'subheading',
+              type: 'text',
+              defaultValue: 'Family',
+              admin: {
+                description: 'Text after the logo',
+              },
+            },
+            {
+              name: 'content',
+              type: 'textarea',
+              admin: {
+                description: 'Introductory paragraph below the heading',
+              },
+            },
+            {
+              name: 'backgroundImage',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Background image for the hero section',
+              },
+            },
+            {
+              name: 'overlayImage',
+              type: 'upload',
+              relationTo: 'media',
+              admin: {
+                description: 'Team photo that overlays on the right side with red border',
+              },
+            },
+            {
+              name: 'primaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Contact Us',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/contact',
+                },
+              ],
+            },
+            {
+              name: 'secondaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Jobs',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/jobs',
+                },
+              ],
+            },
+          ],
+        },
+        // Staff Grid Section (team member cards)
+        {
+          slug: 'staffGrid',
+          labels: {
+            singular: 'Staff Grid Section',
+            plural: 'Staff Grid Sections',
+          },
+          fields: [
+            {
+              name: 'introText',
+              type: 'textarea',
+              admin: {
+                description: 'Italic introduction text (use double line breaks for paragraphs)',
+              },
+            },
+            {
+              name: 'staffMembers',
+              type: 'array',
+              minRows: 1,
+              maxRows: 12,
+              admin: {
+                description: 'Team members to display in the grid',
+              },
+              fields: [
+                {
+                  name: 'name',
+                  type: 'text',
+                  required: true,
+                  admin: {
+                    description: 'Display name (e.g., "Meet Shauna")',
+                  },
+                },
+                {
+                  name: 'title',
+                  type: 'text',
+                  admin: {
+                    description: 'Job title (e.g., "General Manager")',
+                  },
+                },
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: false,
+                  admin: {
+                    description: 'Staff member photo (portrait orientation works best)',
+                  },
+                },
+              ],
+            },
+          ],
+        },
         // Family Section (team/staff introduction)
         {
           slug: 'familySection',
@@ -319,7 +460,7 @@ const Pages: CollectionConfig = {
             },
           ],
         },
-        // History Hero Section (with hanging overlay image)
+        // History Hero Section (simple card with logo, heading, content, button)
         {
           slug: 'historyHero',
           labels: {
@@ -327,6 +468,15 @@ const Pages: CollectionConfig = {
             plural: 'History Heroes',
           },
           fields: [
+            {
+              name: 'logo',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: "Keno's script logo (uses default if not provided)",
+              },
+            },
             {
               name: 'heading',
               type: 'text',
@@ -352,13 +502,20 @@ const Pages: CollectionConfig = {
               },
             },
             {
-              name: 'overlayImage',
-              type: 'upload',
-              relationTo: 'media',
-              required: false,
-              admin: {
-                description: 'Historical photo that hangs below the hero section',
-              },
+              name: 'button',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Read More',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/our-history',
+                },
+              ],
             },
           ],
         },

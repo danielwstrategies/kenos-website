@@ -5,7 +5,10 @@ const Media: CollectionConfig = {
   trash: true,
   admin: {
     useAsTitle: 'alt',
-    defaultColumns: ['alt', 'updatedAt'],
+    defaultColumns: ['preview', 'alt', 'filename', 'updatedAt'],
+    listSearchableFields: ['alt', 'filename'],
+    group: 'Content',
+    description: 'Manage images and media files for the website',
   },
   access: {
     read: () => true,
@@ -42,6 +45,15 @@ const Media: CollectionConfig = {
   },
   fields: [
     {
+      name: 'preview',
+      type: 'ui',
+      admin: {
+        components: {
+          Cell: '@/components/MediaThumbnailCell',
+        },
+      },
+    },
+    {
       name: 'alt',
       type: 'text',
       required: true,
@@ -52,6 +64,9 @@ const Media: CollectionConfig = {
     {
       name: 'caption',
       type: 'text',
+      admin: {
+        description: 'Optional caption to display with the image',
+      },
     },
   ],
 }

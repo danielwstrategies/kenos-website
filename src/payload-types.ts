@@ -170,6 +170,204 @@ export interface Page {
   layout: (
     | {
         /**
+         * Script logo for 'Keno\'s' text (uses default if not provided)
+         */
+        logo?: (string | null) | Media;
+        /**
+         * Text after the logo (e.g., 'Today', 'Legacy', 'Story')
+         */
+        headingSuffix?: string | null;
+        /**
+         * Description text below the heading
+         */
+        content?: string | null;
+        primaryButton?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        secondaryButton?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        /**
+         * Background image for the hero area
+         */
+        backgroundImage?: (string | null) | Media;
+        /**
+         * Images for the horizontal scrolling ticker
+         */
+        gallery?:
+          | {
+              image: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'kenosToday';
+      }
+    | {
+        /**
+         * First part of heading (before logo)
+         */
+        heading?: string | null;
+        /**
+         * Logo to display in heading (Keno's script logo)
+         */
+        headingLogo?: (string | null) | Media;
+        /**
+         * Text after the logo
+         */
+        subheading?: string | null;
+        /**
+         * Introductory paragraph below the heading
+         */
+        content?: string | null;
+        /**
+         * Background image for the hero section
+         */
+        backgroundImage?: (string | null) | Media;
+        /**
+         * Team photo that overlays on the right side with red border
+         */
+        overlayImage?: (string | null) | Media;
+        primaryButton?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        secondaryButton?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'staffHero';
+      }
+    | {
+        /**
+         * Italic introduction text (use double line breaks for paragraphs)
+         */
+        introText?: string | null;
+        /**
+         * Team members to display in the grid
+         */
+        staffMembers?:
+          | {
+              /**
+               * Display name (e.g., "Meet Shauna")
+               */
+              name: string;
+              /**
+               * Job title (e.g., "General Manager")
+               */
+              title?: string | null;
+              /**
+               * Staff member photo (portrait orientation works best)
+               */
+              image?: (string | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'staffGrid';
+      }
+    | {
+        /**
+         * Section heading (displayed in Marble Dreams font)
+         */
+        heading: string;
+        /**
+         * Main text content (use double line breaks for paragraphs)
+         */
+        content: string;
+        /**
+         * Image displayed on the right side
+         */
+        image?: (string | null) | Media;
+        button?: {
+          text?: string | null;
+          link?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'familySection';
+      }
+    | {
+        /**
+         * Choose how to display the photos
+         */
+        displayMode?: ('notecard' | 'ticker') | null;
+        /**
+         * Show the EST. year section (uncheck to hide)
+         */
+        showYear?: boolean | null;
+        /**
+         * Small label above the year (e.g., "EST.", "SINCE") - only shown if "Show Year" is checked
+         */
+        yearLabel?: string | null;
+        /**
+         * Year to display prominently - only shown if "Show Year" is checked
+         */
+        year?: string | null;
+        /**
+         * Historical photos to display
+         */
+        images?:
+          | {
+              image: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'historyTimelineTicker';
+      }
+    | {
+        /**
+         * Small uppercase subtitle (e.g., "TASTE THE CLASSICS")
+         */
+        subtitle?: string | null;
+        /**
+         * Body text content
+         */
+        content?: string | null;
+        /**
+         * Two images that stack/overlap on the right side
+         */
+        images?:
+          | {
+              image: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'classicsSection';
+      }
+    | {
+        /**
+         * Main headline (e.g., "Our History")
+         */
+        heading: string;
+        /**
+         * History description text
+         */
+        content?: string | null;
+        /**
+         * Background image (e.g., restaurant exterior)
+         */
+        backgroundImage?: (string | null) | Media;
+        /**
+         * Historical photo that hangs below the hero section
+         */
+        overlayImage?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'historyHero';
+      }
+    | {
+        /**
          * Main headline (e.g., "You're Only A Stranger Once")
          */
         heading: string;
@@ -177,6 +375,10 @@ export interface Page {
          * Restaurant address to display on hero
          */
         address?: string | null;
+        /**
+         * Google Maps link for the address
+         */
+        addressLink?: string | null;
         /**
          * Large food photography background
          */
@@ -201,9 +403,9 @@ export interface Page {
                */
               title: string;
               /**
-               * Award source (e.g., "Yelp", "OC Register")
+               * Select the award source logo to display
                */
-              source?: string | null;
+              source?: ('hotlist' | 'register') | null;
               /**
                * Circular badge design with stars
                */
@@ -221,21 +423,44 @@ export interface Page {
       }
     | {
         /**
-         * Promotion heading with gradient effect
+         * Main heading (e.g., "Thanksgiving Day Menus")
          */
         heading: string;
         /**
-         * Promotional details in bordered box
+         * Subheading below main heading (e.g., "Pre-Order Family Meals or Dine-In")
          */
-        content: {
-          [k: string]: unknown;
-        }[];
+        subheading?: string | null;
+        /**
+         * Promotion images (menu flyers, product photos) - displayed on right side with overflow and rounded corners
+         */
+        promotionImages?:
+          | {
+              image: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Show the date/info box above the CTA button
+         */
+        showDateBox?: boolean | null;
+        /**
+         * First line in date box (e.g., "Thursday November 27th, 2025") - only shown if "Show Date Box" is checked
+         */
+        dateBoxLine1?: string | null;
+        /**
+         * Second line in date box (e.g., "Open from 7:00 am - 6:00 pm") - only shown if "Show Date Box" is checked
+         */
+        dateBoxLine2?: string | null;
+        /**
+         * Third line in date box (e.g., "Holiday Menu 11am - Sold Out") - only shown if "Show Date Box" is checked
+         */
+        dateBoxLine3?: string | null;
         button?: {
           text?: string | null;
           link?: string | null;
         };
         /**
-         * Dark food photography background
+         * Background image for the section
          */
         backgroundImage?: (string | null) | Media;
         id?: string | null;
@@ -286,9 +511,17 @@ export interface Page {
         label?: string | null;
         name: string;
         /**
-         * Personal quote about favorite meal
+         * Biography text (use double line breaks for paragraphs)
          */
-        quote: string;
+        bio?: string | null;
+        /**
+         * Label for favorite meal section
+         */
+        favoriteMealLabel?: string | null;
+        /**
+         * Favorite meal quote
+         */
+        favoriteMeal?: string | null;
         button?: {
           text?: string | null;
           link?: string | null;
@@ -471,9 +704,12 @@ export interface Page {
   status: 'draft' | 'published';
   updatedAt: string;
   createdAt: string;
+  deletedAt?: string | null;
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Manage images and media files for the website
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -483,9 +719,13 @@ export interface Media {
    * Alternative text for accessibility and SEO
    */
   alt: string;
+  /**
+   * Optional caption to display with the image
+   */
   caption?: string | null;
   updatedAt: string;
   createdAt: string;
+  deletedAt?: string | null;
   url?: string | null;
   thumbnailURL?: string | null;
   filename?: string | null;
@@ -720,11 +960,134 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        kenosToday?:
+          | T
+          | {
+              logo?: T;
+              headingSuffix?: T;
+              content?: T;
+              primaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              backgroundImage?: T;
+              gallery?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        staffHero?:
+          | T
+          | {
+              heading?: T;
+              headingLogo?: T;
+              subheading?: T;
+              content?: T;
+              backgroundImage?: T;
+              overlayImage?: T;
+              primaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        staffGrid?:
+          | T
+          | {
+              introText?: T;
+              staffMembers?:
+                | T
+                | {
+                    name?: T;
+                    title?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        familySection?:
+          | T
+          | {
+              heading?: T;
+              content?: T;
+              image?: T;
+              button?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        historyTimelineTicker?:
+          | T
+          | {
+              displayMode?: T;
+              showYear?: T;
+              yearLabel?: T;
+              year?: T;
+              images?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        classicsSection?:
+          | T
+          | {
+              subtitle?: T;
+              content?: T;
+              images?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        historyHero?:
+          | T
+          | {
+              heading?: T;
+              content?: T;
+              backgroundImage?: T;
+              overlayImage?: T;
+              id?: T;
+              blockName?: T;
+            };
         kenosHero?:
           | T
           | {
               heading?: T;
               address?: T;
+              addressLink?: T;
               backgroundImage?: T;
               primaryButton?:
                 | T
@@ -760,7 +1123,17 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
-              content?: T;
+              subheading?: T;
+              promotionImages?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              showDateBox?: T;
+              dateBoxLine1?: T;
+              dateBoxLine2?: T;
+              dateBoxLine3?: T;
               button?:
                 | T
                 | {
@@ -813,7 +1186,9 @@ export interface PagesSelect<T extends boolean = true> {
               photo?: T;
               label?: T;
               name?: T;
-              quote?: T;
+              bio?: T;
+              favoriteMealLabel?: T;
+              favoriteMeal?: T;
               button?:
                 | T
                 | {
@@ -973,6 +1348,7 @@ export interface PagesSelect<T extends boolean = true> {
   status?: T;
   updatedAt?: T;
   createdAt?: T;
+  deletedAt?: T;
   _status?: T;
 }
 /**
@@ -984,6 +1360,7 @@ export interface MediaSelect<T extends boolean = true> {
   caption?: T;
   updatedAt?: T;
   createdAt?: T;
+  deletedAt?: T;
   url?: T;
   thumbnailURL?: T;
   filename?: T;
@@ -1135,12 +1512,36 @@ export interface Navigation {
     openInNewTab?: boolean | null;
     id?: string | null;
   }[];
-  footerNav: {
-    label: string;
-    href: string;
-    openInNewTab?: boolean | null;
-    id?: string | null;
-  }[];
+  /**
+   * Navigation links for the left column of the footer
+   */
+  footerLeftColumn?:
+    | {
+        label: string;
+        href: string;
+        openInNewTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Navigation links for the right column of the footer
+   */
+  footerRightColumn?:
+    | {
+        label: string;
+        href: string;
+        openInNewTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Restaurant hours displayed in the footer
+   */
+  footerHours?: {
+    title?: string | null;
+    line1?: string | null;
+    line2?: string | null;
+  };
   socialLinks?: {
     facebook?: string | null;
     instagram?: string | null;
@@ -1163,13 +1564,28 @@ export interface NavigationSelect<T extends boolean = true> {
         openInNewTab?: T;
         id?: T;
       };
-  footerNav?:
+  footerLeftColumn?:
     | T
     | {
         label?: T;
         href?: T;
         openInNewTab?: T;
         id?: T;
+      };
+  footerRightColumn?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        openInNewTab?: T;
+        id?: T;
+      };
+  footerHours?:
+    | T
+    | {
+        title?: T;
+        line1?: T;
+        line2?: T;
       };
   socialLinks?:
     | T
