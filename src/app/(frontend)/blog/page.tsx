@@ -12,7 +12,7 @@ export default async function BlogPage() {
   const payload = await getPayload({ config })
 
   const posts = await payload.find({
-    collection: 'blog-posts',
+    collection: 'blog-posts' as any,
     where: {
       status: { equals: 'published' },
     },

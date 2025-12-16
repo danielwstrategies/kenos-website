@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props) {
   const payload = await getPayload({ config })
 
   const result = await payload.find({
-    collection: 'blog-posts',
+    collection: 'blog-posts' as any,
     where: { slug: { equals: slug } },
     limit: 1,
   })
@@ -38,7 +38,7 @@ export default async function BlogPostPage({ params }: Props) {
   const payload = await getPayload({ config })
 
   const result = await payload.find({
-    collection: 'blog-posts',
+    collection: 'blog-posts' as any,
     where: { 
       slug: { equals: slug },
       status: { equals: 'published' },
@@ -60,7 +60,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   // Get related posts (same category, exclude current)
   const relatedResult = await payload.find({
-    collection: 'blog-posts',
+    collection: 'blog-posts' as any,
     where: {
       and: [
         { category: { equals: post.category } },
