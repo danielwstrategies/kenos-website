@@ -26,7 +26,7 @@ export async function GET() {
     // Find the kenosToday block in the history page
     const kenosTodayBlock = historyPage.layout?.find(
       (block: any) => block.blockType === 'kenosToday'
-    )
+    ) as any
 
     if (!kenosTodayBlock) {
       return NextResponse.json({ error: 'Kenos Today block not found in history page' }, { status: 404 })
