@@ -145,7 +145,7 @@ export async function GET(request: NextRequest) {
                 heading: 'Our History',
                 content: "Kenos Family Restaurant has been a part of the Canyon since its inception in 1983. Kenos opened its doors on August 3rd, 1980. The current owners, the Cooper family, began owning and operating the business on July 21, 1993. For the past thirty years, Kenos has grown with the Canyon. But one thing at Kenos has stayed the same throughout the decades: the food & the people.",
                 button: { text: 'Read More', link: '/our-history' },
-              },
+              } as any,
               {
                 blockType: 'kenosToday',
                 headingSuffix: 'Today',
@@ -153,7 +153,7 @@ export async function GET(request: NextRequest) {
                 primaryButton: { text: 'See Menu', link: '/menu' },
                 secondaryButton: { text: 'Order Online', link: '/order' },
               },
-            ],
+            ] as any,
             meta: {
               title: "Our Staff | Keno's Restaurant",
               description: "Meet the Keno's family - our dedicated team of managers and staff.",
@@ -190,7 +190,7 @@ export async function GET(request: NextRequest) {
                 heading: 'Our History',
                 content: "Kenos Family Restaurant has been a part of the Canyon since its inception in 1983. Kenos opened its doors on August 3rd, 1980. The current owners, the Cooper family, began owning and operating the business on July 21, 1993. For the past thirty years, Kenos has grown with the Canyon. But one thing at Kenos has stayed the same throughout the decades: the food & the people.",
                 button: { text: 'Meet The Team', link: '/our-staff' },
-              },
+              } as any,
               {
                 blockType: 'historyTimelineTicker',
                 displayMode: 'notecard',
