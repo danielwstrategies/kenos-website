@@ -598,7 +598,7 @@ export async function GET(request: NextRequest) {
       try {
         // Check if post already exists
         const existing = await payload.find({
-          collection: 'blog-posts',
+          collection: 'blog-posts' as any,
           where: { slug: { equals: post.slug } },
         })
 
@@ -609,7 +609,7 @@ export async function GET(request: NextRequest) {
 
         // Create the blog post
         const created = await payload.create({
-          collection: 'blog-posts',
+          collection: 'blog-posts' as any,
           data: {
             title: post.title,
             slug: post.slug,
