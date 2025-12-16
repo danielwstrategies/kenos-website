@@ -221,7 +221,7 @@ export async function GET(request: NextRequest) {
             ],
             showContactForm: true,
           },
-        ],
+        ] as any,
         meta: {
           title: "Keno's Restaurant | Orange County's Best Breakfast & Family Dining Since 1994",
           description:
