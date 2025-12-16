@@ -82,7 +82,7 @@ export default function KenosTodayBlock({ block }: KenosTodayBlockProps) {
               />
             ) : (
               <Image
-                src="/media/Keno's Logo 2 1.png"
+                src="/media/kenos-logo.png"
                 alt="Keno's"
                 width={200}
                 height={80}

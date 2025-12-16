@@ -90,7 +90,7 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
               />
             ) : (
               <Image
-                src="/media/Keno's Logo 2 1.png"
+                src="/media/kenos-logo.png"
                 alt="Keno's"
                 width={100}
                 height={50}

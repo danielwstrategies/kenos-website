@@ -126,7 +126,7 @@ export default function StaffHeroBlock({ block }: StaffHeroBlockProps) {
                   />
                 ) : (
                   <Image
-                    src="/media/Keno's Logo 2 1.png"
+                    src="/media/kenos-logo.png"
                     alt="Keno's"
                     width={180}
                     height={90}
