@@ -98,7 +98,7 @@ export async function GET() {
               link: '/order',
             },
           },
-        ],
+        ] as any,
         meta: {
           title: 'Our Staff | Keno\'s Restaurant',
           description: 'Meet the Keno\'s family - our dedicated team of managers and staff who bring their heart and energy into the restaurant every single day.',

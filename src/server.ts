@@ -69,8 +69,8 @@ const start = async () => {
   app.get('/health', async (req, res) => {
     try {
       // Check database connection
-      const db = payload.db
-      if (db) {
+      const db = payload.db as any
+      if (db?.connection?.db) {
         await db.connection.db.admin().ping()
         logger.info('Health check passed')
         res.status(200).json({ status: 'ok', database: 'connected' })
