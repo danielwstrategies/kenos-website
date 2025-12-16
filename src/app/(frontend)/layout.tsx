@@ -44,11 +44,11 @@ export default async function FrontendLayout({ children }: { children: React.Rea
         <Navigation mainNav={navigation?.mainNav} />
         {children}
         <Footer 
-          leftColumn={navigation?.footerLeftColumn}
-          rightColumn={navigation?.footerRightColumn}
-          hoursTitle={navigation?.footerHours?.title}
-          hoursLine1={navigation?.footerHours?.line1}
-          hoursLine2={navigation?.footerHours?.line2}
+          leftColumn={navigation?.footerLeftColumn ?? undefined}
+          rightColumn={navigation?.footerRightColumn ?? undefined}
+          hoursTitle={navigation?.footerHours?.title ?? undefined}
+          hoursLine1={navigation?.footerHours?.line1 ?? undefined}
+          hoursLine2={navigation?.footerHours?.line2 ?? undefined}
         />
       </body>
     </html>
