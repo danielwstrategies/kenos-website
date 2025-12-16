@@ -114,7 +114,7 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
             {button?.text && button?.link && (
               <Link
                 href={button.link}
-                className="inline-block px-6 py-2.5 md:px-8 md:py-3 border border-white text-white font-montserrat text-sm md:text-base rounded hover:bg-white/10 transition-colors"
+                className="kenos-btn-outline-white text-sm md:text-base"
               >
                 {button.text}
               </Link>

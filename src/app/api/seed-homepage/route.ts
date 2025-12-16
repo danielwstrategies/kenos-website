@@ -60,8 +60,8 @@ export async function GET(request: NextRequest) {
               link: '/menu',
             },
             secondaryButton: {
-              text: 'Our History',
-              link: '/history',
+              text: 'Join Waitlist',
+              link: 'https://www.waitlist.com/restaurants/kenos',
             },
           },
           // 2. Awards Section - Best Breakfast & Family Friendly

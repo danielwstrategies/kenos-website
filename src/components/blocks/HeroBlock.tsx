@@ -51,7 +51,7 @@ export default function HeroBlock({ block }: HeroBlockProps) {
           {block.primaryButton?.text && (
             <a
               href={block.primaryButton.link || '#menu'}
-              className="btn btn-primary"
+              className="kenos-btn-primary"
             >
               {block.primaryButton.text}
             </a>
@@ -59,7 +59,7 @@ export default function HeroBlock({ block }: HeroBlockProps) {
           {block.secondaryButton?.text && (
             <a
               href={block.secondaryButton.link || '#history'}
-              className="btn btn-secondary"
+              className="kenos-btn-secondary"
             >
               {block.secondaryButton.text}
             </a>

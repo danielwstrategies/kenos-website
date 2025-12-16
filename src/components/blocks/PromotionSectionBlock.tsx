@@ -200,16 +200,16 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
             )}
 
             {/* CTA Button */}
-            {button?.text && (
-              <div ref={buttonRef} className="opacity-0">
-                <a
-                  href={button.link}
-                  className="kenos-btn-primary text-base px-8 py-3 inline-block"
-                >
-                  {button.text}
-                </a>
-              </div>
-            )}
+            <div ref={buttonRef} className="opacity-0">
+              <a
+                href="https://www.waitlist.com/restaurants/kenos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="kenos-btn-primary text-base px-8 py-3 inline-block"
+              >
+                Join Waitlist
+              </a>
+            </div>
           </div>
 
           {/* Right Column - Images */}

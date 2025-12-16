@@ -19,6 +19,7 @@ const defaultNav: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Menu', href: '#menu' },
   { label: 'About', href: '#about' },
+  { label: 'Our Staff', href: '/our-staff' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Contact', href: '#contact' },
 ]

@@ -76,15 +76,23 @@ export default function OwnerProfileSectionBlock({ block }: OwnerProfileSectionB
               </div>
             )}
 
-            {/* CTA Button */}
-            {button?.text && (
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4">
+              {button?.text && (
+                <a
+                  href={button.link}
+                  className="kenos-btn-outline"
+                >
+                  {button.text}
+                </a>
+              )}
               <a
-                href={button.link}
-                className="inline-block px-8 py-3 font-yeseva text-base border-2 border-[#2F0C0C] text-[#2F0C0C] bg-transparent hover:bg-[#2F0C0C] hover:text-white transition-colors duration-300"
+                href="/our-history"
+                className="kenos-btn-outline"
               >
-                {button.text}
+                Our History
               </a>
-            )}
+            </div>
           </div>
         </div>
       </div>

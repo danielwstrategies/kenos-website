@@ -45,14 +45,24 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
               {description}
             </p>
           )}
-          {button?.text && (
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {button?.text && (
+              <a
+                href={button.link}
+                className="kenos-btn-primary"
+              >
+                {button.text}
+              </a>
+            )}
             <a
-              href={button.link}
-              className="kenos-btn-primary"
+              href="https://www.waitlist.com/restaurants/kenos"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="kenos-btn-secondary"
             >
-              {button.text}
+              Join Waitlist
             </a>
-          )}
+          </div>
         </div>
       </div>
 

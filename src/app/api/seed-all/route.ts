@@ -48,7 +48,7 @@ export async function GET(request: NextRequest) {
                 heading: "You're Only A Stranger Once",
                 address: '8685 E Chapman Ave\nOrange, CA 92869',
                 primaryButton: { text: 'See Menu', link: '/menu' },
-                secondaryButton: { text: 'Our History', link: '/our-history' },
+                secondaryButton: { text: 'Join Waitlist', link: 'https://www.waitlist.com/restaurants/kenos' },
               },
               {
                 blockType: 'awardsSection',
