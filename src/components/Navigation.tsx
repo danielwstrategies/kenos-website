@@ -9,6 +9,7 @@ interface NavItem {
   label: string
   href: string
   openInNewTab?: boolean | null
+  id?: string | null
 }
 
 interface NavigationProps {

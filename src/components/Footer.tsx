@@ -13,7 +13,8 @@ if (typeof window !== 'undefined') {
 interface FooterNav {
   label: string
   href: string
-  openInNewTab?: boolean
+  openInNewTab?: boolean | null
+  id?: string | null
 }
 
 interface FooterProps {
