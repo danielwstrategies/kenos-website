@@ -6,11 +6,11 @@ import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
 import sharp from 'sharp'
 import Users from './collections/Users'
-import TestCollection from './collections/TestCollection'
 import Pages from './collections/Pages'
 import Media from './collections/Media'
 import Services from './collections/Services'
 import ContactSubmissions from './collections/ContactSubmissions'
+import BlogPosts from './collections/BlogPosts'
 import Navigation from './globals/Navigation'
 
 const filename = fileURLToPath(import.meta.url)
@@ -37,7 +37,7 @@ export default buildConfig({
   editor: slateEditor({}),
   admin: {
     user: 'users',
-    theme: 'light',
+    theme: 'dark',
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -48,7 +48,7 @@ export default buildConfig({
     Media,
     Services,
     ContactSubmissions,
-    TestCollection,
+    BlogPosts,
   ],
   globals: [
     Navigation,

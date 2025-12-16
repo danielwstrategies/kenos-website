@@ -3,9 +3,14 @@ import type { CollectionConfig } from 'payload'
 const Pages: CollectionConfig = {
   slug: 'pages',
   trash: true,
+  labels: {
+    singular: 'Page',
+    plural: 'Pages',
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
+    group: 'Content',
   },
   versions: {
     drafts: true,

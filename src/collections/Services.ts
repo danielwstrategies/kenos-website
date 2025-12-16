@@ -2,9 +2,14 @@ import type { CollectionConfig } from 'payload'
 
 const Services: CollectionConfig = {
   slug: 'services',
+  labels: {
+    singular: 'Service',
+    plural: 'Services',
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'icon', 'order'],
+    group: 'Content',
   },
   hooks: {
     afterChange: [

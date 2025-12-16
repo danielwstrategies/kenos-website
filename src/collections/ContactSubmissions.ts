@@ -25,9 +25,14 @@ function checkRateLimit(ip: string): boolean {
 
 const ContactSubmissions: CollectionConfig = {
   slug: 'contact-submissions',
+  labels: {
+    singular: 'Contact Submission',
+    plural: 'Contact Submissions',
+  },
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'email', 'phone', 'status', 'createdAt'],
+    group: 'Forms',
   },
   access: {
     // Only authenticated users can read submissions

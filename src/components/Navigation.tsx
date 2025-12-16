@@ -15,15 +15,6 @@ interface NavigationProps {
   mainNav?: NavItem[]
 }
 
-const defaultNav: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Menu', href: '#menu' },
-  { label: 'About', href: '#about' },
-  { label: 'Our Staff', href: '/our-staff' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'Contact', href: '#contact' },
-]
-
 export default function Navigation({ mainNav }: NavigationProps) {
   const navRef = useRef<HTMLElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -31,7 +22,7 @@ export default function Navigation({ mainNav }: NavigationProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const navItems = mainNav && mainNav.length > 0 ? mainNav : defaultNav
+  const navItems = mainNav || []
 
   useEffect(() => {
     const handleScroll = () => {

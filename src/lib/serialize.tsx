@@ -43,23 +43,26 @@ export function serialize(nodes: Node[]): React.ReactNode {
       return <Fragment key={i}>{text}</Fragment>
     }
 
-    if (!node.type) return null
-
     const children = node.children ? serialize(node.children) : null
+
+    // If no type but has children, render as paragraph
+    if (!node.type) {
+      return children ? <p key={i}>{children}</p> : null
+    }
 
     switch (node.type) {
       case 'h1':
-        return <h1 key={i}>{children}</h1>
+        return <h1 key={i} style={{ color: '#73060E' }}>{children}</h1>
       case 'h2':
-        return <h2 key={i}>{children}</h2>
+        return <h2 key={i} style={{ color: '#73060E' }}>{children}</h2>
       case 'h3':
-        return <h3 key={i}>{children}</h3>
+        return <h3 key={i} style={{ color: '#73060E' }}>{children}</h3>
       case 'h4':
-        return <h4 key={i}>{children}</h4>
+        return <h4 key={i} style={{ color: '#73060E' }}>{children}</h4>
       case 'h5':
-        return <h5 key={i}>{children}</h5>
+        return <h5 key={i} style={{ color: '#73060E' }}>{children}</h5>
       case 'h6':
-        return <h6 key={i}>{children}</h6>
+        return <h6 key={i} style={{ color: '#73060E' }}>{children}</h6>
       case 'blockquote':
         return <blockquote key={i}>{children}</blockquote>
       case 'ul':

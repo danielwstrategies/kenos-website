@@ -24,24 +24,6 @@ interface FooterProps {
   hoursLine2?: string
 }
 
-const defaultLeftColumn: FooterNav[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Current Menus and Ordering', href: '/menu' },
-  { label: 'Entertainment', href: '/entertainment' },
-  { label: 'Our History', href: '/history' },
-  { label: 'Our Staff', href: '/our-staff' },
-  { label: 'Gallery', href: '/gallery' },
-]
-
-const defaultRightColumn: FooterNav[] = [
-  { label: 'Contact Us', href: '/contact' },
-  { label: 'Jobs', href: '/jobs' },
-  { label: "Keno's News", href: '/news' },
-  { label: 'Become a VIP', href: '/vip' },
-  { label: 'Site Map', href: '/sitemap' },
-  { label: 'Privacy Policy', href: '/privacy' },
-]
-
 export default function Footer({ 
   leftColumn, 
   rightColumn,
@@ -49,8 +31,8 @@ export default function Footer({
   hoursLine1 = 'Sunday-Thursday 7 AM-9 PM',
   hoursLine2 = 'Friday-Saturday: 7 AM-10 PM'
 }: FooterProps) {
-  const leftNav = leftColumn && leftColumn.length > 0 ? leftColumn : defaultLeftColumn
-  const rightNav = rightColumn && rightColumn.length > 0 ? rightColumn : defaultRightColumn
+  const leftNav = leftColumn || []
+  const rightNav = rightColumn || []
 
   const footerRef = useRef<HTMLElement>(null)
   const logoRef = useRef<HTMLDivElement>(null)

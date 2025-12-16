@@ -163,9 +163,9 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
 
       {/* Content */}
       <div className="relative z-10 w-full px-4 md:px-8 lg:px-12">
-        <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center">
+        <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-8 items-center">
           {/* Left Column - Text Content */}
-          <div className="flex-shrink-0 md:w-[30%] flex flex-col">
+          <div className="w-full md:w-[30%] flex-shrink-0 flex flex-col">
             {/* Heading */}
             <h2 
               ref={headingRef}
@@ -213,7 +213,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
           </div>
 
           {/* Right Column - Images */}
-          <div className="flex-1 flex flex-row gap-4 items-center justify-end -my-16 md:-my-24">
+          <div className="w-full md:flex-1 flex flex-row gap-4 items-center justify-center md:justify-end relative mt-6 md:mt-0 md:-my-24">
             {promotionImages?.map((item, index) => {
               const imageUrl = item.image?.url
               if (!imageUrl) return null
@@ -221,14 +221,14 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
                 <div 
                   key={index}
                   ref={(el) => { if (el) imagesRef.current[index] = el }}
-                  className="flex-shrink-0 opacity-0"
+                  className="flex-1 opacity-0"
                 >
                   <Image
                     src={imageUrl}
                     alt={`Promotion ${index + 1}`}
                     width={item.image?.width || 400}
                     height={item.image?.height || 500}
-                    className="h-auto max-h-[400px] md:max-h-[500px] w-auto object-contain rounded-xl"
+                    className="h-auto max-h-[400px] md:max-h-[500px] w-full object-contain rounded-xl"
                     style={{ 
                       boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 12px 24px -8px rgba(0, 0, 0, 0.2)' 
                     }}

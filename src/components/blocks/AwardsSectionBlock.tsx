@@ -24,7 +24,8 @@ interface AwardsSectionBlockProps {
 export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
   const { awards, centerLogo } = block
   const sectionRef = useRef<HTMLElement>(null)
-  const logoRef = useRef<HTMLDivElement>(null)
+  const logoMobileRef = useRef<HTMLDivElement>(null)
+  const logoDesktopRef = useRef<HTMLDivElement>(null)
   const awardsRef = useRef<HTMLDivElement[]>([])
 
   const getSourceLogo = (source?: string) => {
@@ -39,10 +40,29 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate logo
-      if (logoRef.current) {
+      // Animate mobile logo
+      if (logoMobileRef.current) {
         gsap.fromTo(
-          logoRef.current,
+          logoMobileRef.current,
+          { opacity: 0, scale: 0.8 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: 'back.out(1.2)',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        )
+      }
+
+      // Animate desktop logo
+      if (logoDesktopRef.current) {
+        gsap.fromTo(
+          logoDesktopRef.current,
           { opacity: 0, scale: 0.8 },
           {
             opacity: 1,
@@ -86,11 +106,11 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
   }, [])
 
   return (
-    <section ref={sectionRef} className="pb-16 -mt-16 md:pb-32 md:-mt-8" style={{ backgroundColor: '#FFFCF8' }}>
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section ref={sectionRef} className="pb-8 -mt-16 lg:pb-32 lg:-mt-8" style={{ backgroundColor: '#FFFCF8' }}>
+      <div className="container mx-auto px-2 max-w-7xl">
         {/* Logo - Above on mobile, left on desktop */}
-        <div className="flex justify-center md:hidden mb-6">
-          <div ref={logoRef} className="relative w-40 h-40 opacity-0">
+        <div className="flex justify-center lg:hidden mb-4">
+          <div ref={logoMobileRef} className="relative w-32 h-32 opacity-0">
             <Image
               src="/media/kenos-logo-1.png"
               alt="Kenos Restaurant Logo"
@@ -100,9 +120,9 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
           </div>
         </div>
 
-        <div className="flex flex-row md:flex-row items-center justify-center gap-4 md:gap-12 lg:gap-16">
+        <div className="flex flex-row lg:flex-row items-center justify-center gap-2 lg:gap-12">
           {/* Logo - Hidden on mobile, shown on desktop */}
-          <div ref={logoRef} className="hidden md:block flex-shrink-0 opacity-0">
+          <div ref={logoDesktopRef} className="hidden lg:block flex-shrink-0 opacity-0">
             <div className="relative w-64 h-64">
               <Image
                 src="/media/kenos-logo-1.png"
@@ -123,7 +143,7 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
                 className="flex-shrink-0 opacity-0"
               >
                 <div
-                  className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-72 md:h-72 lg:w-80 lg:h-80 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8"
+                  className="relative w-36 h-36 lg:w-72 lg:h-72 xl:w-80 xl:h-80 flex flex-col items-center justify-center p-3 lg:p-8"
                 >
                   {/* Star Background */}
                   <div className="absolute inset-0 w-full h-full">
@@ -137,14 +157,14 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
 
                   {/* Content */}
                   <div className="relative z-10 flex flex-col items-center">
-                    <p className="font-montserrat text-[0.5rem] sm:text-xs tracking-[0.2em] text-[#980914] mb-1 sm:mb-2 uppercase">
+                    <p className="font-montserrat text-[0.45rem] lg:text-xs tracking-[0.2em] text-[#980914] mb-1 lg:mb-2 uppercase">
                       Voted
                     </p>
-                    <h3 className="font-yeseva text-xs sm:text-sm md:text-lg lg:text-xl text-[#2D1810] mb-2 sm:mb-3 md:mb-4 leading-tight text-center max-w-[100px] sm:max-w-[120px] md:max-w-[180px]">
+                    <h3 className="font-yeseva text-[0.65rem] lg:text-lg xl:text-xl text-[#2D1810] mb-1 lg:mb-4 leading-tight text-center max-w-[90px] lg:max-w-[180px]">
                       {award.title}
                     </h3>
                     {sourceLogo && (
-                      <div className="relative w-16 h-5 sm:w-28 sm:h-6 md:w-36 md:h-10 mt-1 md:mt-2 overflow-hidden">
+                      <div className="relative w-14 h-4 lg:w-36 lg:h-10 mt-1 lg:mt-2 overflow-hidden">
                         <Image
                           src={sourceLogo}
                           alt={award.source === 'hotlist' ? 'Orange County Hotlist' : 'The Orange County Register'}

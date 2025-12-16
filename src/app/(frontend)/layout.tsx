@@ -1,5 +1,9 @@
 import { Yeseva_One, Inter } from 'next/font/google'
 import '../globals.css'
+import Navigation from '@/components/Navigation'
+import Footer from '@/components/Footer'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 
 const yeseva = Yeseva_One({ 
   subsets: ['latin'],
@@ -20,10 +24,33 @@ export const metadata = {
   description: "Keno's Family Restaurant - Award-winning breakfast and family dining in Anaheim Hills, CA. Serving the community since 1992.",
 }
 
-export default function FrontendLayout({ children }: { children: React.ReactNode }) {
+export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
+  const payload = await getPayload({ config })
+  
+  // Fetch navigation data
+  let navigation = null
+  try {
+    navigation = await payload.findGlobal({
+      slug: 'navigation',
+    })
+  } catch (e) {
+    // Navigation global may not exist yet
+    console.error('Navigation fetch error:', e)
+  }
+
   return (
     <html lang="en" className={`${yeseva.variable} ${inter.variable}`}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Navigation mainNav={navigation?.mainNav} />
+        {children}
+        <Footer 
+          leftColumn={navigation?.footerLeftColumn}
+          rightColumn={navigation?.footerRightColumn}
+          hoursTitle={navigation?.footerHours?.title}
+          hoursLine1={navigation?.footerHours?.line1}
+          hoursLine2={navigation?.footerHours?.line2}
+        />
+      </body>
     </html>
   )
 }
