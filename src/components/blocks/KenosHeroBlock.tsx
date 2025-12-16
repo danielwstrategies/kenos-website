@@ -61,12 +61,12 @@ export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
         </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
+      <div className="relative z-10 text-center text-white px-4 w-full max-w-[95%] mx-auto">
         {/* Main Headline */}
         <h1
           ref={headingRef}
-          className="font-yeseva text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight opacity-0"
-          style={{ fontSize: 'clamp(2.5rem, 8vw, 5rem)' }}
+          className="font-yeseva mb-8 leading-none opacity-0 whitespace-nowrap"
+          style={{ fontSize: 'clamp(1.25rem, 5.5vw, 3.5rem)' }}
         >
           {heading}
         </h1>
