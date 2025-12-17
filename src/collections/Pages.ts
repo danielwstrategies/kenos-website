@@ -787,7 +787,7 @@ const Pages: CollectionConfig = {
               type: 'textarea',
             },
             {
-              name: 'button',
+              name: 'primaryButton',
               type: 'group',
               fields: [
                 {

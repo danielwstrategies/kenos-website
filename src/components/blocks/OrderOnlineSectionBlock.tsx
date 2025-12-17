@@ -15,7 +15,7 @@ interface OrderOnlineSectionBlockProps {
   block: {
     heading: string
     description?: string
-    button?: {
+    primaryButton?: {
       text: string
       link: string
     }
@@ -31,7 +31,7 @@ interface OrderOnlineSectionBlockProps {
 }
 
 export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlockProps) {
-  const { heading, description, button, secondaryButton } = block
+  const { heading, description, primaryButton, secondaryButton } = block
 
   // Double the images for seamless infinite scroll
   const doubledImages = [...tickerImages, ...tickerImages]
@@ -50,14 +50,14 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
             </p>
           )}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            {button?.text && button?.link && (
+            {primaryButton?.text && primaryButton?.link && (
               <a
-                href={button.link}
-                target={button.link.startsWith('http') ? '_blank' : undefined}
-                rel={button.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                href={primaryButton.link}
+                target={primaryButton.link.startsWith('http') ? '_blank' : undefined}
+                rel={primaryButton.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className="kenos-btn-primary"
               >
-                {button.text}
+                {primaryButton.text}
               </a>
             )}
             {secondaryButton?.text && secondaryButton?.link && (
