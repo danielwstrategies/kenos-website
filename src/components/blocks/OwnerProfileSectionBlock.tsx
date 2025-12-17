@@ -82,7 +82,7 @@ export default function OwnerProfileSectionBlock({ block }: OwnerProfileSectionB
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              {button?.text && (
+              {button?.text && button?.link && (
                 <a
                   href={button.link}
                   target={button.link.startsWith('http') ? '_blank' : undefined}
@@ -92,7 +92,7 @@ export default function OwnerProfileSectionBlock({ block }: OwnerProfileSectionB
                   {button.text}
                 </a>
               )}
-              {secondaryButton?.text && (
+              {secondaryButton?.text && secondaryButton?.link && (
                 <a
                   href={secondaryButton.link}
                   target={secondaryButton.link.startsWith('http') ? '_blank' : undefined}

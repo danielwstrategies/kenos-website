@@ -50,7 +50,7 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
             </p>
           )}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            {button?.text && (
+            {button?.text && button?.link && (
               <a
                 href={button.link}
                 target={button.link.startsWith('http') ? '_blank' : undefined}
@@ -60,7 +60,7 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
                 {button.text}
               </a>
             )}
-            {secondaryButton?.text && (
+            {secondaryButton?.text && secondaryButton?.link && (
               <a
                 href={secondaryButton.link}
                 target={secondaryButton.link.startsWith('http') ? '_blank' : undefined}

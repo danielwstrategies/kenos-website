@@ -200,7 +200,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
             )}
 
             {/* CTA Button */}
-            {button?.text && (
+            {button?.text && button?.link && (
               <div ref={buttonRef} className="opacity-0">
                 <a
                   href={button.link}
