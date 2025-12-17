@@ -758,12 +758,12 @@ const Pages: CollectionConfig = {
                 {
                   name: 'text',
                   type: 'text',
-                  defaultValue: 'Reserve',
+                  defaultValue: 'Join Waitlist',
                 },
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/reservations',
+                  defaultValue: 'https://www.waitlist.com/restaurants/kenos',
                 },
               ],
             },
@@ -808,6 +808,22 @@ const Pages: CollectionConfig = {
                   name: 'link',
                   type: 'text',
                   defaultValue: '/order',
+                },
+              ],
+            },
+            {
+              name: 'secondaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Join Waitlist',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: 'https://www.waitlist.com/restaurants/kenos',
                 },
               ],
             },
@@ -941,6 +957,22 @@ const Pages: CollectionConfig = {
                   name: 'link',
                   type: 'text',
                   defaultValue: '/team',
+                },
+              ],
+            },
+            {
+              name: 'secondaryButton',
+              type: 'group',
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  defaultValue: 'Our History',
+                },
+                {
+                  name: 'link',
+                  type: 'text',
+                  defaultValue: '/our-history',
                 },
               ],
             },

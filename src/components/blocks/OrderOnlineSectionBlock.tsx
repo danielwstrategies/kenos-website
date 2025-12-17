@@ -19,6 +19,10 @@ interface OrderOnlineSectionBlockProps {
       text: string
       link: string
     }
+    secondaryButton?: {
+      text: string
+      link: string
+    }
     gallery?: Array<{
       image: any
       caption?: string
@@ -27,7 +31,7 @@ interface OrderOnlineSectionBlockProps {
 }
 
 export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlockProps) {
-  const { heading, description, button } = block
+  const { heading, description, button, secondaryButton } = block
 
   // Double the images for seamless infinite scroll
   const doubledImages = [...tickerImages, ...tickerImages]
@@ -49,19 +53,23 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
             {button?.text && (
               <a
                 href={button.link}
+                target={button.link.startsWith('http') ? '_blank' : undefined}
+                rel={button.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className="kenos-btn-primary"
               >
                 {button.text}
               </a>
             )}
-            <a
-              href="https://www.waitlist.com/restaurants/kenos"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="kenos-btn-secondary"
-            >
-              Join Waitlist
-            </a>
+            {secondaryButton?.text && (
+              <a
+                href={secondaryButton.link}
+                target={secondaryButton.link.startsWith('http') ? '_blank' : undefined}
+                rel={secondaryButton.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="kenos-btn-secondary"
+              >
+                {secondaryButton.text}
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -15,11 +15,15 @@ interface OwnerProfileSectionBlockProps {
       text: string
       link: string
     }
+    secondaryButton?: {
+      text: string
+      link: string
+    }
   }
 }
 
 export default function OwnerProfileSectionBlock({ block }: OwnerProfileSectionBlockProps) {
-  const { photo, label, name, bio, favoriteMealLabel, favoriteMeal, button } = block
+  const { photo, label, name, bio, favoriteMealLabel, favoriteMeal, button, secondaryButton } = block
 
   return (
     <section className="py-16 md:py-24" style={{ backgroundColor: '#F0E3D9' }}>
@@ -81,17 +85,23 @@ export default function OwnerProfileSectionBlock({ block }: OwnerProfileSectionB
               {button?.text && (
                 <a
                   href={button.link}
+                  target={button.link.startsWith('http') ? '_blank' : undefined}
+                  rel={button.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="kenos-btn-outline"
                 >
                   {button.text}
                 </a>
               )}
-              <a
-                href="/our-history"
-                className="kenos-btn-outline"
-              >
-                Our History
-              </a>
+              {secondaryButton?.text && (
+                <a
+                  href={secondaryButton.link}
+                  target={secondaryButton.link.startsWith('http') ? '_blank' : undefined}
+                  rel={secondaryButton.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="kenos-btn-outline"
+                >
+                  {secondaryButton.text}
+                </a>
+              )}
             </div>
           </div>
         </div>
