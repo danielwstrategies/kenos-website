@@ -74,12 +74,11 @@ export default function Footer({
 
       // Left column links stagger
       if (leftColRef.current) {
-        const leftItems = leftColRef.current.querySelectorAll('li')
+        const leftItems = leftColRef.current.querySelectorAll('.footer-link')
         if (leftItems.length > 0) {
-          tl.fromTo(
+          tl.from(
             leftItems,
-            { opacity: 0, x: -15 },
-            { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+            { opacity: 0, x: -15, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
             0.2
           )
         }
@@ -87,12 +86,11 @@ export default function Footer({
 
       // Right column links stagger
       if (rightColRef.current) {
-        const rightItems = rightColRef.current.querySelectorAll('li')
+        const rightItems = rightColRef.current.querySelectorAll('.footer-link')
         if (rightItems.length > 0) {
-          tl.fromTo(
+          tl.from(
             rightItems,
-            { opacity: 0, x: -15 },
-            { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+            { opacity: 0, x: -15, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
             0.3
           )
         }
@@ -120,6 +118,11 @@ export default function Footer({
         background: 'linear-gradient(135deg, #1a0a0a 0%, #2d1515 50%, #0d0d0d 100%)'
       }}
     >
+      <style jsx>{`
+        .footer-link {
+          opacity: 1;
+        }
+      `}</style>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
           {/* Left - Logo and Hours */}
@@ -152,7 +155,7 @@ export default function Footer({
           <div ref={leftColRef} className="md:col-span-4">
             <ul className="space-y-4">
               {leftNav.map((item, i) => (
-                <li key={item.id || i}>
+                <li key={item.id || i} className="footer-link">
                   <Link
                     href={item.href}
                     target={item.openInNewTab ? '_blank' : undefined}
@@ -169,7 +172,7 @@ export default function Footer({
           <div ref={rightColRef} className="md:col-span-4">
             <ul className="space-y-4">
               {rightNav.map((item, i) => (
-                <li key={item.id || i}>
+                <li key={item.id || i} className="footer-link">
                   <Link
                     href={item.href}
                     target={item.openInNewTab ? '_blank' : undefined}
