@@ -74,22 +74,28 @@ export default function Footer({
 
       // Left column links stagger
       if (leftColRef.current) {
-        tl.fromTo(
-          leftColRef.current.querySelectorAll('li'),
-          { opacity: 0, x: -15 },
-          { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
-          0.2
-        )
+        const leftItems = leftColRef.current.querySelectorAll('li')
+        if (leftItems.length > 0) {
+          tl.fromTo(
+            leftItems,
+            { opacity: 0, x: -15 },
+            { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+            0.2
+          )
+        }
       }
 
       // Right column links stagger
       if (rightColRef.current) {
-        tl.fromTo(
-          rightColRef.current.querySelectorAll('li'),
-          { opacity: 0, x: -15 },
-          { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
-          0.3
-        )
+        const rightItems = rightColRef.current.querySelectorAll('li')
+        if (rightItems.length > 0) {
+          tl.fromTo(
+            rightItems,
+            { opacity: 0, x: -15 },
+            { opacity: 1, x: 0, duration: 0.4, stagger: 0.05, ease: 'power3.out' },
+            0.3
+          )
+        }
       }
 
       // Copyright
@@ -146,7 +152,7 @@ export default function Footer({
           <div ref={leftColRef} className="md:col-span-4">
             <ul className="space-y-4">
               {leftNav.map((item, i) => (
-                <li key={i} className="opacity-0">
+                <li key={item.id || i}>
                   <Link
                     href={item.href}
                     target={item.openInNewTab ? '_blank' : undefined}
@@ -163,7 +169,7 @@ export default function Footer({
           <div ref={rightColRef} className="md:col-span-4">
             <ul className="space-y-4">
               {rightNav.map((item, i) => (
-                <li key={i} className="opacity-0">
+                <li key={item.id || i}>
                   <Link
                     href={item.href}
                     target={item.openInNewTab ? '_blank' : undefined}
