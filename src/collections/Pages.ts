@@ -121,7 +121,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/menu',
                 },
               ],
             },
@@ -137,7 +136,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/order',
                 },
               ],
             },
@@ -235,7 +233,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/contact',
                 },
               ],
             },
@@ -251,7 +248,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/jobs',
                 },
               ],
             },
@@ -375,7 +371,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/team',
                 },
               ],
             },
@@ -538,7 +533,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/our-history',
                 },
               ],
             },
@@ -608,7 +602,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/menu',
                 },
               ],
             },
@@ -624,7 +617,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/history',
                 },
               ],
             },
@@ -763,7 +755,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: 'https://www.waitlist.com/restaurants/kenos',
                 },
               ],
             },
@@ -807,7 +798,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/order',
                 },
               ],
             },
@@ -823,7 +813,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: 'https://www.waitlist.com/restaurants/kenos',
                 },
               ],
             },
@@ -877,7 +866,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/menu',
                 },
               ],
             },
@@ -956,7 +944,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/team',
                 },
               ],
             },
@@ -972,7 +959,6 @@ const Pages: CollectionConfig = {
                 {
                   name: 'link',
                   type: 'text',
-                  defaultValue: '/our-history',
                 },
               ],
             },
