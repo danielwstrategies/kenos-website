@@ -10,3 +10,5 @@ build
 
 # Documentation (contains example credentials)
 docs/
+*.env*
+.env.temp
