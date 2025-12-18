@@ -12,3 +12,4 @@ build
 docs/
 *.env*
 .env.temp
+media-backup.tar.gz

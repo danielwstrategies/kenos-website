@@ -6,6 +6,21 @@ const nextConfig = {
   experimental: {
     reactCompiler: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3011',
+        pathname: '/api/media/file/**',
+      },
+      {
+        protocol: 'https',
+        hostname: '**',
+        pathname: '/api/media/file/**',
+      },
+    ],
+  },
   async headers() {
     return [
       {
