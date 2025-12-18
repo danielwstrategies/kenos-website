@@ -166,3 +166,4 @@ const BlogPosts: CollectionConfig = {
 }
 
 export default BlogPosts
+

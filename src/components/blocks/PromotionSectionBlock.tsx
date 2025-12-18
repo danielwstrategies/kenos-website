@@ -163,9 +163,10 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
 
       {/* Content */}
       <div className="relative z-10 w-full px-4 md:px-8 lg:px-12">
-        <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-8 items-center">
-          {/* Left Column - Text Content */}
-          <div className="w-full md:w-[30%] flex-shrink-0 flex flex-col">
+        <div className="max-w-[1200px] w-full mx-auto">
+          <div className="flex flex-col-reverse md:flex-row gap-6 md:gap-8 items-center">
+            {/* Left Column - Text Content */}
+            <div className="w-full md:w-[30%] flex-shrink-0 flex flex-col">
             {/* Heading */}
             <h2 
               ref={headingRef}
@@ -223,14 +224,14 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
                 <div 
                   key={index}
                   ref={(el) => { if (el) imagesRef.current[index] = el }}
-                  className="flex-1 opacity-0"
+                  className="flex-1 opacity-0 h-[400px] md:h-[500px]"
                 >
                   <Image
                     src={imageUrl}
                     alt={`Promotion ${index + 1}`}
                     width={item.image?.width || 400}
                     height={item.image?.height || 500}
-                    className="h-auto max-h-[400px] md:max-h-[500px] w-full object-contain rounded-xl"
+                    className="w-full h-full object-cover rounded-xl"
                     style={{ 
                       boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 12px 24px -8px rgba(0, 0, 0, 0.2)' 
                     }}
@@ -238,6 +239,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
                 </div>
               )
             })}
+          </div>
           </div>
         </div>
       </div>

@@ -160,3 +160,4 @@ function BlogCard({ post }: { post: any }) {
     </Link>
   )
 }
+
