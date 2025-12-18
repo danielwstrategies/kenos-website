@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Image from 'next/image'
 
 type Node = {
   type?: string
@@ -10,6 +11,8 @@ type Node = {
   code?: boolean
   children?: Node[]
   url?: string
+  value?: any
+  relationTo?: string
   [key: string]: any
 }
 
@@ -76,6 +79,25 @@ export function serialize(nodes: Node[]): React.ReactNode {
           <a href={node.url} key={i} target="_blank" rel="noopener noreferrer">
             {children}
           </a>
+        )
+      case 'upload':
+        const image = node.value
+        if (!image || typeof image !== 'object' || !image.url) return null
+        return (
+          <div key={i} className="my-8">
+            <Image
+              src={image.url}
+              alt={image.alt || 'Blog image'}
+              width={image.width || 1200}
+              height={image.height || 800}
+              className="w-full h-auto rounded-lg"
+            />
+            {image.caption && (
+              <p className="text-sm text-neutral-600 mt-2 text-center italic">
+                {image.caption}
+              </p>
+            )}
+          </div>
         )
       default:
         return <p key={i}>{children}</p>
