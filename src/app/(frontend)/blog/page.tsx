@@ -18,6 +18,7 @@ export default async function BlogPage() {
     },
     sort: '-publishedDate',
     limit: 50,
+    depth: 2,
   })
 
   // Group posts by category
