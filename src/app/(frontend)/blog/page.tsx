@@ -8,6 +8,8 @@ export const metadata = {
   description: "News, entertainment interviews, recipes, and stories from Keno's Restaurant in Anaheim Hills.",
 }
 
+export const revalidate = 60 // Revalidate every 60 seconds
+
 export default async function BlogPage() {
   const payload = await getPayload({ config })
 

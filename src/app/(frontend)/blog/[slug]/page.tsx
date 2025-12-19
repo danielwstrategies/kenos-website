@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { serialize } from '@/lib/serialize'
 
+export const revalidate = 60 // Revalidate every 60 seconds
+
 type Props = {
   params: Promise<{ slug: string }>
 }
