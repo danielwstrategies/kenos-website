@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 
-export async function POST(request: NextRequest) {
+async function handleRevalidation(request: NextRequest) {
   try {
-    const body = await request.json()
-    const secret = body.secret || request.headers.get('x-revalidate-secret')
-    
     // Optional: Add secret validation for security
+    // const secret = request.headers.get('x-revalidate-secret')
     // if (secret !== process.env.REVALIDATE_SECRET) {
     //   return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
     // }
@@ -17,8 +15,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ 
       revalidated: true, 
-      message: 'Blog pages cache cleared',
-      now: Date.now() 
+      message: 'Blog pages cache cleared successfully',
+      timestamp: new Date().toISOString()
     })
   } catch (error: any) {
     return NextResponse.json(
@@ -29,5 +27,9 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  return POST(request)
+  return handleRevalidation(request)
+}
+
+export async function POST(request: NextRequest) {
+  return handleRevalidation(request)
 }
