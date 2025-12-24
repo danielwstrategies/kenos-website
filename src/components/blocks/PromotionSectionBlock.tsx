@@ -126,21 +126,26 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
         )
       }
 
-      // Simplified image animation - just fade in, no transform
+      // Wipe animation for images
       imagesRef.current.forEach((img, index) => {
         if (img) {
-          gsap.set(img, { willChange: 'opacity' })
-          tl.fromTo(
-            img,
-            { opacity: 0 },
-            { 
-              opacity: 1, 
-              duration: 0.5,
-              ease: 'power2.out',
-              clearProps: 'willChange',
-            },
-            0.15 + (index * 0.1)
-          )
+          const imgElement = img.querySelector('img')
+          if (imgElement) {
+            gsap.set(imgElement, { willChange: 'clip-path' })
+            tl.fromTo(
+              imgElement,
+              { 
+                clipPath: 'inset(0 100% 0 0)',
+              },
+              { 
+                clipPath: 'inset(0 0% 0 0)',
+                duration: 1.2,
+                ease: 'power3.out',
+                clearProps: 'willChange',
+              },
+              0.3 + (index * 0.15)
+            )
+          }
         }
       })
     }, sectionRef)
@@ -150,7 +155,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
 
   return (
     <section ref={sectionRef} className="relative py-8 md:py-12 overflow-visible">
-      {/* Background Image with Light Overlay */}
+      {/* Background Image with Dark Blue-Green Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src={bgImageUrl}
@@ -158,7 +163,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
           fill
           className="object-cover"
         />
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(245,235,235,0.92)' }} />
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(18, 28, 32, 0.95)' }} />
       </div>
 
       {/* Content */}
@@ -170,7 +175,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
             {/* Heading */}
             <h2 
               ref={headingRef}
-              className="font-yeseva text-3xl md:text-4xl lg:text-5xl mb-1 text-[#711B1C] leading-tight opacity-0"
+              className="font-yeseva text-3xl md:text-4xl lg:text-5xl mb-1 text-white leading-tight opacity-0"
             >
               {heading}
             </h2>
@@ -179,7 +184,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
             {subheading && (
               <p 
                 ref={subheadingRef}
-                className="font-montserrat text-base md:text-lg text-[#2F0C0C] mb-6 opacity-0"
+                className="font-montserrat text-base md:text-lg text-white/90 mb-6 opacity-0"
               >
                 {subheading}
               </p>
@@ -189,8 +194,8 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
             {showDateBox && (
               <div 
                 ref={dateBoxRef}
-                className="border-2 px-4 py-3 mb-4 text-[#2F0C0C] inline-block w-fit opacity-0"
-                style={{ borderColor: '#980914' }}
+                className="border-2 px-4 py-3 mb-4 text-white inline-block w-fit opacity-0"
+                style={{ borderColor: 'rgba(255, 255, 255, 0.4)' }}
               >
                 <div className="font-montserrat">
                   {dateBoxLine1 && <p className="text-sm md:text-base font-semibold">{dateBoxLine1}</p>}
@@ -224,17 +229,17 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
                 <div 
                   key={index}
                   ref={(el) => { if (el) imagesRef.current[index] = el }}
-                  className="flex-1 opacity-0 h-[400px] md:h-[500px]"
+                  className="flex-1 h-[400px] md:h-[500px] overflow-hidden rounded-xl"
+                  style={{ 
+                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 12px 24px -8px rgba(0, 0, 0, 0.4)' 
+                  }}
                 >
                   <Image
                     src={imageUrl}
                     alt={`Promotion ${index + 1}`}
                     width={item.image?.width || 400}
                     height={item.image?.height || 500}
-                    className="w-full h-full object-cover rounded-xl"
-                    style={{ 
-                      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 12px 24px -8px rgba(0, 0, 0, 0.2)' 
-                    }}
+                    className="w-full h-full object-cover"
                   />
                 </div>
               )
