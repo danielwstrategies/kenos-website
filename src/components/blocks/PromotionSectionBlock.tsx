@@ -172,7 +172,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
             {/* Heading */}
             <h2 
               ref={headingRef}
-              className="font-yeseva text-3xl md:text-4xl lg:text-5xl mb-1 text-white leading-tight opacity-0"
+              className="font-yeseva text-2xl md:text-3xl mb-1 text-white leading-tight opacity-0"
             >
               {heading}
             </h2>
@@ -181,7 +181,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
             {subheading && (
               <p 
                 ref={subheadingRef}
-                className="font-montserrat text-base md:text-lg text-white/90 mb-6 opacity-0"
+                className="font-montserrat   text-white/90 mb-6 opacity-0"
               >
                 {subheading}
               </p>
@@ -195,7 +195,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
                 style={{ borderColor: 'rgba(255, 255, 255, 0.4)' }}
               >
                 <div className="font-montserrat">
-                  {dateBoxLine1 && <p className="text-sm md:text-base font-semibold">{dateBoxLine1}</p>}
+                  {dateBoxLine1 && <p className="text-sm  font-semibold">{dateBoxLine1}</p>}
                   {dateBoxLine2 && <p className="text-sm">{dateBoxLine2}</p>}
                   {dateBoxLine3 && <p className="text-xs italic">{dateBoxLine3}</p>}
                 </div>
@@ -209,7 +209,7 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
                   href={button.link}
                   target={button.link.startsWith('http') ? '_blank' : undefined}
                   rel={button.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="kenos-btn-primary text-base px-8 py-3 inline-block"
+                  className="kenos-btn-primary  px-8 py-3 inline-block"
                 >
                   {button.text}
                 </a>

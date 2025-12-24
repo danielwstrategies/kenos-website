@@ -41,11 +41,11 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Heading and Description */}
         <div className="text-center mb-12">
-          <h2 className="font-yeseva text-3xl md:text-4xl lg:text-5xl mb-4 text-[#2F0C0C]">
+          <h2 className="font-yeseva text-2xl md:text-3xl mb-4 text-[#2F0C0C]">
             {heading}
           </h2>
           {description && (
-            <p className="font-montserrat text-base md:text-lg text-neutral-700 max-w-2xl mx-auto mb-8">
+            <p className="font-montserrat   text-neutral-700 max-w-2xl mx-auto mb-8">
               {description}
             </p>
           )}

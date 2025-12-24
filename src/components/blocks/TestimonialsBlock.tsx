@@ -26,7 +26,7 @@ export default function TestimonialsBlock({ block }: TestimonialsBlockProps) {
       <div className="max-w-7xl mx-auto">
         {/* Destination Section */}
         <div className="bg-primary-brown text-white p-12 md:p-16 rounded-lg mb-16">
-          <h2 className="text-3xl md:text-4xl mb-6 font-heading text-white">
+          <h2 className="text-2xl md:text-3xl mb-6 font-heading text-white">
             A Destination
           </h2>
           <p className="text-lg leading-relaxed mb-8 max-w-2xl text-white/90">

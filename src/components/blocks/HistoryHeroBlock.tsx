@@ -114,13 +114,13 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
             )}
 
             {/* Heading */}
-            <h2 className="font-yeseva text-3xl md:text-4xl lg:text-5xl text-white mb-4 md:mb-6 leading-tight">
+            <h2 className="font-yeseva text-2xl md:text-3xl text-white mb-4 md:mb-6 leading-tight">
               {heading}
             </h2>
 
             {/* Content */}
             {content && (
-              <p className="font-montserrat text-xs md:text-sm lg:text-base leading-relaxed text-white/90 mb-6 md:mb-8">
+              <p className="font-montserrat text-xs md:text-sm  leading-relaxed text-white/90 mb-6 md:mb-8">
                 {content}
               </p>
             )}
@@ -129,7 +129,7 @@ export default function HistoryHeroBlock({ block }: HistoryHeroBlockProps) {
             {button?.text && button?.link && (
               <Link
                 href={button.link}
-                className="kenos-btn-outline-white text-sm md:text-base"
+                className="kenos-btn-outline-white text-sm "
               >
                 {button.text}
               </Link>

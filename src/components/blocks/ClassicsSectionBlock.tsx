@@ -110,7 +110,7 @@ export default function ClassicsSectionBlock({ block }: ClassicsSectionBlockProp
             {content && (
               <div 
                 ref={contentRef}
-                className="font-montserrat text-sm md:text-base leading-relaxed text-[#2F0C0C]/80 opacity-0"
+                className="font-montserrat text-sm  leading-relaxed text-[#2F0C0C]/80 opacity-0"
               >
                 {content.split('\n').map((paragraph, idx) => (
                   <p key={idx} className="mb-4 last:mb-0">

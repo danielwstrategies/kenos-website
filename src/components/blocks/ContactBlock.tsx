@@ -50,11 +50,11 @@ export default function ContactBlock({ block }: ContactBlockProps) {
     <section id="contact" className="py-20 px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4 font-heading text-neutral-800">
+          <h2 className="text-2xl md:text-3xl mb-4 font-heading text-neutral-800">
             {block.title || 'Contact Us'}
           </h2>
           {block.subtitle && (
-            <p className="text-neutral-600 text-lg">{block.subtitle}</p>
+            <p className="text-neutral-600 ">{block.subtitle}</p>
           )}
         </div>
 

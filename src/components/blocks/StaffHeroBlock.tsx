@@ -155,7 +155,7 @@ export default function StaffHeroBlock({ block }: StaffHeroBlockProps) {
 
               {/* Content */}
               {content && (
-                <p className="font-montserrat text-xs lg:text-base text-white/90 mb-6 lg:mb-8 leading-relaxed max-w-full">
+                <p className="font-montserrat text-xs  text-white/90 mb-6 lg:mb-8 leading-relaxed max-w-full">
                   {content}
                 </p>
               )}
@@ -163,12 +163,12 @@ export default function StaffHeroBlock({ block }: StaffHeroBlockProps) {
               {/* Buttons */}
               <div className="flex flex-wrap justify-center lg:justify-start gap-3 lg:gap-4">
                 {primaryButton?.text && primaryButton?.link && (
-                  <Link href={primaryButton.link} className="kenos-btn-primary text-sm lg:text-base">
+                  <Link href={primaryButton.link} className="kenos-btn-primary text-sm ">
                     {primaryButton.text}
                   </Link>
                 )}
                 {secondaryButton?.text && secondaryButton?.link && (
-                  <Link href={secondaryButton.link} className="kenos-btn-secondary text-sm lg:text-base">
+                  <Link href={secondaryButton.link} className="kenos-btn-secondary text-sm ">
                     {secondaryButton.text}
                   </Link>
                 )}

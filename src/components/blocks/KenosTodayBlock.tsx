@@ -96,7 +96,7 @@ export default function KenosTodayBlock({ block }: KenosTodayBlockProps) {
 
           {/* Description */}
           {content && (
-            <p className="font-montserrat text-sm md:text-base text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed">
+            <p className="font-montserrat text-sm  text-white/90 max-w-2xl mx-auto mb-8 leading-relaxed">
               {content}
             </p>
           )}

@@ -125,7 +125,7 @@ export default function DestinationSectionBlock({ block }: DestinationSectionBlo
               {/* Heading */}
               <h2 
                 ref={headingRef}
-                className="font-yeseva text-3xl md:text-4xl lg:text-5xl text-white mb-6 opacity-0"
+                className="font-yeseva text-2xl md:text-3xl text-white mb-6 opacity-0"
               >
                 {heading}
               </h2>
@@ -133,7 +133,7 @@ export default function DestinationSectionBlock({ block }: DestinationSectionBlo
               {/* Content with better line height */}
               <p 
                 ref={contentRef}
-                className="font-montserrat text-sm md:text-base text-white/70 mb-10 leading-relaxed max-w-xl opacity-0"
+                className="font-montserrat text-sm  text-white/70 mb-10 leading-relaxed max-w-xl opacity-0"
               >
                 {content}
               </p>

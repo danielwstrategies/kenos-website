@@ -153,7 +153,7 @@ function BioModal({
           {/* Title */}
           {member.title && (
             <p 
-              className="font-yeseva text-base md:text-lg mb-4"
+              className="font-yeseva   mb-4"
               style={{ color: '#73060E' }}
             >
               {member.title}
@@ -163,7 +163,7 @@ function BioModal({
           {/* Bio */}
           {member.bio && (
             <p 
-              className="font-montserrat text-sm md:text-base leading-relaxed"
+              className="font-montserrat text-sm  leading-relaxed"
               style={{ color: '#2C2013' }}
             >
               {member.bio.split('\n\n').map((paragraph, index) => (
@@ -183,7 +183,7 @@ function BioModal({
           {/* No bio message */}
           {!member.bio && (
             <p 
-              className="font-montserrat text-sm md:text-base italic"
+              className="font-montserrat text-sm  italic"
               style={{ color: '#666' }}
             >
               Bio coming soon!
@@ -268,7 +268,7 @@ export default function StaffGridBlock({ block }: StaffGridBlockProps) {
           {introText && (
             <div ref={introRef} className="max-w-full mb-8 md:mb-12 lg:mb-16 opacity-0 mx-auto">
               <p
-                className="font-montserrat text-xs md:text-sm lg:text-base leading-relaxed italic"
+                className="font-montserrat text-xs md:text-sm  leading-relaxed italic"
                 style={{ color: '#2C2013' }}
               >
                 {introText.split('\n\n').map((paragraph, index) => (
@@ -327,7 +327,7 @@ export default function StaffGridBlock({ block }: StaffGridBlockProps) {
                   <div>
                     {member.name && (
                       <p
-                        className="font-yeseva text-base md:text-lg lg:text-xl mb-0.5 group-hover:underline"
+                        className="font-yeseva   lg:text-xl mb-0.5 group-hover:underline"
                         style={{ color: '#73060E' }}
                       >
                         {member.name}

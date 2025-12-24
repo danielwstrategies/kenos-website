@@ -34,7 +34,7 @@ export default function CTABlock({ block }: CTABlockProps) {
           <p className="text-primary font-semibold uppercase tracking-wider text-sm mb-4">
             OWNER
           </p>
-          <h2 className="text-3xl md:text-4xl mb-8 font-heading text-neutral-800">
+          <h2 className="text-2xl md:text-3xl mb-8 font-heading text-neutral-800">
             Steve Cooper
           </h2>
         </div>
@@ -52,12 +52,12 @@ export default function CTABlock({ block }: CTABlockProps) {
           </div>
 
           <div className="max-w-lg text-left">
-            <p className="text-neutral-600 leading-relaxed text-lg mb-4">
+            <p className="text-neutral-600 leading-relaxed  mb-4">
               Steve Cooper has been an active member of the food industry for
               over 30 years. After over 20 years at Kenos, Steve&apos;s passion and
               dedication to the restaurant shows through daily.
             </p>
-            <p className="text-neutral-600 leading-relaxed text-lg">
+            <p className="text-neutral-600 leading-relaxed ">
               Steve&apos;s dedication to his family and his values are just a few of
               the reasons why he is so well-respected by the community and other
               members of the industry.

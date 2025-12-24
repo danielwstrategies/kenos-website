@@ -67,13 +67,13 @@ export default function OwnerProfileSectionBlock({ block }: OwnerProfileSectionB
             )}
 
             {/* Name */}
-            <h3 className="font-yeseva text-4xl md:text-5xl text-[#2F0C0C] mb-6">
+            <h3 className="font-yeseva text-2xl md:text-3xl text-[#2F0C0C] mb-6">
               {name}
             </h3>
 
             {/* Bio */}
             {bio && (
-              <div className="font-montserrat text-base md:text-lg text-[#2F0C0C] mb-8 leading-relaxed space-y-4">
+              <div className="font-montserrat   text-[#2F0C0C] mb-8 leading-relaxed space-y-4">
                 {bio.split('\n\n').map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}

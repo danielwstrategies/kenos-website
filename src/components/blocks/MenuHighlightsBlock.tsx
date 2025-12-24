@@ -26,11 +26,11 @@ export default function MenuHighlightsBlock({ block }: MenuHighlightsBlockProps)
     <section id="menu" className="py-20 px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4 font-heading text-neutral-800">
+          <h2 className="text-2xl md:text-3xl mb-4 font-heading text-neutral-800">
             {block.title}
           </h2>
           {block.subtitle && (
-            <p className="text-neutral-600 text-lg mb-8">{block.subtitle}</p>
+            <p className="text-neutral-600  mb-8">{block.subtitle}</p>
           )}
           <a
             href="#order"
@@ -61,7 +61,7 @@ export default function MenuHighlightsBlock({ block }: MenuHighlightsBlockProps)
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-bold font-heading">{item.name}</h3>
                   {item.price && (
-                    <span className="text-primary font-bold text-lg">
+                    <span className="text-primary font-bold ">
                       {item.price}
                     </span>
                   )}

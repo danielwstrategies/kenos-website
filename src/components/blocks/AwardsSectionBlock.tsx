@@ -160,7 +160,7 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
                     <p className="font-montserrat text-[0.45rem] lg:text-xs tracking-[0.2em] text-[#980914] mb-1 lg:mb-2 uppercase">
                       Voted
                     </p>
-                    <h3 className="font-yeseva text-[0.65rem] lg:text-lg xl:text-xl text-[#2D1810] mb-1 lg:mb-4 leading-tight text-center max-w-[90px] lg:max-w-[180px]">
+                    <h3 className="font-yeseva text-[0.65rem]  xl:text-xl text-[#2D1810] mb-1 lg:mb-4 leading-tight text-center max-w-[90px] lg:max-w-[180px]">
                       {award.title}
                     </h3>
                     {sourceLogo && (

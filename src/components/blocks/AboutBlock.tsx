@@ -58,10 +58,10 @@ export default function AboutBlock({ block }: AboutBlockProps) {
           {block.subtitle}
         </p>
       )}
-      <h2 className="text-3xl md:text-4xl mb-8 font-heading text-neutral-800">
+      <h2 className="text-2xl md:text-3xl mb-8 font-heading text-neutral-800">
         {block.title}
       </h2>
-      <div className="mb-8 leading-relaxed text-neutral-600 text-lg">
+      <div className="mb-8 leading-relaxed text-neutral-600 ">
         {block.content?.map((paragraph: any, i: number) => (
           <p key={i} className="mb-4">
             {paragraph.children?.map((child: any) => child.text).join('')}

@@ -22,11 +22,11 @@ export default function ContentBlock({ block }: ContentBlockProps) {
     <section className={`py-20 px-8 ${bgClass}`}>
       <div className="max-w-4xl mx-auto">
         {block.title && (
-          <h2 className="text-3xl md:text-4xl mb-8 font-heading">
+          <h2 className="text-2xl md:text-3xl mb-8 font-heading">
             {block.title}
           </h2>
         )}
-        <div className="leading-relaxed text-lg">
+        <div className="leading-relaxed ">
           {block.content?.map((paragraph: any, i: number) => (
             <p key={i} className="mb-4">
               {paragraph.children?.map((child: any) => child.text).join('')}

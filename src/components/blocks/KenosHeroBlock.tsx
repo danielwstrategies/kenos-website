@@ -74,7 +74,7 @@ export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
         {/* Dine with us text and Address */}
         {address && (
           <div ref={subtextRef} className="mb-8 font-montserrat opacity-0">
-            <p className="text-base md:text-lg mb-2">Dine with us at the original Keno&apos;s</p>
+            <p className="text-base  mb-2">Dine with us at the original Keno&apos;s</p>
             <a
               href={addressLink || '#'}
               target="_blank"

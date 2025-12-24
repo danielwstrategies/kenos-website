@@ -140,7 +140,7 @@ export default function Footer({
 
             {/* Hours Box */}
             <div ref={hoursRef} className="border border-white/30 p-6 inline-block opacity-0">
-              <h4 className="font-montserrat font-semibold text-lg mb-3 text-white">
+              <h4 className="font-montserrat font-semibold  mb-3 text-white">
                 {hoursTitle}
               </h4>
               <p className="font-montserrat text-white/80 text-sm leading-relaxed">
@@ -159,7 +159,7 @@ export default function Footer({
                   <Link
                     href={item.href}
                     target={item.openInNewTab ? '_blank' : undefined}
-                    className="font-montserrat text-white/90 hover:text-white transition-colors text-base"
+                    className="font-montserrat text-white/90 hover:text-white transition-colors "
                   >
                     {item.label}
                   </Link>
@@ -176,7 +176,7 @@ export default function Footer({
                   <Link
                     href={item.href}
                     target={item.openInNewTab ? '_blank' : undefined}
-                    className="font-montserrat text-white/90 hover:text-white transition-colors text-base"
+                    className="font-montserrat text-white/90 hover:text-white transition-colors "
                   >
                     {item.label}
                   </Link>
