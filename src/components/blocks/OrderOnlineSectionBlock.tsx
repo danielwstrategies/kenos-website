@@ -75,12 +75,18 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
       </div>
 
       {/* Infinite Scrolling Ticker */}
-      <div className="ticker-wrapper mt-12 mb-[-2rem]">
-        <div className="ticker-track">
+      <div className="w-full overflow-hidden mt-12 mb-[-2rem]">
+        <div 
+          className="flex gap-6"
+          style={{
+            width: 'max-content',
+            animation: 'ticker 25s linear infinite',
+          }}
+        >
           {doubledImages.map((src, index) => (
             <div
               key={index}
-              className="ticker-item"
+              className="flex-shrink-0"
             >
               <Image
                 src={src}
@@ -95,22 +101,6 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
       </div>
 
       <style jsx>{`
-        .ticker-wrapper {
-          width: 100%;
-          overflow: hidden;
-        }
-
-        .ticker-track {
-          display: flex;
-          gap: 1.5rem;
-          animation: ticker 25s linear infinite;
-          width: max-content;
-        }
-
-        .ticker-item {
-          flex-shrink: 0;
-        }
-
         @keyframes ticker {
           0% {
             transform: translateX(0);
@@ -118,10 +108,6 @@ export default function OrderOnlineSectionBlock({ block }: OrderOnlineSectionBlo
           100% {
             transform: translateX(-50%);
           }
-        }
-
-        .ticker-wrapper:hover .ticker-track {
-          animation-play-state: paused;
         }
       `}</style>
     </section>

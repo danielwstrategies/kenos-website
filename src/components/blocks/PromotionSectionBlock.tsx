@@ -126,26 +126,23 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
         )
       }
 
-      // Wipe animation for images
+      // Wipe animation using clip-path on wrapper
       imagesRef.current.forEach((img, index) => {
         if (img) {
-          const imgElement = img.querySelector('img')
-          if (imgElement) {
-            gsap.set(imgElement, { willChange: 'clip-path' })
-            tl.fromTo(
-              imgElement,
-              { 
-                clipPath: 'inset(0 100% 0 0)',
-              },
-              { 
-                clipPath: 'inset(0 0% 0 0)',
-                duration: 1.2,
-                ease: 'power3.out',
-                clearProps: 'willChange',
-              },
-              0.3 + (index * 0.15)
-            )
-          }
+          gsap.set(img, { willChange: 'clip-path' })
+          tl.fromTo(
+            img,
+            { 
+              clipPath: 'polygon(0 0, 0 0, 0 100%, 0% 100%)',
+            },
+            { 
+              clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+              duration: 1.2,
+              ease: 'power3.out',
+              clearProps: 'willChange',
+            },
+            0.3 + (index * 0.15)
+          )
         }
       })
     }, sectionRef)
@@ -228,19 +225,23 @@ export default function PromotionSectionBlock({ block }: PromotionSectionBlockPr
               return (
                 <div 
                   key={index}
-                  ref={(el) => { if (el) imagesRef.current[index] = el }}
-                  className="flex-1 h-[400px] md:h-[500px] overflow-hidden rounded-xl"
+                  className="flex-1"
                   style={{ 
-                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 12px 24px -8px rgba(0, 0, 0, 0.4)' 
+                    filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.6)) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.4))'
                   }}
                 >
-                  <Image
-                    src={imageUrl}
-                    alt={`Promotion ${index + 1}`}
-                    width={item.image?.width || 400}
-                    height={item.image?.height || 500}
-                    className="w-full h-full object-cover"
-                  />
+                  <div 
+                    ref={(el) => { if (el) imagesRef.current[index] = el }}
+                    className="h-[400px] md:h-[500px]"
+                  >
+                    <Image
+                      src={imageUrl}
+                      alt={`Promotion ${index + 1}`}
+                      width={item.image?.width || 400}
+                      height={item.image?.height || 500}
+                      className="w-full h-full object-cover rounded-md"
+                    />
+                  </div>
                 </div>
               )
             })}
