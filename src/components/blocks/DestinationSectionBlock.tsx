@@ -26,7 +26,7 @@ export default function DestinationSectionBlock({ block }: DestinationSectionBlo
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const contentRef = useRef<HTMLParagraphElement>(null)
-  const buttonRef = useRef<HTMLAnchorElement>(null)
+  const buttonRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
 
