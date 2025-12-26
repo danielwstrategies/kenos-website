@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 import MapButtons from '@/components/MapButtons'
 
 interface AddressModalProps {
@@ -12,14 +13,44 @@ interface AddressModalProps {
 
 export default function AddressModal({ isOpen, onClose, address, displayAddress }: AddressModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
+  const backdropRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
 
-  // Focus trap and escape key handler
+  // GSAP animations
   useEffect(() => {
     if (!isOpen) return
 
+    const ctx = gsap.context(() => {
+      // Animate backdrop
+      gsap.fromTo(
+        backdropRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: 'power2.out' }
+      )
+
+      // Animate modal
+      gsap.fromTo(
+        modalRef.current,
+        { 
+          opacity: 0, 
+          scale: 0.9,
+          y: 20
+        },
+        { 
+          opacity: 1, 
+          scale: 1,
+          y: 0,
+          duration: 0.4, 
+          ease: 'back.out(1.7)',
+          delay: 0.1
+        }
+      )
+    })
+
     // Focus the close button when modal opens
-    closeButtonRef.current?.focus()
+    setTimeout(() => {
+      closeButtonRef.current?.focus()
+    }, 400)
 
     // Handle escape key
     const handleEscape = (e: KeyboardEvent) => {
@@ -62,6 +93,7 @@ export default function AddressModal({ isOpen, onClose, address, displayAddress 
     document.body.style.overflow = 'hidden'
 
     return () => {
+      ctx.revert()
       document.removeEventListener('keydown', handleEscape)
       document.removeEventListener('keydown', handleTab)
       document.body.style.overflow = 'unset'
@@ -79,6 +111,7 @@ export default function AddressModal({ isOpen, onClose, address, displayAddress 
 
   return (
     <div
+      ref={backdropRef}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       onClick={handleBackdropClick}
       role="dialog"
@@ -88,7 +121,7 @@ export default function AddressModal({ isOpen, onClose, address, displayAddress 
     >
       <div
         ref={modalRef}
-        className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative animate-in fade-in zoom-in duration-200"
+        className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 relative"
       >
         {/* Close Button */}
         <button
