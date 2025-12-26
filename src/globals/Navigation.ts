@@ -3,8 +3,44 @@ import type { GlobalConfig } from 'payload'
 const Navigation: GlobalConfig = {
   slug: 'navigation',
   label: 'Navigation',
+  admin: {
+    description: '⚡ Navigation changes automatically clear the site cache. Changes appear live within a few seconds.',
+  },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc, req }) => {
+        try {
+          const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3011'
+          
+          // Revalidate all pages with navigation changes
+          const pathsToRevalidate = [
+            '/', // Homepage
+            '/layout', // Root layout (navigation/footer)
+          ]
+          
+          // Revalidate each path
+          for (const path of pathsToRevalidate) {
+            await fetch(`${serverUrl}/api/revalidate`, {
+              method: 'POST',
+              headers: {
+                'x-revalidate-secret': process.env.REVALIDATE_SECRET!,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ path }),
+            })
+          }
+          
+          console.log('Navigation updated - cache cleared for all pages')
+        } catch (err) {
+          console.error('Navigation revalidation failed (non-critical):', err)
+        }
+
+        return doc
+      },
+    ],
   },
   fields: [
     {
