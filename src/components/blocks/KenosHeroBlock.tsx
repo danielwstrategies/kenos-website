@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { heroAnimation } from '@/lib/animations'
+import AddressModal from '@/components/AddressModal'
 
 interface KenosHeroBlockProps {
   block: {
@@ -23,6 +24,8 @@ interface KenosHeroBlockProps {
 
 export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
   const { heading, address, addressLink, backgroundImage, primaryButton, secondaryButton } = block
+  
+  const [isModalOpen, setIsModalOpen] = useState(false)
   
   const headingRef = useRef<HTMLHeadingElement>(null)
   const subtextRef = useRef<HTMLDivElement>(null)
@@ -74,15 +77,14 @@ export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
         {/* Dine with us text and Address */}
         {address && (
           <div ref={subtextRef} className="mb-8 font-montserrat opacity-0">
-            <p className="text-base  mb-2">Dine with us at the original Keno&apos;s</p>
-            <a
-              href={addressLink || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs md:text-sm underline hover:text-accent-gold transition-colors whitespace-pre-line"
+            <p className="text-base mb-2">Dine with us at the original Keno&apos;s</p>
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="text-xs md:text-sm underline hover:text-accent-gold transition-colors whitespace-pre-line cursor-pointer"
+              aria-label="View address and get directions"
             >
               {address}
-            </a>
+            </button>
           </div>
         )}
 
@@ -107,6 +109,16 @@ export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
         </div>
       </div>
       </div>
+
+      {/* Address Modal */}
+      {address && (
+        <AddressModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          address={address.replace(/\n/g, ', ')}
+          displayAddress={address}
+        />
+      )}
     </section>
   )
 }
