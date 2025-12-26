@@ -106,7 +106,7 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
   }, [])
 
   return (
-    <section ref={sectionRef} className="pb-8 -mt-16 lg:pb-32 lg:-mt-8" style={{ backgroundColor: '#FFFCF8' }}>
+    <section ref={sectionRef} className="pb-8 -mt-16 lg:pb-16 lg:-mt-8" style={{ backgroundColor: '#FFFCF8' }}>
       <div className="container mx-auto px-2 max-w-7xl">
         {/* Logo - Above on mobile, left on desktop */}
         <div className="flex justify-center lg:hidden mb-4">
@@ -160,7 +160,7 @@ export default function AwardsSectionBlock({ block }: AwardsSectionBlockProps) {
                     <p className="font-montserrat text-[0.45rem] lg:text-xs tracking-[0.2em] text-[#980914] mb-1 lg:mb-2 uppercase">
                       Voted
                     </p>
-                    <h3 className="font-yeseva text-[0.65rem]  xl:text-xl text-[#2D1810] mb-1 lg:mb-4 leading-tight text-center max-w-[90px] lg:max-w-[180px]">
+                    <h3 className="font-yeseva text-[0.65rem]  xl:text-xl text-[#2D1810] mb-1 lg:mb-4 leading-none text-center max-w-[90px] lg:max-w-[180px]">
                       {award.title}
                     </h3>
                     {sourceLogo && (
