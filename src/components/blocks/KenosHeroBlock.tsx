@@ -7,6 +7,7 @@ import AddressModal from '@/components/AddressModal'
 
 interface KenosHeroBlockProps {
   block: {
+    logo?: any
     heading: string
     address?: string
     addressLink?: string
@@ -23,7 +24,7 @@ interface KenosHeroBlockProps {
 }
 
 export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
-  const { heading, address, addressLink, backgroundImage, primaryButton, secondaryButton } = block
+  const { logo, heading, address, addressLink, backgroundImage, primaryButton, secondaryButton } = block
   
   const [isModalOpen, setIsModalOpen] = useState(false)
   
@@ -34,6 +35,7 @@ export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
   const backgroundImageRef = useRef<HTMLDivElement>(null)
 
   const bgImageUrl = backgroundImage?.url || '/images/KENOS(Hero Group Shot)15986.jpg'
+  const logoUrl = logo?.url || '/media/Keno\'s Logo 2 1-1.png'
 
   useEffect(() => {
     const animation = heroAnimation({
@@ -71,7 +73,7 @@ export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
         <div ref={logoRef} className="flex justify-center mb-2 opacity-0">
           <div className="relative w-24 h-24 md:w-32 md:h-32">
             <Image
-              src="/media/Keno's Logo 2 1-1.png"
+              src={logoUrl}
               alt="Keno's Restaurant Logo"
               fill
               className="object-contain"

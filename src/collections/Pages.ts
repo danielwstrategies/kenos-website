@@ -560,6 +560,15 @@ const Pages: CollectionConfig = {
           },
           fields: [
             {
+              name: 'logo',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: "Keno's script logo displayed above heading (uses default if not provided)",
+              },
+            },
+            {
               name: 'heading',
               type: 'text',
               required: true,
