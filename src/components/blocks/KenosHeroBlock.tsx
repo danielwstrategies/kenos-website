@@ -68,7 +68,7 @@ export default function KenosHeroBlock({ block }: KenosHeroBlockProps) {
       {/* Content */}
       <div className="relative z-10 text-center text-white px-4 w-full max-w-[95%] mx-auto">
         {/* Logo */}
-        <div ref={logoRef} className="flex justify-center mb-6 opacity-0">
+        <div ref={logoRef} className="flex justify-center mb-2 opacity-0">
           <div className="relative w-24 h-24 md:w-32 md:h-32">
             <Image
               src="/media/Keno's Logo 2 1-1.png"
