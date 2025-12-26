@@ -224,6 +224,7 @@ export const textReveal = (element: string | Element | null, options?: gsap.Twee
 // Hero specific animation timeline
 export const heroAnimation = (refs: {
   heading?: Element | null
+  logo?: Element | null
   subtext?: Element | null
   buttons?: Element | null
   backgroundImage?: Element | null
@@ -239,12 +240,21 @@ export const heroAnimation = (refs: {
     )
   }
   
+  if (refs.logo) {
+    tl.fromTo(
+      refs.logo,
+      { opacity: 0, scale: 0.8 },
+      { opacity: 1, scale: 1, duration: 0.8, ease: 'back.out(1.7)' },
+      0.2
+    )
+  }
+  
   if (refs.heading) {
     tl.fromTo(
       refs.heading,
       { opacity: 0, y: 30 },
       { opacity: 1, y: 0, duration: 1 },
-      0.3
+      0.4
     )
   }
   
@@ -253,7 +263,7 @@ export const heroAnimation = (refs: {
       refs.subtext,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.8 },
-      0.6
+      0.7
     )
   }
   
@@ -262,7 +272,7 @@ export const heroAnimation = (refs: {
       refs.buttons,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.6 },
-      0.9
+      1.0
     )
   }
   
