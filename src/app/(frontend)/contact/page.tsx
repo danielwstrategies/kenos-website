@@ -35,7 +35,7 @@ export default function ContactPage() {
                 {/* Address */}
                 <div className="mb-6">
                   <h3 className="font-montserrat font-semibold text-[#73060E] mb-2">
-                    📍 Address
+                    Address
                   </h3>
                   <p className="font-montserrat text-neutral-700 leading-relaxed">
                     5750 E La Palma Ave<br />
@@ -54,7 +54,7 @@ export default function ContactPage() {
                 {/* Phone */}
                 <div className="mb-6">
                   <h3 className="font-montserrat font-semibold text-[#73060E] mb-2">
-                    📞 Phone
+                    Phone
                   </h3>
                   <a
                     href="tel:+17146853200"
@@ -67,7 +67,7 @@ export default function ContactPage() {
                 {/* Hours */}
                 <div className="mb-6">
                   <h3 className="font-montserrat font-semibold text-[#73060E] mb-2">
-                    🕐 Hours
+                    Hours
                   </h3>
                   <div className="font-montserrat text-neutral-700 space-y-1">
                     <p>Sunday - Thursday: 7 AM - 9 PM</p>
