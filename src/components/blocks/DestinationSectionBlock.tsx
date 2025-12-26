@@ -107,13 +107,13 @@ export default function DestinationSectionBlock({ block }: DestinationSectionBlo
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-40 overflow-hidden" style={{ backgroundColor: '#0c1418' }}>
+    <section ref={sectionRef} className="relative py-16 md:py-24 overflow-hidden" style={{ backgroundColor: '#0c1418' }}>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 md:px-8 max-w-6xl">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
           {/* Left - Text Content */}
-          <div className="flex gap-8 md:gap-12 flex-1">
+          <div className="flex gap-6 md:gap-8 flex-1">
             {/* Vertical accent line */}
             <div 
               ref={lineRef}
@@ -125,7 +125,7 @@ export default function DestinationSectionBlock({ block }: DestinationSectionBlo
               {/* Heading */}
               <h2 
                 ref={headingRef}
-                className="font-yeseva text-2xl md:text-3xl text-white mb-6 opacity-0"
+                className="font-yeseva text-2xl md:text-3xl text-white mb-4 opacity-0"
               >
                 {heading}
               </h2>
@@ -133,7 +133,7 @@ export default function DestinationSectionBlock({ block }: DestinationSectionBlo
               {/* Content with better line height */}
               <p 
                 ref={contentRef}
-                className="font-montserrat text-sm  text-white/70 mb-10 leading-relaxed max-w-xl opacity-0"
+                className="font-montserrat text-sm  text-white/70 mb-6 leading-relaxed max-w-xl opacity-0"
               >
                 {content}
               </p>
