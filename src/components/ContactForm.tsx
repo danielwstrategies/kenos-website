@@ -24,12 +24,11 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     setErrorMessage('')
 
     try {
-      // Get ReCaptcha token
-      const recaptchaToken = await recaptchaRef.current?.executeAsync()
-      recaptchaRef.current?.reset()
-
-      if (!recaptchaToken) {
-        throw new Error('Please complete the ReCaptcha verification')
+      // Get ReCaptcha token (only if ReCaptcha is configured)
+      let recaptchaToken = null
+      if (recaptchaSiteKey && recaptchaRef.current) {
+        recaptchaToken = await recaptchaRef.current.executeAsync()
+        recaptchaRef.current.reset()
       }
 
       // Submit form
@@ -69,14 +68,6 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
   }
 
   const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-
-  if (!recaptchaSiteKey) {
-    return (
-      <div className="text-center p-8 bg-red-50 rounded-lg">
-        <p className="text-red-600">ReCaptcha is not configured. Please contact the administrator.</p>
-      </div>
-    )
-  }
 
   return (
     <div className={className}>
@@ -160,12 +151,14 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
           />
         </div>
 
-        {/* ReCaptcha */}
-        <ReCAPTCHA
-          ref={recaptchaRef}
-          size="invisible"
-          sitekey={recaptchaSiteKey}
-        />
+        {/* ReCaptcha (only if configured) */}
+        {recaptchaSiteKey && (
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            size="invisible"
+            sitekey={recaptchaSiteKey}
+          />
+        )}
 
         {/* Submit Button */}
         <button

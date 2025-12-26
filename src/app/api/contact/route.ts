@@ -40,20 +40,16 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate ReCaptcha
-    if (!recaptchaToken) {
-      return NextResponse.json(
-        { error: 'ReCaptcha verification is required' },
-        { status: 400 }
-      )
-    }
-
-    const isValidRecaptcha = await verifyRecaptcha(recaptchaToken)
-    if (!isValidRecaptcha) {
-      return NextResponse.json(
-        { error: 'ReCaptcha verification failed. Please try again.' },
-        { status: 400 }
-      )
+    // Validate ReCaptcha (only if configured)
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY
+    if (secretKey && recaptchaToken) {
+      const isValidRecaptcha = await verifyRecaptcha(recaptchaToken)
+      if (!isValidRecaptcha) {
+        return NextResponse.json(
+          { error: 'ReCaptcha verification failed. Please try again.' },
+          { status: 400 }
+        )
+      }
     }
 
     // Get Payload instance
