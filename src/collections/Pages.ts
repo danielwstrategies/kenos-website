@@ -23,7 +23,9 @@ const Pages: CollectionConfig = {
     afterChange: [
       async ({ doc, req, operation }) => {
         try {
-          const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3011'
+          // Use localhost for internal calls (Docker container calling itself)
+          const port = process.env.PORT || '3011'
+          const serverUrl = `http://localhost:${port}`
           
           // Revalidate the specific page path
           const path = doc.slug === 'home' ? '/' : `/${doc.slug}`
