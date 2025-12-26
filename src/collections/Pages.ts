@@ -11,6 +11,7 @@ const Pages: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', 'status', 'updatedAt'],
     group: 'Content',
+    description: '⚡ Publishing a page automatically clears the entire site cache. Changes appear live within seconds.',
   },
   versions: {
     drafts: true,
@@ -24,7 +25,7 @@ const Pages: CollectionConfig = {
         try {
           const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3011'
           
-          // Revalidate the page's path
+          // Revalidate the specific page path
           const path = doc.slug === 'home' ? '/' : `/${doc.slug}`
           
           await fetch(`${serverUrl}/api/revalidate`, {
@@ -36,7 +37,16 @@ const Pages: CollectionConfig = {
             body: JSON.stringify({ path }),
           })
           
-          console.log(`Triggered revalidation for page: ${path}`)
+          // Also trigger full site revalidation to be safe
+          await fetch(`${serverUrl}/api/revalidate-all`, {
+            method: 'POST',
+            headers: {
+              'x-revalidate-secret': process.env.REVALIDATE_SECRET!,
+              'Content-Type': 'application/json',
+            },
+          })
+          
+          console.log(`✅ Triggered full cache revalidation for page: ${path}`)
         } catch (err) {
           console.error('Revalidation failed (non-critical):', err)
         }
