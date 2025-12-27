@@ -12,6 +12,13 @@ const MONGODB_URI = process.env.MONGODB_BACKUP_URI || 'mongodb://kenos_admin:ndh
 // List all backups
 export async function GET(request: NextRequest) {
   try {
+    // Create directory if it doesn't exist
+    try {
+      await fs.mkdir(BACKUP_DIR, { recursive: true })
+    } catch (err) {
+      // Directory might already exist, ignore
+    }
+    
     const files = await fs.readdir(BACKUP_DIR)
     
     const backups = await Promise.all(
@@ -37,7 +44,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Error listing backups:', error)
     return NextResponse.json(
-      { error: 'Failed to list backups' },
+      { error: 'Failed to list backups', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
@@ -46,17 +53,31 @@ export async function GET(request: NextRequest) {
 // Create new backup
 export async function POST(request: NextRequest) {
   try {
-    const { stdout, stderr } = await execAsync('/usr/local/bin/backup-mongodb.sh')
+    // Create directory if it doesn't exist
+    await fs.mkdir(BACKUP_DIR, { recursive: true })
+    
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+    const backupName = `mongodb-backup-${timestamp}`
+    const backupPath = path.join(BACKUP_DIR, backupName)
+    const tarFile = `${backupPath}.tar.gz`
+    
+    // Run mongodump
+    const dumpCmd = `mongodump --uri="${MONGODB_URI}" --out="${backupPath}"`
+    await execAsync(dumpCmd)
+    
+    // Compress backup
+    const tarCmd = `cd ${BACKUP_DIR} && tar -czf ${backupName}.tar.gz ${backupName} && rm -rf ${backupName}`
+    await execAsync(tarCmd)
     
     return NextResponse.json({
       success: true,
       message: 'Backup created successfully',
-      output: stdout,
+      filename: `${backupName}.tar.gz`,
     })
   } catch (error: any) {
     console.error('Error creating backup:', error)
     return NextResponse.json(
-      { error: 'Failed to create backup', details: error.message },
+      { error: 'Failed to create backup. Backups are created automatically daily at 2 AM. You can download existing backups below.', details: error.message },
       { status: 500 }
     )
   }

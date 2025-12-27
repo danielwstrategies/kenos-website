@@ -128,25 +128,37 @@ export default function BackupManager() {
 
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>📦 Database Backups</h1>
-        <button
-          onClick={createBackup}
-          disabled={creating}
-          style={{
-            padding: '0.75rem 1.5rem',
-            backgroundColor: '#0066FF',
-            color: 'white',
-            border: 'none',
-            borderRadius: '6px',
-            cursor: creating ? 'not-allowed' : 'pointer',
-            fontSize: '14px',
-            fontWeight: '500',
-            opacity: creating ? 0.6 : 1,
-          }}
-        >
-          {creating ? 'Creating...' : '➕ Create New Backup'}
-        </button>
+      <div style={{ marginBottom: '2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+          <h1 style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>📦 Database Backups</h1>
+          <button
+            onClick={createBackup}
+            disabled={creating}
+            style={{
+              padding: '0.75rem 1.5rem',
+              backgroundColor: '#0066FF',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: creating ? 'not-allowed' : 'pointer',
+              fontSize: '14px',
+              fontWeight: '500',
+              opacity: creating ? 0.6 : 1,
+            }}
+          >
+            {creating ? 'Creating...' : '➕ Create Backup Now'}
+          </button>
+        </div>
+        <div style={{ 
+          backgroundColor: '#f0f9ff', 
+          padding: '12px 16px', 
+          borderRadius: '6px', 
+          border: '1px solid #bfdbfe',
+          fontSize: '14px',
+          color: '#1e40af'
+        }}>
+          ℹ️ <strong>Automatic Backups:</strong> Database backups are created automatically every day at 2:00 AM and kept for 7 days.
+        </div>
       </div>
 
       {message && (
