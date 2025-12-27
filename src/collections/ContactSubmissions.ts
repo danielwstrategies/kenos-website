@@ -25,13 +25,13 @@ function checkRateLimit(ip: string): boolean {
 }
 
 // Monday.com GraphQL API integration
-async function createMondayLead(data: any): Promise<string | null> {
+async function createMondayLead(data: any): Promise<void> {
   const apiToken = process.env.MONDAY_API_TOKEN
   const boardId = process.env.MONDAY_BOARD_ID
 
   if (!apiToken || !boardId) {
     console.log('Monday.com not configured - skipping lead creation')
-    return null
+    return
   }
 
   const mutation = `
@@ -71,15 +71,11 @@ async function createMondayLead(data: any): Promise<string | null> {
     
     if (result.errors) {
       console.error('Monday.com API error:', result.errors)
-      return null
     } else {
-      const itemId = result.data.create_item.id
-      console.log('✅ Lead created in Monday.com:', itemId)
-      return itemId
+      console.log('✅ Lead created in Monday.com:', result.data.create_item.id)
     }
   } catch (error) {
     console.error('Failed to create Monday.com lead:', error)
-    return null
   }
 }
 
@@ -139,25 +135,16 @@ const ContactSubmissions: CollectionConfig = {
   },
   hooks: {
     afterChange: [
-      async ({ doc, operation, req }) => {
+      async ({ doc, operation }) => {
         // Only trigger on new submissions (not updates)
         if (operation === 'create') {
-          // Create Monday.com lead and get item ID
-          const mondayItemId = await createMondayLead(doc)
-          
-          // Send email notification (don't wait)
-          sendEmailNotification(doc).catch(err => 
-            console.error('Email notification failed:', err)
-          )
-          
-          // Update document with Monday item ID if created
-          if (mondayItemId && req.payload) {
-            await req.payload.update({
-              collection: 'contact-submissions',
-              id: doc.id,
-              data: { mondayItemId },
-            })
-          }
+          // Run integrations in parallel (fire and forget)
+          Promise.allSettled([
+            createMondayLead(doc),
+            sendEmailNotification(doc),
+          ]).catch(err => {
+            console.error('Integration error:', err)
+          })
         }
       },
     ],
@@ -212,15 +199,6 @@ const ContactSubmissions: CollectionConfig = {
       defaultValue: 'new',
       admin: {
         position: 'sidebar',
-      },
-    },
-    {
-      name: 'mondayItemId',
-      type: 'text',
-      admin: {
-        readOnly: true,
-        position: 'sidebar',
-        description: 'Monday.com item ID (auto-populated)',
       },
     },
   ],
