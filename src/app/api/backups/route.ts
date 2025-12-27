@@ -3,14 +3,36 @@ import { exec } from 'child_process'
 import { promisify } from 'util'
 import fs from 'fs/promises'
 import path from 'path'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 
 const execAsync = promisify(exec)
 
 const BACKUP_DIR = '/var/backups/mongodb'
 const MONGODB_URI = process.env.MONGODB_BACKUP_URI || 'mongodb://kenos_admin:ndhmnL2WepLoh4VoCxYi@localhost:27017/kenos-website?authSource=admin'
 
+// Authentication helper
+async function isAuthenticated(request: NextRequest): Promise<boolean> {
+  try {
+    const payload = await getPayload({ config })
+    const token = request.cookies.get('payload-token')?.value
+    
+    if (!token) return false
+    
+    const { user } = await payload.auth({ headers: { Authorization: `JWT ${token}` } })
+    return !!user
+  } catch {
+    return false
+  }
+}
+
 // List all backups
 export async function GET(request: NextRequest) {
+  // Check authentication
+  if (!(await isAuthenticated(request))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  
   try {
     // Create directory if it doesn't exist
     try {
@@ -52,6 +74,11 @@ export async function GET(request: NextRequest) {
 
 // Create new backup
 export async function POST(request: NextRequest) {
+  // Check authentication
+  if (!(await isAuthenticated(request))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  
   try {
     // Create directory if it doesn't exist
     await fs.mkdir(BACKUP_DIR, { recursive: true })
@@ -85,6 +112,11 @@ export async function POST(request: NextRequest) {
 
 // Delete backup
 export async function DELETE(request: NextRequest) {
+  // Check authentication
+  if (!(await isAuthenticated(request))) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+  
   try {
     const { searchParams } = new URL(request.url)
     const filename = searchParams.get('filename')
