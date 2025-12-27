@@ -97,13 +97,16 @@ async function sendEmailNotification(data: any): Promise<void> {
   }
 
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // Use STARTTLS
     auth: {
       user: smtpUser,
       pass: smtpPass,
     },
     connectionTimeout: 10000, // 10 second timeout
     greetingTimeout: 10000,
+    socketTimeout: 10000,
   })
 
   const mailOptions = {
@@ -157,18 +160,20 @@ const ContactSubmissions: CollectionConfig = {
         if (operation === 'create') {
           console.log('📧 Processing contact submission:', doc.email)
           
-          // Run integrations in parallel
-          const results = await Promise.allSettled([
-            createMondayLead(doc),
-            sendEmailNotification(doc),
-          ])
-          
-          // Log any failures
-          results.forEach((result, index) => {
-            if (result.status === 'rejected') {
-              const name = index === 0 ? 'Monday.com' : 'Email'
-              console.error(`❌ ${name} integration failed:`, result.reason)
-            }
+          // Run integrations in background (fire and forget - don't block the submission)
+          setImmediate(async () => {
+            const results = await Promise.allSettled([
+              createMondayLead(doc),
+              sendEmailNotification(doc),
+            ])
+            
+            // Log any failures
+            results.forEach((result, index) => {
+              if (result.status === 'rejected') {
+                const name = index === 0 ? 'Monday.com' : 'Email'
+                console.error(`❌ ${name} integration failed:`, result.reason)
+              }
+            })
           })
         }
       },
