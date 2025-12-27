@@ -102,6 +102,8 @@ async function sendEmailNotification(data: any): Promise<void> {
       user: smtpUser,
       pass: smtpPass,
     },
+    connectionTimeout: 10000, // 10 second timeout
+    greetingTimeout: 10000,
   })
 
   const mailOptions = {
@@ -123,8 +125,14 @@ async function sendEmailNotification(data: any): Promise<void> {
   console.log('📤 Sending email to:', notifyEmail)
 
   try {
-    const info = await transporter.sendMail(mailOptions)
-    console.log('✅ Email notification sent:', info.messageId)
+    // Race between sending email and 15-second timeout
+    const info = await Promise.race([
+      transporter.sendMail(mailOptions),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Email send timeout after 15 seconds')), 15000)
+      )
+    ])
+    console.log('✅ Email notification sent:', (info as any).messageId)
   } catch (error) {
     console.error('❌ Failed to send email notification:', error)
     throw error // Re-throw so Promise.allSettled catches it
