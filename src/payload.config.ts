@@ -41,6 +41,17 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      afterNavLinks: [
+        {
+          Component: () => ({
+            type: 'link',
+            label: '📦 Backups',
+            href: '/admin/backups',
+          }),
+        },
+      ],
+    },
   },
   collections: [
     Users,

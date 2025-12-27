@@ -1,0 +1,45 @@
+import { NextRequest, NextResponse } from 'next/server'
+import fs from 'fs'
+import path from 'path'
+
+const BACKUP_DIR = '/var/backups/mongodb'
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const filename = searchParams.get('filename')
+    
+    if (!filename || !filename.endsWith('.tar.gz')) {
+      return NextResponse.json(
+        { error: 'Invalid filename' },
+        { status: 400 }
+      )
+    }
+    
+    const filePath = path.join(BACKUP_DIR, filename)
+    
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      return NextResponse.json(
+        { error: 'Backup file not found' },
+        { status: 404 }
+      )
+    }
+    
+    const fileBuffer = fs.readFileSync(filePath)
+    
+    return new NextResponse(fileBuffer, {
+      headers: {
+        'Content-Type': 'application/gzip',
+        'Content-Disposition': `attachment; filename="${filename}"`,
+        'Content-Length': fileBuffer.length.toString(),
+      },
+    })
+  } catch (error) {
+    console.error('Error downloading backup:', error)
+    return NextResponse.json(
+      { error: 'Failed to download backup' },
+      { status: 500 }
+    )
+  }
+}
