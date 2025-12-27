@@ -85,6 +85,12 @@ async function sendEmailNotification(data: any): Promise<void> {
   const smtpPass = process.env.SMTP_PASS
   const notifyEmail = process.env.NOTIFY_EMAIL || smtpUser
 
+  console.log('📬 Email config:', {
+    smtpUser,
+    notifyEmail,
+    hasPassword: !!smtpPass,
+  })
+
   if (!smtpUser || !smtpPass) {
     console.log('SMTP not configured - skipping email notification')
     return
@@ -114,11 +120,14 @@ async function sendEmailNotification(data: any): Promise<void> {
     `,
   }
 
+  console.log('📤 Sending email to:', notifyEmail)
+
   try {
-    await transporter.sendMail(mailOptions)
-    console.log('✅ Email notification sent')
+    const info = await transporter.sendMail(mailOptions)
+    console.log('✅ Email notification sent:', info.messageId)
   } catch (error) {
-    console.error('Failed to send email notification:', error)
+    console.error('❌ Failed to send email notification:', error)
+    throw error // Re-throw so Promise.allSettled catches it
   }
 }
 
@@ -138,12 +147,20 @@ const ContactSubmissions: CollectionConfig = {
       async ({ doc, operation }) => {
         // Only trigger on new submissions (not updates)
         if (operation === 'create') {
-          // Run integrations in parallel (fire and forget)
-          Promise.allSettled([
+          console.log('📧 Processing contact submission:', doc.email)
+          
+          // Run integrations in parallel
+          const results = await Promise.allSettled([
             createMondayLead(doc),
             sendEmailNotification(doc),
-          ]).catch(err => {
-            console.error('Integration error:', err)
+          ])
+          
+          // Log any failures
+          results.forEach((result, index) => {
+            if (result.status === 'rejected') {
+              const name = index === 0 ? 'Monday.com' : 'Email'
+              console.error(`❌ ${name} integration failed:`, result.reason)
+            }
           })
         }
       },
