@@ -6,7 +6,15 @@ import path from 'path'
 const execAsync = promisify(exec)
 
 const BACKUP_DIR = '/var/backups/mongodb'
-const MONGODB_URI = 'mongodb://kenos_admin:ndhmnL2WepLoh4VoCxYi@localhost:27017/?authSource=admin'
+const MONGODB_URI = process.env.MONGODB_BACKUP_URI
+
+// Validate MongoDB URI is configured
+function getMongoUri(): string {
+  if (!MONGODB_URI) {
+    throw new Error('MONGODB_BACKUP_URI environment variable is not configured')
+  }
+  return MONGODB_URI
+}
 
 // Authentication helper
 function isAuthenticated(request: NextRequest): boolean {
@@ -37,7 +45,7 @@ export async function POST(request: NextRequest) {
     await execAsync(`cd ${BACKUP_DIR} && tar -xzf ${filename}`)
     
     // Restore to MongoDB
-    const restoreCommand = `mongorestore --uri="${MONGODB_URI}" --db=kenos-website --drop ${extractDir}/kenos-website`
+    const restoreCommand = `mongorestore --uri="${getMongoUri()}" --db=kenos-website --drop ${extractDir}/kenos-website`
     const { stdout, stderr } = await execAsync(restoreCommand)
     
     // Clean up extracted directory

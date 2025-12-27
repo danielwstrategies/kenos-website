@@ -12,8 +12,6 @@ const dirname = path.dirname(filename)
 
 dotenv.config({ path: path.resolve(dirname, '../.env') })
 
-console.log('DATABASE_URI:', process.env.DATABASE_URI?.substring(0, 50) + '...')
-
 // Configure Winston logger
 const logger = winston.createLogger({
   level: 'info',

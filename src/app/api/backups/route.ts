@@ -7,7 +7,15 @@ import path from 'path'
 const execAsync = promisify(exec)
 
 const BACKUP_DIR = '/var/backups/mongodb'
-const MONGODB_URI = process.env.MONGODB_BACKUP_URI || 'mongodb://kenos_admin:ndhmnL2WepLoh4VoCxYi@localhost:27017/kenos-website?authSource=admin'
+const MONGODB_URI = process.env.MONGODB_BACKUP_URI
+
+// Validate MongoDB URI is configured
+function getMongoUri(): string {
+  if (!MONGODB_URI) {
+    throw new Error('MONGODB_BACKUP_URI environment variable is not configured')
+  }
+  return MONGODB_URI
+}
 
 // Authentication helper
 function isAuthenticated(request: NextRequest): boolean {
@@ -78,7 +86,7 @@ export async function POST(request: NextRequest) {
     const tarFile = `${backupPath}.tar.gz`
     
     // Run mongodump
-    const dumpCmd = `mongodump --uri="${MONGODB_URI}" --out="${backupPath}"`
+    const dumpCmd = `mongodump --uri="${getMongoUri()}" --out="${backupPath}"`
     await execAsync(dumpCmd)
     
     // Compress backup

@@ -3,11 +3,11 @@ import { revalidatePath } from 'next/cache'
 
 async function handleRevalidation(request: NextRequest) {
   try {
-    // Optional: Add secret validation for security
-    // const secret = request.headers.get('x-revalidate-secret')
-    // if (secret !== process.env.REVALIDATE_SECRET) {
-    //   return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
-    // }
+    // Require secret validation for security
+    const secret = request.headers.get('x-revalidate-secret')
+    if (secret !== process.env.REVALIDATE_SECRET) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
 
     // Revalidate blog pages
     revalidatePath('/blog')

@@ -3,14 +3,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import config from '@/payload.config'
 
 export async function GET(request: NextRequest) {
-  // Optional: Add API key protection
-  const apiKey = request.headers.get('x-api-key')
-  const expectedKey = process.env.SEED_API_KEY
-  
-  // If SEED_API_KEY is set, require it
-  if (expectedKey && apiKey !== expectedKey) {
+  // Require authentication via Payload token
+  const token = request.cookies.get('payload-token')?.value
+  if (!token) {
     return NextResponse.json(
-      { success: false, error: 'Unauthorized - invalid or missing API key' },
+      { success: false, error: 'Unauthorized - admin login required' },
       { status: 401 }
     )
   }

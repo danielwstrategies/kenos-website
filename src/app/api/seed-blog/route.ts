@@ -585,6 +585,12 @@ const entertainmentInterviews = [
 ]
 
 export async function GET(request: NextRequest) {
+  // Require authentication via Payload token
+  const token = request.cookies.get('payload-token')?.value
+  if (!token) {
+    return NextResponse.json({ error: 'Unauthorized - admin login required' }, { status: 401 })
+  }
+  
   try {
     const payload = await getPayload({ config })
 
