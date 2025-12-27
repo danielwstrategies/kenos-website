@@ -13,6 +13,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
     email: '',
     phone: '',
     message: '',
+    website: '', // Honeypot field
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -50,7 +51,7 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
       }
 
       setStatus('success')
-      setFormData({ name: '', email: '', phone: '', message: '' })
+      setFormData({ name: '', email: '', phone: '', message: '', website: '' })
       
       // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000)
@@ -131,6 +132,20 @@ export default function ContactForm({ className = '' }: ContactFormProps) {
             onChange={handleChange}
             className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#73060E] focus:border-transparent"
             placeholder="(123) 456-7890"
+          />
+        </div>
+
+        {/* Honeypot field (hidden from users, only bots fill it) */}
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="website">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
           />
         </div>
 

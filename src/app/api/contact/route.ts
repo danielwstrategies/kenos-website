@@ -30,7 +30,16 @@ async function verifyRecaptcha(token: string): Promise<boolean> {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, message, recaptchaToken } = body
+    const { name, email, phone, message, recaptchaToken, website } = body
+
+    // Honeypot check - if 'website' field is filled, it's a bot
+    if (website) {
+      console.log('Honeypot triggered - blocking spam submission')
+      return NextResponse.json(
+        { error: 'Invalid submission' },
+        { status: 400 }
+      )
+    }
 
     // Validate required fields
     if (!name || !email || !message) {
